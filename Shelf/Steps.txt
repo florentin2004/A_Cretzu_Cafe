@@ -1,9 +1,17 @@
+The bible: https://doc.qt.io/qt-6/     -> here we have the documentantion, don't know -> search, read, ...
+
+my all god book: https://doc.qt.io/qt-6/qtdesigner-manual.html    -> use it 
+
 first we need to see how to make the connection.
 I searched on the internet and saw that my intuitions is correct and i should use TCP/IP protocol.
 Arian is going to take care of the connection, but i will try to help him with some info. After we see that the connection works we can move to the next step ... code
 In the meantime i will make the interface to look nice. So i think that i will be on FrontEnd and Arian on BackEnd
 
+
+
 For Arian:
+in the documentation is Network and Connectivity
+
 C++ Network Programming Part 1: Sockets
 https://youtu.be/gntyAFoZp-E?si=NEM9YQiM_luoMpBN
 
