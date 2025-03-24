@@ -1,0 +1,2 @@
+for the connection between mssql and qt i will leave this link
+https://usavps.com/blog/127386/#:~:text=This%20article%20will%20guide%20you%20through%20the%20process,and%20best%20practices%20to%20ensure%20a%20successful%20integration.
