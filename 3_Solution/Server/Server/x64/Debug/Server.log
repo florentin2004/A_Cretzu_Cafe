@@ -1,2 +1,6 @@
-﻿  source.cpp
-  Server.vcxproj -> C:\Users\arysu\Desktop\New folder\Server\x64\Debug\Server.exe
+﻿  Retea.cpp
+C:\Users\arysu\A_Cretzu_Cafe\3_Solution\Server\Server\Retea.cpp(198,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\arysu\A_Cretzu_Cafe\3_Solution\Server\Server\Retea.cpp(217,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\arysu\A_Cretzu_Cafe\3_Solution\Server\Server\Retea.cpp(236,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\arysu\A_Cretzu_Cafe\3_Solution\Server\Server\Retea.cpp(255,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  Server.vcxproj -> C:\Users\arysu\A_Cretzu_Cafe\3_Solution\Server\x64\Debug\Server.exe
