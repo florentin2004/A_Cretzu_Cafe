@@ -31,6 +31,10 @@ private:
     QLineEdit *passwordField;
     QLineEdit *confirmPasswordField;
     QPushButton *registerButton;
+    QPushButton *backButton;
+
+    void clickRegister();
+    void BackToMainWindow();
 };
 
 #endif // REGISTER_H

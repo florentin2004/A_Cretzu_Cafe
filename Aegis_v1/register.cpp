@@ -1,5 +1,5 @@
 #include "register.h"
-#include "resizer.h"
+#include "mainwindow.h"
 #include <QVBoxLayout>
 #include <QLabel>
 #include <QLineEdit>
@@ -11,7 +11,9 @@ Register::Register(QWidget *parent)
     : QWidget(parent)
 {
     setWindowTitle("Register");
-    // setFixedSize(400, 300);
+
+    // start size
+    resize(600,400);
 
     // Create a Layout
     QVBoxLayout *layout = new QVBoxLayout(this);
@@ -28,7 +30,14 @@ Register::Register(QWidget *parent)
     confirmPasswordField = new QLineEdit(this);
     confirmPasswordField->setPlaceholderText("Confirm Password");
     confirmPasswordField->setEchoMode(QLineEdit::Password);
+
+    // Buttons
     registerButton = new QPushButton("Register", this);
+    backButton = new QPushButton("Back", this);
+
+    // connect
+    connect(registerButton, &QPushButton::clicked, this, &Register::clickRegister);
+    connect(backButton, &QPushButton::clicked, this, &Register::BackToMainWindow);
 
     layout->addWidget(registerLabel);
     layout->addWidget(usernameField);
@@ -54,6 +63,20 @@ void Register::resizeEvent(QResizeEvent *event)
 
     Resizer::resizeFonts(event->size(), widgets, fontSizes);
     QWidget::resizeEvent(event);
+}
+
+void Register::clickRegister()
+{
+    MainWindow *mainWindow = new MainWindow();
+    mainWindow->show();
+    this->close();
+}
+
+void Register::BackToMainWindow()
+{
+    MainWindow *mainWindow = new MainWindow(); // Create MainWindow instance
+    mainWindow->show();  // Show MainWindow
+    this->close();  // Close Login form
 }
 
 Register::~Register()

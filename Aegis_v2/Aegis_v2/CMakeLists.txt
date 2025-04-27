@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(Aegis_v1 VERSION 0.1 LANGUAGES CXX)
+project(Aegis_v2 VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
@@ -20,43 +20,49 @@ set(PROJECT_SOURCES
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    qt_add_executable(Aegis_v1
+    qt_add_executable(Aegis_v2
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
+        img.qrc
+        img.qrc
         register.h
         register.cpp
         resizer.h
         resizer.cpp
+        mainmenu.h
+        mainmenu.cpp
         login.h
         login.cpp
+
+
     )
 # Define target properties for Android with Qt 6 as:
-#    set_property(TARGET Aegis_v1 APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
+#    set_property(TARGET Aegis_v2 APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
 #                 ${CMAKE_CURRENT_SOURCE_DIR}/android)
 # For more information, see https://doc.qt.io/qt-6/qt-add-executable.html#target-creation
 else()
     if(ANDROID)
-        add_library(Aegis_v1 SHARED
+        add_library(Aegis_v2 SHARED
             ${PROJECT_SOURCES}
         )
 # Define properties for Android with Qt 5 after find_package() calls as:
 #    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
     else()
-        add_executable(Aegis_v1
+        add_executable(Aegis_v2
             ${PROJECT_SOURCES}
         )
     endif()
 endif()
 
-target_link_libraries(Aegis_v1 PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(Aegis_v2 PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an
 # explicit, fixed bundle identifier manually though.
 if(${QT_VERSION} VERSION_LESS 6.1.0)
-  set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.Aegis_v1)
+  set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.Aegis_v2)
 endif()
-set_target_properties(Aegis_v1 PROPERTIES
+set_target_properties(Aegis_v2 PROPERTIES
     ${BUNDLE_ID_OPTION}
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
@@ -65,12 +71,12 @@ set_target_properties(Aegis_v1 PROPERTIES
 )
 
 include(GNUInstallDirs)
-install(TARGETS Aegis_v1
+install(TARGETS Aegis_v2
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
 
 if(QT_VERSION_MAJOR EQUAL 6)
-    qt_finalize_executable(Aegis_v1)
+    qt_finalize_executable(Aegis_v2)
 endif()
