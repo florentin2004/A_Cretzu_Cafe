@@ -2,6 +2,8 @@
 #include "mainmenu.h"
 #include "register.h"
 #include "resizer.h"
+#include "Network.h"
+
 
 #include <QPalette>
 #include <QPixmap>
@@ -138,20 +140,18 @@ void Login::openRegisterWindow()
 // Handle Login (Example Logic)
 void Login::handleLogin()
 {
+    // Validate fields
     if (usernameInput->text().isEmpty() || passwordInput->text().isEmpty())
     {
-        QMessageBox::warning(this, "Error", "Both fields must be filled!");
+        QMessageBox::warning(this, "Error", "Username and password must be filled!");
         return;
     }
 
-    // Example Authentication (Replace with actual logic)
-    if (usernameInput->text() == "test" && passwordInput->text() == "password")
-    {
-        QMessageBox::information(this, "Success", "Login successful!");
-        goBackToMainMenu();
-    }
-    else
-    {
-        QMessageBox::warning(this, "Error", "Invalid username or password!");
-    }
+    // Create network client
+    Network *client = new Network();
+    client->connectToServer();
+
+    // Send actual input data
+    QString loginData = "LOGIN:" + usernameInput->text() + ":" + passwordInput->text();
+    client->sendMessage(loginData);
 }

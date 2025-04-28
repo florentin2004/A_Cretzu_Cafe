@@ -1,5 +1,6 @@
 #include "mainmenu.h"
 #include "resizer.h"
+#include "Network.h"
 #include "register.h"
 #include "login.h"
 #include <QPalette>
@@ -15,6 +16,10 @@ MainMenu::MainMenu(QWidget *parent) : QWidget(parent)
 
     setWindowIcon(QIcon(":/img/Images/Aegis.ico"));
 
+    // Use a singleton or shared instance of Network instead of creating a new one
+    static Network *client = new Network();  // Keeps the same instance throughout the app
+    client->connectToServer();
+    client->sendMessage("MAIN_MENU_INITIALIZED");
 
     Resizer::delayedResize(this, size(), getResizableWidgets(), 24, 14);
 }

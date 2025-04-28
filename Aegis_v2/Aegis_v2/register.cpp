@@ -1,6 +1,7 @@
 #include "register.h"
 #include "resizer.h"
 #include "mainmenu.h"
+#include "Network.h"
 
 #include <QPalette>
 #include <QPixmap>
@@ -141,7 +142,9 @@ void Register::goBackToMainMenu()
 // Handle Registration
 void Register::handleRegister()
 {
-    if (emailInput->text().isEmpty() || usernameInput->text().isEmpty() || passwordInput->text().isEmpty() || confirmPasswordInput->text().isEmpty())
+    // Validate fields
+    if (emailInput->text().isEmpty() || usernameInput->text().isEmpty() ||
+        passwordInput->text().isEmpty() || confirmPasswordInput->text().isEmpty())
     {
         QMessageBox::warning(this, "Error", "All fields must be filled!");
         return;
@@ -159,6 +162,11 @@ void Register::handleRegister()
         return;
     }
 
-    QMessageBox::information(this, "Success", "Registration successful!");
-    goBackToMainMenu();
+    // Create network client
+    Network *client = new Network();
+    client->connectToServer();
+
+    // Send actual input data
+    QString registrationData = "REGISTER:" + usernameInput->text() + ":" + passwordInput->text() + ":" + emailInput->text();
+    client->sendMessage(registrationData);
 }
