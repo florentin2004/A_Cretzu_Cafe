@@ -19,7 +19,7 @@ int Retea::Initialize() {
         WSACleanup();
         return 1;
     }
-
+    
     return 0;
 }
 
@@ -77,97 +77,6 @@ void Retea::Shutdown() {
     WSACleanup();
 }
 
-void HandleClientLogger(std::istringstream& stream, std::string& token, const char delimiter, bool& resultOperation)
-{
-    DatabaseManagerAccounts::connect();
-    int i = 1;
-    std::string username, password;
-    while(std::getline(stream, token, delimiter))
-    {
-        if (i == 1)
-        {
-           std::cout << "Username: ";
-           username = token;
-           std::cout << username << std::endl;
-
-        }
-        else if (i == 2)
-        {
-           std::cout << "Parola: ";
-           password = token;
-           std::cout << password << std::endl;
-        }
-        i++;
-    }
-    resultOperation = DatabaseManagerAccounts::selectUser(username, password);
-    DatabaseManagerAccounts::disconnect();
-}
-
-void HandleClientRegister(std::istringstream& stream, std::string& token, const char delimiter, bool& resultOperation)
-{
-    DatabaseManagerAccounts::connect();
-    int i = 1;
-    std::string username, password;
-    while (std::getline(stream, token, delimiter))
-    {
-        if (i == 1)
-        {
-            std::cout << "Username: ";
-            username = token;
-            std::cout << username << std::endl;
-
-        }
-        else if (i == 2)
-        {
-            std::cout << "Parola: ";
-            password = token;
-            std::cout << password << std::endl;
-        }
-        i++;
-    }
-    resultOperation = DatabaseManagerAccounts::insertUser(username, password);
-    DatabaseManagerAccounts::disconnect();
-}
-
-void HandleClientChangePassword(std::istringstream& stream, std::string token, const char delimiter, bool& resultOperation)
-{
-    DatabaseManagerAccounts::connect();
-    std::string username, newPassword;
-    int i = 1;
-    while (std::getline(stream, token, delimiter))
-    {
-        if (i == 1)
-        {
-            std::cout << "Username: ";
-            username = token;
-            std::cout << username << std::endl;
-
-        }
-        else if (i == 2)
-        {
-            std::cout << "Noua parola: ";
-            newPassword = token;
-            std::cout << newPassword << std::endl;
-        }
-        i++;
-    }
-    resultOperation = DatabaseManagerAccounts::updatePassword(username, newPassword);
-    DatabaseManagerAccounts::disconnect();
-}
-
-void HandleClientDeleteAccount(std::istringstream& stream, std::string& token, const char delimiter, bool& resultOperation)
-{
-    DatabaseManagerAccounts::connect();
-    std::string username;
-
-    std::getline(stream, token, delimiter);
-    std::cout << "Username: ";
-    username = token;
-    std::cout << username << std::endl;
-
-    resultOperation = DatabaseManagerAccounts::deleteUser(username);
-    DatabaseManagerAccounts::disconnect();
-}
 
 void Retea::HandleClient() {
     int iResult;
@@ -178,6 +87,7 @@ void Retea::HandleClient() {
         printf("Bytes received: %d\n", iResult);
         recvbuf[iResult] = '\0';
         if (iResult > 0) {
+            int IDUser = -1;
             std::string buffer = recvbuf;
             std::istringstream stream(buffer);
             std::string token;
@@ -186,10 +96,10 @@ void Retea::HandleClient() {
             if (token == "0")
             {
                 std::cout << "Logare: " << std::endl;
-                HandleClientLogger(stream, token, ':', resultOperation);
+                IDUser = UserManager::HandleClientLogger(stream, token, ':', resultOperation);
 
                 if (resultOperation)
-                    buffer = "Te-ai logat cu succes!";
+                    buffer = "Te-ai logat cu succes! (ID-ul tau este " + std::to_string(IDUser) + " )";
                 else
                     buffer = "Username sau parola incorecta!";
 
@@ -207,7 +117,7 @@ void Retea::HandleClient() {
             else if (token == "1")
             {
                 std::cout << "Inregistrare: " << std::endl;
-                HandleClientRegister(stream, token, ':', resultOperation);
+                UserManager::HandleClientRegister(stream, token, ':', resultOperation);
 
                 if (resultOperation)
                     buffer = "Te-ai inregistrat cu succes!";
@@ -226,7 +136,7 @@ void Retea::HandleClient() {
             else if (token == "2")
             {
                 std::cout << "Schimbare Parola: " << std::endl;
-                HandleClientChangePassword(stream, token, ':', resultOperation);
+                UserManager::HandleClientChangePassword(stream, token, ':', resultOperation);
 
                 if (resultOperation)
                     buffer = "Parola a fost schimbata cu succes!";
@@ -245,7 +155,7 @@ void Retea::HandleClient() {
             else if (token == "3")
             {
                 std::cout << "Stergere cont: " << std::endl;
-                HandleClientDeleteAccount(stream, token, ':', resultOperation);
+                UserManager::HandleClientDeleteAccount(stream, token, ':', resultOperation);
 
                 if (resultOperation)
                     buffer = "Contul a fost sters cu succes!";
@@ -261,10 +171,63 @@ void Retea::HandleClient() {
                 }
                 printf("Bytes sent: %d\n", iSendResult);
             }
+            else if (token == "4")
+            {
+                std::cout << "Adaugare fisier: " << std::endl;
+                UserManager::HandleClientUploadFile(stream, token, ':', resultOperation);
+
+                if (resultOperation)
+                    buffer = "Fisierul a fost adaugat cu succes!";
+                else
+                    buffer = "A intervenit o eroare la adaugarea fisierului in server!";
+
+                iSendResult = send(ClientSocket, buffer.c_str(), buffer.size(), 0);
+                if (iSendResult == SOCKET_ERROR) {
+                    printf("send failed with error: %d\n", WSAGetLastError());
+                    closesocket(ClientSocket);
+                    WSACleanup();
+                    return;
+                }
+                printf("Bytes sent: %d\n", iSendResult);
+            }
+            else if (token == "5") 
+            {
+                std::string* content = nullptr;
+                std::cout << "Descarcare fisier : " << std::endl;
+                content = UserManager::HandleClientDownloadFile(stream, token, ':', resultOperation);
+
+                if (resultOperation && content)
+                {
+                    buffer = "Fisierul a fost descarcat cu succes!";
+                    iSendResult = send(ClientSocket, (*content).c_str(), (*content).size(), 0);
+                    if (iSendResult == SOCKET_ERROR) {
+                        printf("send failed with error: %d\n", WSAGetLastError());
+                        closesocket(ClientSocket);
+                        WSACleanup();
+                        return;
+                        printf("Bytes sent: %d\n", iSendResult);
+                    }
+                }
+                else {
+                    buffer = "A intervenit o eroare la descarcarea fisierului din server!";
+                    iSendResult = send(ClientSocket, buffer.c_str(), buffer.size(), 0);
+                    if (iSendResult == SOCKET_ERROR) {
+                        printf("send failed with error: %d\n", WSAGetLastError());
+                        closesocket(ClientSocket);
+                        WSACleanup();
+                        return;
+                        printf("Bytes sent: %d\n", iSendResult);
+
+                    }
+                }
+                delete content;
+            }
 
         }
         else if (iResult == 0)
+        {
             printf("Connection closing...\n");
+        }
         else {
             printf("recv failed with error: %d\n", WSAGetLastError());
             closesocket(ClientSocket);
@@ -274,5 +237,5 @@ void Retea::HandleClient() {
 
     } while (iResult > 0);
 
-    Shutdown();
+    
 }

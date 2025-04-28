@@ -4,6 +4,7 @@ SQLHENV DatabaseManagerAccounts::hEnv = nullptr;
 SQLHDBC DatabaseManagerAccounts::hDbc = nullptr;
 SQLHSTMT DatabaseManagerAccounts::hStmt = nullptr;
 
+
 void DatabaseManagerAccounts::showSQLError(SQLHANDLE handle, SQLSMALLINT type) {
     SQLCHAR sqlState[6], message[512];
     SQLINTEGER nativeError;
@@ -34,10 +35,10 @@ bool DatabaseManagerAccounts::connect() {
     return true;
 }
 
-bool DatabaseManagerAccounts::selectUser(std::string& username, std::string& password) {
+int DatabaseManagerAccounts::selectUser(std::string& username, std::string& password) {
     SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt);
 
-    std::string query = "SELECT COUNT(*) FROM Utilizatori WHERE Username = '" + username +"' AND Password = '" + password + "';";
+    std::string query = "SELECT * FROM Utilizatori WHERE Username = '" + username +"' AND Password = '" + password + "';";
     SQLRETURN retcode = SQLExecDirectA(hStmt, (SQLCHAR *)query.c_str(), SQL_NTS);
 
     if (retcode != SQL_SUCCESS && retcode != SQL_SUCCESS_WITH_INFO) {
@@ -46,15 +47,15 @@ bool DatabaseManagerAccounts::selectUser(std::string& username, std::string& pas
         return false;
     }
 
-    int count = 0;
+    int IDUser = -1;
 
     if (SQLFetch(hStmt) == SQL_SUCCESS) {
-        SQLGetData(hStmt, 1, SQL_C_SLONG, &count, 0, NULL);
+        SQLGetData(hStmt, 1, SQL_C_SLONG, &IDUser, 0, NULL);
     }
 
     SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
 
-    return (count > 0);
+    return IDUser;
 }
 
 bool DatabaseManagerAccounts::insertUser(std::string& username, std::string& password) {
@@ -109,6 +110,46 @@ bool DatabaseManagerAccounts::deleteUser(std::string& username) {
     }
     else {
         std::cout << "Utilizator sters!" << std::endl;
+        SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
+        return true;
+    }
+}
+
+bool DatabaseManagerAccounts::addFile(int& IDUser, std::string& filename)
+{
+    SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt);
+
+    std::string query = "INSERT INTO UserFiles (UserID, FileName) VALUES ('" + std::to_string(IDUser) + "', '" + filename + "')";
+    SQLRETURN retcode = SQLExecDirectA(hStmt, (SQLCHAR*)query.c_str(), SQL_NTS);
+
+    if (retcode != SQL_SUCCESS && retcode != SQL_SUCCESS_WITH_INFO) {
+        std::cerr << "INSERT a esuat!" << std::endl;
+        showSQLError(hStmt, SQL_HANDLE_STMT);
+        SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
+        return false;
+    }
+    else {
+        std::cout << "Numele fisierului adaugat cu succes!" << std::endl;
+        SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
+        return true;
+    }
+}
+
+bool DatabaseManagerAccounts::deleteFile(int& IDUser, std::string& filename)
+{
+    SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt);
+
+    std::string query = "DELETE FROM UserFiles WHERE FileName = '" + filename + "' AND UserID = '" + std::to_string(IDUser) + "';";
+    SQLRETURN retcode = SQLExecDirectA(hStmt, (SQLCHAR*)query.c_str(), SQL_NTS);
+
+    if (retcode != SQL_SUCCESS && retcode != SQL_SUCCESS_WITH_INFO) {
+        std::cerr << "DELETE a esuat!" << std::endl;
+        showSQLError(hStmt, SQL_HANDLE_STMT);
+        SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
+        return false;
+    }
+    else {
+        std::cout << "Fisier sters!" << std::endl;
         SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
         return true;
     }
