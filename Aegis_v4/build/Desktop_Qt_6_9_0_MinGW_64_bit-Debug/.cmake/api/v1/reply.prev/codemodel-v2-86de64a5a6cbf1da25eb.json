@@ -1,0 +1,79 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-20e80091bacdd766708f.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "Aegis_v4",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "Aegis_v4::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Aegis_v4-Debug-1164e9ebfc81cb9dca39.json",
+					"name" : "Aegis_v4",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Aegis_v4_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Aegis_v4_autogen-Debug-6ebfe16bfb16173a2215.json",
+					"name" : "Aegis_v4_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Aegis_v4_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Aegis_v4_autogen_timestamp_deps-Debug-fab2d431b87845063139.json",
+					"name" : "Aegis_v4_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "D:/MTA/Aegis_v4/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug",
+		"source" : "D:/MTA/Aegis_v4"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}
