@@ -1,9 +1,9 @@
-#include "Retea.h"
+﻿#include "Retea.h"
 
 int Retea::Initialize() {
     int iResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
     if (iResult != 0) {
-        printf("WSAStartup failed with error: %d\n", iResult);
+        printf("[EROARE] WSAStartup failed with error: %d\n", iResult);
         return 1;
     }
 
@@ -15,7 +15,7 @@ int Retea::Initialize() {
 
     iResult = getaddrinfo(NULL, DEFAULT_PORT, &hints, &result);
     if (iResult != 0) {
-        printf("getaddrinfo failed with error: %d\n", iResult);
+        printf("[EROARE] getaddrinfo failed with error: %d\n", iResult);
         WSACleanup();
         return 1;
     }
@@ -26,7 +26,7 @@ int Retea::Initialize() {
 int Retea::CreateSocket() {
     ListenSocket = socket(result->ai_family, result->ai_socktype, result->ai_protocol);
     if (ListenSocket == INVALID_SOCKET) {
-        printf("socket failed with error: %ld\n", WSAGetLastError());
+        printf("[EROARE] socket failed with error: %ld\n", WSAGetLastError());
         freeaddrinfo(result);
         //WSACleanup();
         return 1;
@@ -34,7 +34,7 @@ int Retea::CreateSocket() {
 
     int iResult = bind(ListenSocket, result->ai_addr, (int)result->ai_addrlen);
     if (iResult == SOCKET_ERROR) {
-        printf("bind failed with error: %d\n", WSAGetLastError());
+        printf("[EROARE] bind failed with error: %d\n", WSAGetLastError());
         freeaddrinfo(result);
         closesocket(ListenSocket);
         //WSACleanup();
@@ -45,7 +45,7 @@ int Retea::CreateSocket() {
 
     iResult = listen(ListenSocket, SOMAXCONN);
     if (iResult == SOCKET_ERROR) {
-        printf("listen failed with error: %d\n", WSAGetLastError());
+        printf("[EROARE] listen failed with error: %d\n", WSAGetLastError());
         closesocket(ListenSocket);
         //WSACleanup();
         return 1;
@@ -59,7 +59,7 @@ int Retea::CreateSocket() {
 int Retea::AcceptConnection() {
     ClientSocket = accept(ListenSocket, NULL, NULL);
     if (ClientSocket == INVALID_SOCKET) {
-        printf("accept failed with error: %d\n", WSAGetLastError());
+        printf("[EROARE] accept failed with error: %d\n", WSAGetLastError());
         //closesocket(ListenSocket);
         //WSACleanup();
         return 1;
@@ -68,6 +68,7 @@ int Retea::AcceptConnection() {
     //closesocket(ListenSocket);  // No longer need the server socket
 
     printf("[SERVER] Client conectat!\n");
+    this->on = true;
 
     return 0;
 }
@@ -75,12 +76,14 @@ int Retea::AcceptConnection() {
 void Retea::Shutdown() {
     int iResult = shutdown(ClientSocket, SD_SEND);
     if (iResult == SOCKET_ERROR) {
-        printf("shutdown failed with error: %d\n", WSAGetLastError());
+        printf("[EROARE] shutdown failed with error: %d\n", WSAGetLastError());
     }
 
     closesocket(ClientSocket);
     WSACleanup();
 }
+
+
 
 
 void Retea::HandleClient() {
@@ -100,7 +103,7 @@ void Retea::HandleClient() {
             std::getline(stream, token, ':');
             if (token == "0")
             {
-                std::cout << "Logare: " << std::endl;
+                std::cout << "[REQUEST TYPE] Logare: " << std::endl;
                 IDUser = UserManager::HandleClientLogger(stream, token, ':', resultOperation);
 
                 if (resultOperation)
@@ -112,7 +115,7 @@ void Retea::HandleClient() {
 
                 iSendResult = send(ClientSocket, buffer.c_str(), buffer.size(), 0);
                 if (iSendResult == SOCKET_ERROR) {
-                    printf("send failed with error: %d\n", WSAGetLastError());
+                    printf("[EROARE] send failed with error: %d\n", WSAGetLastError());
                     //WSACleanup();
                     return;
                 }
@@ -120,7 +123,7 @@ void Retea::HandleClient() {
             }
             else if (token == "1")
             {
-                std::cout << "Inregistrare: " << std::endl;
+                std::cout << "[REQUEST TYPE] Inregistrare: " << std::endl;
                 UserManager::HandleClientRegister(stream, token, ':', resultOperation);
 
                 if (resultOperation)
@@ -130,7 +133,7 @@ void Retea::HandleClient() {
 
                 iSendResult = send(ClientSocket, buffer.c_str(), buffer.size(), 0);
                 if (iSendResult == SOCKET_ERROR) {
-                    printf("send failed with error: %d\n", WSAGetLastError());
+                    printf("[EROARE] send failed with error: %d\n", WSAGetLastError());
                     //WSACleanup();
                     return;
                 }
@@ -138,7 +141,7 @@ void Retea::HandleClient() {
             }
             else if (token == "2")
             {
-                std::cout << "Schimbare Parola: " << std::endl;
+                std::cout << "[REQUEST TYPE] Schimbare Parola: " << std::endl;
                 UserManager::HandleClientChangePassword(stream, token, ':', resultOperation);
 
                 if (resultOperation)
@@ -148,7 +151,7 @@ void Retea::HandleClient() {
 
                 iSendResult = send(ClientSocket, buffer.c_str(), buffer.size(), 0);
                 if (iSendResult == SOCKET_ERROR) {
-                    printf("send failed with error: %d\n", WSAGetLastError());
+                    printf("[EROARE] send failed with error: %d\n", WSAGetLastError());
                     //WSACleanup();
                     return;
                 }
@@ -156,7 +159,7 @@ void Retea::HandleClient() {
             }
             else if (token == "3")
             {
-                std::cout << "Stergere cont: " << std::endl;
+                std::cout << "[REQUEST TYPE] Stergere cont: " << std::endl;
                 UserManager::HandleClientDeleteAccount(stream, token, ':', resultOperation);
 
                 if (resultOperation)
@@ -166,7 +169,7 @@ void Retea::HandleClient() {
 
                 iSendResult = send(ClientSocket, buffer.c_str(), buffer.size(), 0);
                 if (iSendResult == SOCKET_ERROR) {
-                    printf("send failed with error: %d\n", WSAGetLastError());
+                    printf("[EROARE] send failed with error: %d\n", WSAGetLastError());
                     //WSACleanup();
                     return;
                 }
@@ -174,7 +177,7 @@ void Retea::HandleClient() {
             }
             else if (token == "4")
             {
-                std::cout << "Adaugare fisier: " << std::endl;
+                std::cout << "[REQUEST TYPE] Adaugare fisier: " << std::endl;
                 UserManager::HandleClientUploadFile(stream, token, ':', resultOperation);
 
                 if (resultOperation)
@@ -184,7 +187,7 @@ void Retea::HandleClient() {
 
                 iSendResult = send(ClientSocket, buffer.c_str(), buffer.size(), 0);
                 if (iSendResult == SOCKET_ERROR) {
-                    printf("send failed with error: %d\n", WSAGetLastError());
+                    printf("[EROARE] send failed with error: %d\n", WSAGetLastError());
                     //WSACleanup();
                     return;
                 }
@@ -193,7 +196,7 @@ void Retea::HandleClient() {
             else if (token == "5") 
             {
                 std::string* content = nullptr;
-                std::cout << "Descarcare fisier : " << std::endl;
+                std::cout << "[REQUEST TYPE] Descarcare fisier : " << std::endl;
                 content = UserManager::HandleClientDownloadFile(stream, token, ':', resultOperation);
 
                 if (resultOperation && content)
@@ -201,7 +204,7 @@ void Retea::HandleClient() {
                     buffer = "Fisierul a fost descarcat cu succes!";
                     iSendResult = send(ClientSocket, (*content).c_str(), (*content).size(), 0);
                     if (iSendResult == SOCKET_ERROR) {
-                        printf("send failed with error: %d\n", WSAGetLastError());
+                        printf("[EROARE] send failed with error: %d\n", WSAGetLastError());
                         //WSACleanup();
                         return;    
                     }
@@ -211,7 +214,7 @@ void Retea::HandleClient() {
                     buffer = "A intervenit o eroare la descarcarea fisierului din server!";
                     iSendResult = send(ClientSocket, buffer.c_str(), buffer.size(), 0);
                     if (iSendResult == SOCKET_ERROR) {
-                        printf("send failed with error: %d\n", WSAGetLastError());
+                        printf("[EROARE] send failed with error: %d\n", WSAGetLastError());
                         //WSACleanup();
                         return;
                     }
@@ -219,9 +222,22 @@ void Retea::HandleClient() {
                 }
                 delete content;
             }
+            else if (token == "q")
+            {
+                printf("[SERVER] S-a deconectat clientul!\n");
+                closesocket(ClientSocket);
+            }
             else
             {
-                
+                std::cout << "[PROTOCOL] Protocol neidentificat, informatie aruncata!" << std::endl;
+                buffer = "Protocol neidentificat";
+                iSendResult = send(ClientSocket, buffer.c_str(), buffer.size(), 0);
+                if (iSendResult == SOCKET_ERROR) {
+                    printf("[EROARE] send failed with error: %d\n", WSAGetLastError());
+                    //WSACleanup();
+                    return;
+                }
+                printf("Bytes sent: %d\n", iSendResult);
             }
 
         }
@@ -231,9 +247,15 @@ void Retea::HandleClient() {
             closesocket(ClientSocket);
         }
         else {
-            printf("[SERVER] recv failed with error: %d\n", WSAGetLastError());
-            //WSACleanup();
-            closesocket(ClientSocket);
+            int errorCode = WSAGetLastError();
+            if (errorCode == WSAECONNRESET) {
+                std::cout << "[SERVER] S-a deconectat clientul!\n";
+                closesocket(ClientSocket);
+            }
+            else {
+                std::cerr << "[EROARE] recv failed with error: " << errorCode << std::endl;
+                closesocket(ClientSocket);
+            }
         }
 
     } while (iResult > 0);

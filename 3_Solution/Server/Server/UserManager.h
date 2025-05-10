@@ -1,4 +1,6 @@
 #pragma once
+#include <random>
+#include <ctime>
 #include "DatabaseManagerAccounts.h"
 #include "FileManager.h"
 class UserManager

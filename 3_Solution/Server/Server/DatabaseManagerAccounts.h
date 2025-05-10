@@ -20,7 +20,7 @@ public:
     static bool connect();
     static int selectUser(std::string& username, std::string& password);
     static bool insertUser(std::string& username, std::string& password);
-    static bool updatePassword(std::string& username, std::string& newPassword);
+    static bool updatePassword(std::string& username, std::string& newPassword, std::string& oldPassword);
     static bool deleteUser(std::string& username);
     static bool addFile(int& IDUser, std::string& filename);
     static bool deleteFile(int& IDUser, std::string& filename);

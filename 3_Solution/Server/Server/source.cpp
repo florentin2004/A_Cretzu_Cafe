@@ -14,7 +14,8 @@ int __cdecl main(void)
     Retea server;
      if (server.Initialize()) return 1;
         if (server.CreateSocket()) return 1;
-    while (true) {
+    bool on = true;
+    while (on) {
         std::cout << "[SERVER] Astept un client nou...\n";
         if (server.AcceptConnection() == 0)
         {

@@ -28,6 +28,7 @@ private:
     struct addrinfo hints {};
     char recvbuf[DEFAULT_BUFLEN];
     int recvbuflen = DEFAULT_BUFLEN;
+    bool on = false;
 
 public:
     Retea() = default;
