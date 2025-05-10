@@ -12,22 +12,15 @@
 int __cdecl main(void)
 {
     Retea server;
-     if (server.Initialize() != 0) return 1;
-        if (server.CreateSocket() != 0) return 1;
-   // while (true)
-   // {
-       
-        std::cout << "Astept un client nou...\n";
-
-        if (server.AcceptConnection() != 0) return 1;
-        server.HandleClient();
-
-        std::cout << "Client deconectat.\n";
-        server.Shutdown();
-   // }
-
-   
-
-
+     if (server.Initialize()) return 1;
+        if (server.CreateSocket()) return 1;
+    while (true) {
+        std::cout << "[SERVER] Astept un client nou...\n";
+        if (server.AcceptConnection() == 0)
+        {
+                server.HandleClient();
+        }
+    }
+    server.Shutdown();
     return 0;
 }

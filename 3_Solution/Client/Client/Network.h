@@ -6,6 +6,7 @@
 #include <ws2tcpip.h>
 #include <stdlib.h>
 #include <iostream>
+#include <string>
 
 
 // Need to link with Ws2_32.lib, Mswsock.lib, and Advapi32.lib
@@ -26,7 +27,7 @@ private:
     struct addrinfo* result = NULL,
         * ptr = NULL,
         hints;
-    std::string sendbuf = "3:corduneanu.arian:Arian2004";
+    std::string sendbuf;
     char recvbuf[DEFAULT_BUFLEN];
     int iResult;
     int recvbuflen = DEFAULT_BUFLEN;
@@ -34,7 +35,7 @@ private:
 public:
     Network() = default;
     int connectServer(int, char**);
-    int sent();
+    int sent(std::string&);
     int receive();
     ~Network();
 };

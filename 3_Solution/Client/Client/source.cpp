@@ -3,12 +3,21 @@
 int __cdecl main(int argc, char** argv)
 {
     Network* server = new Network();
+    std::string message;
 
-    server->connectServer(argc, argv);
-    server->sent();// aici se va pune un parametru de tip char/string care acela va respecta acel protocol de sent
-    server->receive();// in functie de ce sent am dat inainte, o sa il folosesc pentru a deserializa acel pachet dat de server
+    if (server->connectServer(argc, argv) != 0) return 1;
+
+    while (true)
+    {
+        std::cout << "Introdu protocolul: ";
+        std::getline(std::cin, message);
+        if (message == "quit")
+            break;
+
+        if (server->sent(message) != 0) break;
+        if (server->receive() != 0) break;
+    }
 
     delete server;
-
     return 0;
 }
