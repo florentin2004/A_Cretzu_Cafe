@@ -28,7 +28,7 @@ int Retea::CreateSocket() {
     if (ListenSocket == INVALID_SOCKET) {
         printf("socket failed with error: %ld\n", WSAGetLastError());
         freeaddrinfo(result);
-        WSACleanup();
+        //WSACleanup();
         return 1;
     }
 
@@ -37,7 +37,7 @@ int Retea::CreateSocket() {
         printf("bind failed with error: %d\n", WSAGetLastError());
         freeaddrinfo(result);
         closesocket(ListenSocket);
-        WSACleanup();
+        //WSACleanup();
         return 1;
     }
 
@@ -47,9 +47,11 @@ int Retea::CreateSocket() {
     if (iResult == SOCKET_ERROR) {
         printf("listen failed with error: %d\n", WSAGetLastError());
         closesocket(ListenSocket);
-        WSACleanup();
+        //WSACleanup();
         return 1;
     }
+
+    printf("[SERVER] S-a initializat cu succes!\n");
 
     return 0;
 }
@@ -58,12 +60,15 @@ int Retea::AcceptConnection() {
     ClientSocket = accept(ListenSocket, NULL, NULL);
     if (ClientSocket == INVALID_SOCKET) {
         printf("accept failed with error: %d\n", WSAGetLastError());
-        closesocket(ListenSocket);
-        WSACleanup();
+        //closesocket(ListenSocket);
+        //WSACleanup();
         return 1;
     }
 
-    closesocket(ListenSocket);  // No longer need the server socket
+    //closesocket(ListenSocket);  // No longer need the server socket
+
+    printf("[SERVER] Client conectat!\n");
+
     return 0;
 }
 
@@ -108,8 +113,7 @@ void Retea::HandleClient() {
                 iSendResult = send(ClientSocket, buffer.c_str(), buffer.size(), 0);
                 if (iSendResult == SOCKET_ERROR) {
                     printf("send failed with error: %d\n", WSAGetLastError());
-                    closesocket(ClientSocket);
-                    WSACleanup();
+                    //WSACleanup();
                     return;
                 }
                 printf("Bytes sent: %d\n", iSendResult);
@@ -127,8 +131,7 @@ void Retea::HandleClient() {
                 iSendResult = send(ClientSocket, buffer.c_str(), buffer.size(), 0);
                 if (iSendResult == SOCKET_ERROR) {
                     printf("send failed with error: %d\n", WSAGetLastError());
-                    closesocket(ClientSocket);
-                    WSACleanup();
+                    //WSACleanup();
                     return;
                 }
                 printf("Bytes sent: %d\n", iSendResult);
@@ -146,8 +149,7 @@ void Retea::HandleClient() {
                 iSendResult = send(ClientSocket, buffer.c_str(), buffer.size(), 0);
                 if (iSendResult == SOCKET_ERROR) {
                     printf("send failed with error: %d\n", WSAGetLastError());
-                    closesocket(ClientSocket);
-                    WSACleanup();
+                    //WSACleanup();
                     return;
                 }
                 printf("Bytes sent: %d\n", iSendResult);
@@ -165,8 +167,7 @@ void Retea::HandleClient() {
                 iSendResult = send(ClientSocket, buffer.c_str(), buffer.size(), 0);
                 if (iSendResult == SOCKET_ERROR) {
                     printf("send failed with error: %d\n", WSAGetLastError());
-                    closesocket(ClientSocket);
-                    WSACleanup();
+                    //WSACleanup();
                     return;
                 }
                 printf("Bytes sent: %d\n", iSendResult);
@@ -184,8 +185,7 @@ void Retea::HandleClient() {
                 iSendResult = send(ClientSocket, buffer.c_str(), buffer.size(), 0);
                 if (iSendResult == SOCKET_ERROR) {
                     printf("send failed with error: %d\n", WSAGetLastError());
-                    closesocket(ClientSocket);
-                    WSACleanup();
+                    //WSACleanup();
                     return;
                 }
                 printf("Bytes sent: %d\n", iSendResult);
@@ -202,37 +202,38 @@ void Retea::HandleClient() {
                     iSendResult = send(ClientSocket, (*content).c_str(), (*content).size(), 0);
                     if (iSendResult == SOCKET_ERROR) {
                         printf("send failed with error: %d\n", WSAGetLastError());
-                        closesocket(ClientSocket);
-                        WSACleanup();
-                        return;
-                        printf("Bytes sent: %d\n", iSendResult);
+                        //WSACleanup();
+                        return;    
                     }
+                    printf("Bytes sent: %d\n", iSendResult);
                 }
                 else {
                     buffer = "A intervenit o eroare la descarcarea fisierului din server!";
                     iSendResult = send(ClientSocket, buffer.c_str(), buffer.size(), 0);
                     if (iSendResult == SOCKET_ERROR) {
                         printf("send failed with error: %d\n", WSAGetLastError());
-                        closesocket(ClientSocket);
-                        WSACleanup();
+                        //WSACleanup();
                         return;
-                        printf("Bytes sent: %d\n", iSendResult);
-
                     }
+                    printf("Bytes sent: %d\n", iSendResult);
                 }
                 delete content;
+            }
+            else
+            {
+                
             }
 
         }
         else if (iResult == 0)
         {
-            printf("Connection closing...\n");
+            printf("[SERVER] S-a deconectat clientul!\n");
+            closesocket(ClientSocket);
         }
         else {
-            printf("recv failed with error: %d\n", WSAGetLastError());
+            printf("[SERVER] recv failed with error: %d\n", WSAGetLastError());
+            //WSACleanup();
             closesocket(ClientSocket);
-            WSACleanup();
-            return;
         }
 
     } while (iResult > 0);

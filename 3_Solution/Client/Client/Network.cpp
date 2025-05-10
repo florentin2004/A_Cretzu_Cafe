@@ -61,48 +61,49 @@ int Network::connectServer(int argc, char** argv)
     return 0;
 }
 
-int Network::sent()
+int Network::sent(std::string& message)
 {
+
+    this->sendbuf = message;
     // Send an initial buffer
     this->iResult = send(this->ConnectSocket, this->sendbuf.c_str(), (int)this->sendbuf.length(), 0);
     if (this->iResult == SOCKET_ERROR) {
         printf("send failed with error: %d\n", WSAGetLastError());
         closesocket(this->ConnectSocket);
-        WSACleanup();
+        //WSACleanup();
         return 1;
     }
 
     printf("Bytes Sent: %ld\n", iResult);
 
     // shutdown the connection since no more data will be sent
-    this->iResult = shutdown(this->ConnectSocket, SD_SEND);
+    /*this->iResult = shutdown(this->ConnectSocket, SD_SEND);
     if (this->iResult == SOCKET_ERROR) {
         printf("shutdown failed with error: %d\n", WSAGetLastError());
         closesocket(this->ConnectSocket);
         WSACleanup();
         return 1;
-    }
+    }*/
 
     return 0;
 }
 
 int Network::receive()
 {
-    // Receive until the peer closes the connection
-    do {
-
-        this->iResult = recv(this->ConnectSocket, this->recvbuf, this->recvbuflen, 0);
-        if (this->iResult > 0)
-        {
-            std::cout << this->recvbuf << std::endl;
-            printf("Bytes received: %d\n", iResult);
-        }
-        else if (iResult == 0)
-            printf("Connection closed\n");
-        else
-            printf("recv failed with error: %d\n", WSAGetLastError());
-
-    } while (this->iResult > 0);
+    this->iResult = recv(this->ConnectSocket, this->recvbuf, this->recvbuflen - 1, 0);
+    if (this->iResult > 0)
+    {
+        this->recvbuf[iResult] = '\0';
+        std::cout << this->recvbuf << std::endl;
+        printf("Bytes received: %d\n", iResult);
+    }
+    else if (iResult == 0)
+        printf("Connection closed\n");
+    else
+    {
+        printf("recv failed with error: %d\n", WSAGetLastError());
+        return 1;
+    }
 
     return 0;
 }

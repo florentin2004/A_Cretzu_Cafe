@@ -11,6 +11,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "UserManager.h"
+#include "MyException.h"
 
 #pragma comment (lib, "Ws2_32.lib")
 
