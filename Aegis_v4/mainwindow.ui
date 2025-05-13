@@ -233,7 +233,7 @@ QPushButton:pressed {
            <string notr="true">font: &quot;Verdana&quot;;</string>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>1</number>
           </property>
           <widget class="QWidget" name="login_page">
            <property name="styleSheet">
@@ -630,7 +630,27 @@ QPushButton#noButton:pressed {
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="App"/>
+      <widget class="QWidget" name="App">
+       <widget class="QPushButton" name="uploadButton">
+        <property name="geometry">
+         <rect>
+          <x>380</x>
+          <y>310</y>
+          <width>191</width>
+          <height>54</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Vineta BT</family>
+          <pointsize>20</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Upload</string>
+        </property>
+       </widget>
+      </widget>
      </widget>
     </item>
    </layout>

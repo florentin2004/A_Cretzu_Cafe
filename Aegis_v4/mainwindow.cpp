@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include <QCryptographicHash>
+#include <QFileDialog>
 #include "./ui_mainwindow.h"
 #include <QIcon>
 
@@ -31,6 +32,7 @@ void MainWindow::on_noButton_clicked()
 
 void MainWindow::on_yesButton_clicked()
 {
+    client->sendMessage("q"); // Notify the server
     QApplication::quit(); // Exit the app
 }
 
@@ -70,7 +72,20 @@ void MainWindow::on_LoginButton_2_clicked()
     QByteArray hashedPassword = QCryptographicHash::hash(key + password.toUtf8(), QCryptographicHash::Sha256).toHex();
 
 
-    QString loginData = "0:" + hashedUsername + ":" + hashedPassword;
+    QString loginData = "0:" + hashedUsername+":"+hashedPassword;
     client->sendMessage(loginData);
+
+    ui->Window_logic->setCurrentIndex(1); // App
+}
+
+
+void MainWindow::on_uploadButton_clicked()
+{
+    QString fileName = QFileDialog::getOpenFileName(this, "Select File", QDir::homePath(), "All Files (*.*)");
+    if (!fileName.isEmpty())
+    {
+        QString idUser = "9";
+        client->sendFile(fileName, idUser);
+    }
 }
 

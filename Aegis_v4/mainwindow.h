@@ -43,6 +43,8 @@ private slots:
 
     void on_LoginButton_2_clicked();
 
+    void on_uploadButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     Network *client;

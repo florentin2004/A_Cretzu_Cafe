@@ -14,6 +14,7 @@ public:
     void connectToServer();    // No need for parameters, uses stored IP/Port
     void sendMessage(const QString &message);
     void setServerDetails(const QString &ip, int port);  // Allows setting IP & Port dynamically
+    void sendFile(const QString &filePath, const QString &idUser);
 
 private slots:
     void onConnected();
