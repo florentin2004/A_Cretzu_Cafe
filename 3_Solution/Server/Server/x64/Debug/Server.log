@@ -1,10 +1,10 @@
 ﻿  Retea.cpp
-C:\Users\arysu\A_Cretzu_Cafe\3_Solution\Server\Server\Retea.cpp(116,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\arysu\A_Cretzu_Cafe\3_Solution\Server\Server\Retea.cpp(134,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\arysu\A_Cretzu_Cafe\3_Solution\Server\Server\Retea.cpp(152,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\arysu\A_Cretzu_Cafe\3_Solution\Server\Server\Retea.cpp(170,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\arysu\A_Cretzu_Cafe\3_Solution\Server\Server\Retea.cpp(188,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\arysu\A_Cretzu_Cafe\3_Solution\Server\Server\Retea.cpp(205,89): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\arysu\A_Cretzu_Cafe\3_Solution\Server\Server\Retea.cpp(215,81): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\arysu\A_Cretzu_Cafe\3_Solution\Server\Server\Retea.cpp(234,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\arysu\A_Cretzu_Cafe\3_Solution\Server\Server\Retea.cpp(117,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\arysu\A_Cretzu_Cafe\3_Solution\Server\Server\Retea.cpp(138,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\arysu\A_Cretzu_Cafe\3_Solution\Server\Server\Retea.cpp(158,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\arysu\A_Cretzu_Cafe\3_Solution\Server\Server\Retea.cpp(178,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\arysu\A_Cretzu_Cafe\3_Solution\Server\Server\Retea.cpp(214,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\arysu\A_Cretzu_Cafe\3_Solution\Server\Server\Retea.cpp(232,89): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\arysu\A_Cretzu_Cafe\3_Solution\Server\Server\Retea.cpp(242,81): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\arysu\A_Cretzu_Cafe\3_Solution\Server\Server\Retea.cpp(261,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
   Server.vcxproj -> C:\Users\arysu\A_Cretzu_Cafe\3_Solution\Server\x64\Debug\Server.exe

@@ -126,7 +126,8 @@ void UserManager::HandleClientUploadFile(std::istringstream& stream, std::string
 {
     DatabaseManagerAccounts::connect();
     int size, IDUser;
-    std::string filename, buffer;
+    std::string filename;
+    std::vector<char> buffer;
     for (int i = 1; std::getline(stream, token, delimiter); i++)
     {
         switch (i)
@@ -144,7 +145,7 @@ void UserManager::HandleClientUploadFile(std::istringstream& stream, std::string
         case 3:
             size = std::stoi(token);
             buffer.resize(size);
-            stream.read(&buffer[0], size);
+            stream.read(buffer.data(), size);
             FileManager::UploadFile(filename, buffer);
             break;
         default:

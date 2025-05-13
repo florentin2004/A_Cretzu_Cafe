@@ -1,10 +1,11 @@
 #include "FileManager.h"
 
-void FileManager::UploadFile(std::string& filename, std::string& content)
+void FileManager::UploadFile(std::string& filename, std::vector<char>& content)
 {
-	std::ofstream out(filename + ".txt", std::ios::binary);
+	std::ofstream out(filename, std::ios::binary);
 	if (!out.is_open()) {
 		std::cerr << "Eroare: nu pot deschide fisierul pentru scriere!\n";
+		return;
 	}
 	out.write(content.data(), content.size());
 	out.close();
@@ -12,7 +13,7 @@ void FileManager::UploadFile(std::string& filename, std::string& content)
 
 std::string* FileManager::DownloadFile(std::string& filename) // returneaza contentul fisierului
 {
-	std::ifstream in(filename + ".txt", std::ios::binary);
+	std::ifstream in(filename, std::ios::binary);
 	if (!in.is_open())
 	{
 		std::cerr << "Eroare: nu pot deschide fisierul pentru citire!\n";

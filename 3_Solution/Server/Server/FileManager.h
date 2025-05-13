@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <vector>
 class FileManager
 {
 private:
@@ -10,7 +11,7 @@ private:
 	FileManager(FileManager&&) = default;
 	~FileManager() = default;
 public:
-	static void UploadFile(std::string& filename, std::string& content);
+	static void UploadFile(std::string& filename, std::vector<char>& content);
 	static std::string* DownloadFile(std::string& filename);
 };
 

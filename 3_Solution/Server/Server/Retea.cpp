@@ -97,17 +97,18 @@ void Retea::HandleClient() {
         if (iResult > 0) {
             int IDUser = -1;
             std::string buffer = recvbuf;
-            std::istringstream stream(buffer);
             std::string token;
             bool resultOperation = true;
+            std::istringstream stream(buffer);
             std::getline(stream, token, ':');
             if (token == "0")
             {
+                
                 std::cout << "[REQUEST TYPE] Logare: " << std::endl;
                 IDUser = UserManager::HandleClientLogger(stream, token, ':', resultOperation);
 
                 if (resultOperation)
-                    buffer = "Te-ai logat cu succes! (ID-ul tau este " + std::to_string(IDUser) + " )";
+                    buffer = std::to_string(IDUser) + ":Te-ai logat cu succes!";
                 else
                     buffer = "Username sau parola incorecta!";
 
@@ -123,6 +124,9 @@ void Retea::HandleClient() {
             }
             else if (token == "1")
             {
+
+                 
+
                 std::cout << "[REQUEST TYPE] Inregistrare: " << std::endl;
                 UserManager::HandleClientRegister(stream, token, ':', resultOperation);
 
@@ -141,6 +145,8 @@ void Retea::HandleClient() {
             }
             else if (token == "2")
             {
+                 
+
                 std::cout << "[REQUEST TYPE] Schimbare Parola: " << std::endl;
                 UserManager::HandleClientChangePassword(stream, token, ':', resultOperation);
 
@@ -159,6 +165,8 @@ void Retea::HandleClient() {
             }
             else if (token == "3")
             {
+                 
+
                 std::cout << "[REQUEST TYPE] Stergere cont: " << std::endl;
                 UserManager::HandleClientDeleteAccount(stream, token, ':', resultOperation);
 
@@ -177,6 +185,24 @@ void Retea::HandleClient() {
             }
             else if (token == "4")
             {
+                int totalReceived = 0, receiving = iResult;
+                std::getline(stream, token, ':');
+                totalReceived = std::stoi(token);
+
+
+                if (receiving<totalReceived)
+                    do {
+                        iResult = recv(ClientSocket, recvbuf, recvbuflen, 0); // -1 pentru loc de '\0'
+
+                        recvbuf[iResult] = '\0'; // acum e sigur
+                        buffer += recvbuf;
+                        receiving += iResult;
+                        
+                    } while (receiving < totalReceived);
+                
+
+                 
+
                 std::cout << "[REQUEST TYPE] Adaugare fisier: " << std::endl;
                 UserManager::HandleClientUploadFile(stream, token, ':', resultOperation);
 
@@ -197,6 +223,7 @@ void Retea::HandleClient() {
             {
                 std::string* content = nullptr;
                 std::cout << "[REQUEST TYPE] Descarcare fisier : " << std::endl;
+
                 content = UserManager::HandleClientDownloadFile(stream, token, ':', resultOperation);
 
                 if (resultOperation && content)
