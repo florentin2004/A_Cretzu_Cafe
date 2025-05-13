@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include <QCryptographicHash>
+#include <QMessageBox>
 #include <QFileDialog>
 #include "./ui_mainwindow.h"
 #include <QIcon>
@@ -61,7 +62,7 @@ void MainWindow::on_RegisterButton_clicked()
 
 #include <QCryptographicHash>
 
-void MainWindow::on_LoginButton_2_clicked()
+void MainWindow::on_LoginButton_login_clicked()
 {
     QString username = ui->user_lineEdit->text();
     QString password = ui->password_lineEdit->text();
@@ -84,8 +85,78 @@ void MainWindow::on_uploadButton_clicked()
     QString fileName = QFileDialog::getOpenFileName(this, "Select File", QDir::homePath(), "All Files (*.*)");
     if (!fileName.isEmpty())
     {
-        QString idUser = "9";
+        QString idUser = "10";
         client->sendFile(fileName, idUser);
     }
+}
+
+
+void MainWindow::on_user_lineEdit_returnPressed()
+{
+    ui->password_lineEdit->setFocus();
+}
+
+
+void MainWindow::on_password_lineEdit_returnPressed()
+{
+    ui->LoginButton_login->click();
+}
+
+
+void MainWindow::on_PasswordButton_register_clicked(bool checked)
+{
+    if (checked) {
+        ui->password_lineEdit_register->setEchoMode(QLineEdit::Normal); // Show characters
+        ui->password_again_lineEdit->setEchoMode(QLineEdit::Normal);
+    } else {
+        ui->password_lineEdit_register->setEchoMode(QLineEdit::Password); // Hide characters
+        ui->password_again_lineEdit->setEchoMode(QLineEdit::Password);
+    }
+}
+
+
+void MainWindow::on_user_lineEdit_register_returnPressed()
+{
+    ui->password_lineEdit_register->setFocus();
+}
+
+
+void MainWindow::on_password_lineEdit_register_returnPressed()
+{
+    ui->password_again_lineEdit->setFocus();
+}
+
+
+
+
+void MainWindow::on_password_again_lineEdit_returnPressed()
+{
+    ui->RegisterButton_register->click();
+}
+
+
+void MainWindow::on_RegisterButton_register_clicked()
+{
+    QString username = ui->user_lineEdit_register->text();
+    QString password = ui->password_lineEdit_register->text();
+
+    // Check if passwords match
+    if (ui->password_lineEdit_register->text() != ui->password_again_lineEdit->text())
+    {
+        QMessageBox::warning(this, "Eroare", "Parolele nu sunt identice!");
+        return; // Stop execution if passwords don't match
+    }
+
+    QByteArray key = "Cretzu_Cafe+Aegis";
+
+    // Hashing username and password with key
+    QByteArray hashedUsername = QCryptographicHash::hash(key + username.toUtf8(), QCryptographicHash::Sha256).toHex();
+    QByteArray hashedPassword = QCryptographicHash::hash(key + password.toUtf8(), QCryptographicHash::Sha256).toHex();
+
+    // Prepare registration data
+    QString registerData = "1:" + hashedUsername + ":" + hashedPassword;
+
+    // Send data
+    client->sendMessage(registerData);
 }
 

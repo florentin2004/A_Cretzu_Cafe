@@ -41,9 +41,23 @@ private slots:
 
     void on_RegisterButton_clicked();
 
-    void on_LoginButton_2_clicked();
+    void on_LoginButton_login_clicked();
 
     void on_uploadButton_clicked();
+
+    void on_user_lineEdit_returnPressed();
+
+    void on_password_lineEdit_returnPressed();
+
+    void on_PasswordButton_register_clicked(bool checked);
+
+    void on_user_lineEdit_register_returnPressed();
+
+    void on_password_lineEdit_register_returnPressed();
+
+    void on_password_again_lineEdit_returnPressed();
+
+    void on_RegisterButton_register_clicked();
 
 private:
     Ui::MainWindow *ui;
