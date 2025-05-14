@@ -158,5 +158,6 @@ void MainWindow::on_RegisterButton_register_clicked()
 
     // Send data
     client->sendMessage(registerData);
+    ui->right_twix->setCurrentIndex(3); // Idle Page
 }
 

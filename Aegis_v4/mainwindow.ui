@@ -45,6 +45,12 @@
        <layout class="QGridLayout" name="gridLayout_2">
         <item row="0" column="0">
          <widget class="QWidget" name="left_twix" native="true">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="styleSheet">
            <string notr="true">background-color: rgb(30, 107, 255);
 font: &quot;Vineta BT&quot;;</string>
@@ -233,7 +239,7 @@ QPushButton:pressed {
            <string notr="true">font: &quot;Verdana&quot;;</string>
           </property>
           <property name="currentIndex">
-           <number>1</number>
+           <number>2</number>
           </property>
           <widget class="QWidget" name="login_page">
            <property name="styleSheet">
