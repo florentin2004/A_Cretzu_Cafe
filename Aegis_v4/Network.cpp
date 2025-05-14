@@ -2,6 +2,7 @@
 #include <QDebug>
 #include <QFile>
 #include <QFileInfo>
+#include <QThread>
 
 Network::Network(QObject *parent) : QObject(parent), serverIP("10.10.25.122"), serverPort(27015)
 {
@@ -58,23 +59,17 @@ void Network::sendFile(const QString &filePath, const QString &idUser)
             QString fileSize = QString::number(fileData.size());
 
             // Create initial header (before adding total size)
-            QString header = "4:" + idUser + ":" + fileNameLength + ":" + fileName + ":" + fileSize + ":";
-
-            // Calculate total message size
-            int totalSize = header.toUtf8().size() + fileData.size();
-            QString totalSizeStr = QString::number(totalSize);
-
-            // Create final header (with total size included)
-            QString finalHeader = "4:" + totalSizeStr + ":" + idUser + ":" + fileNameLength + ":" + fileName + ":" + fileSize + ":";
+            QString header = "4:" + fileSize + ":" + idUser +":"+ fileNameLength+ ":" + fileName;
 
             // Combine header and file data
-            QByteArray fullMessage = finalHeader.toUtf8() + fileData;
+            QByteArray KitMessage = header.toUtf8();
 
             // Send data over socket
-            socket->write(fullMessage);
+            socket->write(KitMessage);
             socket->waitForBytesWritten();
-
-            qDebug() << "Sent file:" << filePath << " (Size: " << fileSize << " bytes)";
+            QThread::msleep(100);
+            socket->write(fileData);
+            socket->waitForBytesWritten();
         }
         else
         {

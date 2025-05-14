@@ -896,8 +896,8 @@ QPushButton#noButton:pressed {
        <widget class="QPushButton" name="uploadButton">
         <property name="geometry">
          <rect>
-          <x>380</x>
-          <y>310</y>
+          <x>550</x>
+          <y>300</y>
           <width>191</width>
           <height>54</height>
          </rect>
@@ -911,6 +911,29 @@ QPushButton#noButton:pressed {
         <property name="text">
          <string>Upload</string>
         </property>
+       </widget>
+       <widget class="QWidget" name="kit" native="true">
+        <property name="geometry">
+         <rect>
+          <x>90</x>
+          <y>190</y>
+          <width>120</width>
+          <height>361</height>
+         </rect>
+        </property>
+        <widget class="QPushButton" name="pushButton">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>20</y>
+           <width>83</width>
+           <height>29</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>PushButton</string>
+         </property>
+        </widget>
        </widget>
       </widget>
      </widget>
