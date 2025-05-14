@@ -59,6 +59,8 @@ private slots:
 
     void on_RegisterButton_register_clicked();
 
+    void on_LogoButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     Network *client;

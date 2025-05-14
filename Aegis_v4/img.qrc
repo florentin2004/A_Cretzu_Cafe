@@ -3,6 +3,13 @@
         <file>Images/Aegis.ico</file>
         <file>Images/Aegis.png</file>
         <file>Images/Aegis-removebg.png</file>
-        <file>Images/Aegis-removebg-larger.png</file>
+        <file>Images/settings.png</file>
+        <file>Images/upload.png</file>
+        <file>Images/cloud-computing.png</file>
+        <file>Images/upload_v2.png</file>
+        <file>Images/download.png</file>
+        <file>Images/arian-removebg-preview.png</file>
+        <file>Images/ivan-removebg-preview.png</file>
+        <file>Images/company.png</file>
     </qresource>
 </RCC>

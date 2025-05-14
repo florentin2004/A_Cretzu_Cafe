@@ -161,3 +161,9 @@ void MainWindow::on_RegisterButton_register_clicked()
     ui->right_twix->setCurrentIndex(3); // Idle Page
 }
 
+
+void MainWindow::on_LogoButton_clicked()
+{
+    ui->right_twix->setCurrentIndex(4); // Credential Page
+}
+
