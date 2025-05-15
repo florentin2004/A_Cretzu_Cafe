@@ -43,7 +43,7 @@ private slots:
 
     void on_LoginButton_login_clicked();
 
-    void on_uploadButton_clicked();
+    void on_UploadButton_clicked();
 
     void on_user_lineEdit_returnPressed();
 
@@ -60,6 +60,10 @@ private slots:
     void on_RegisterButton_register_clicked();
 
     void on_LogoButton_clicked();
+
+    void on_LogOffButton_clicked();
+
+    void on_DownloadButton_clicked();
 
 private:
     Ui::MainWindow *ui;

@@ -66,6 +66,11 @@ void MainWindow::on_LoginButton_login_clicked()
 {
     QString username = ui->user_lineEdit->text();
     QString password = ui->password_lineEdit->text();
+
+    ui->user_lineEdit->clear();
+    ui->password_lineEdit->clear();
+    ui->PasswordButton->setChecked(false);
+
     QByteArray key = "Cretzu_Cafe+Aegis";
 
     // Hashing username and password with key
@@ -75,12 +80,11 @@ void MainWindow::on_LoginButton_login_clicked()
 
     QString loginData = "0:" + hashedUsername+":"+hashedPassword;
     client->sendMessage(loginData);
-
     ui->Window_logic->setCurrentIndex(1); // App
 }
 
 
-void MainWindow::on_uploadButton_clicked()
+void MainWindow::on_UploadButton_clicked()
 {
     QString fileName = QFileDialog::getOpenFileName(this, "Select File", QDir::homePath(), "All Files (*.*)");
     if (!fileName.isEmpty())
@@ -147,6 +151,11 @@ void MainWindow::on_RegisterButton_register_clicked()
         return; // Stop execution if passwords don't match
     }
 
+    ui->user_lineEdit_register->clear();
+    ui->password_lineEdit_register->clear();
+    ui->password_again_lineEdit->clear();
+    ui->PasswordButton_register->setChecked(false);
+
     QByteArray key = "Cretzu_Cafe+Aegis";
 
     // Hashing username and password with key
@@ -165,5 +174,18 @@ void MainWindow::on_RegisterButton_register_clicked()
 void MainWindow::on_LogoButton_clicked()
 {
     ui->right_twix->setCurrentIndex(4); // Credential Page
+}
+
+
+void MainWindow::on_LogOffButton_clicked()
+{
+    ui->Window_logic->setCurrentIndex(0); // MainMenu
+    ui->right_twix->setCurrentIndex(3); // Idle
+}
+
+
+void MainWindow::on_DownloadButton_clicked()
+{
+
 }
 

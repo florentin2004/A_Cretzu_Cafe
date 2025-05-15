@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>955</width>
-    <height>723</height>
+    <height>765</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -256,7 +256,7 @@ QPushButton:pressed {
            <string notr="true">font: &quot;Verdana&quot;;</string>
           </property>
           <property name="currentIndex">
-           <number>4</number>
+           <number>3</number>
           </property>
           <widget class="QWidget" name="login_page">
            <property name="styleSheet">
@@ -1109,6 +1109,33 @@ font: &quot;Vineta BT&quot;;</string>
               </size>
              </property>
             </spacer>
+           </item>
+           <item>
+            <widget class="QPushButton" name="LogOffButton">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="font">
+              <font>
+               <family>Vineta BT</family>
+               <pointsize>20</pointsize>
+               <italic>false</italic>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">image: url(:/img/Images/logout.png);</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="flat">
+              <bool>true</bool>
+             </property>
+            </widget>
            </item>
           </layout>
          </widget>
