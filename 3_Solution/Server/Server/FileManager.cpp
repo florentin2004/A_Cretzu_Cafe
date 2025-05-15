@@ -1,35 +1,34 @@
 #include "FileManager.h"
 
-void FileManager::UploadFile(std::string& filename, std::vector<char>& content)
+bool FileManager::UploadFile(std::string& filename, const std::vector<uint8_t>& content)
 {
 	std::ofstream out(filename, std::ios::binary);
 	if (!out.is_open()) {
-		std::cerr << "Eroare: nu pot deschide fisierul pentru scriere!\n";
-		return;
+		std::cerr << "[ERROR] Nu pot deschide fisierul pentru scriere!\n";
+		return false;
 	}
-	out.write(content.data(), content.size());
+	out.write(reinterpret_cast<const char*>(content.data()), content.size());
 	out.close();
+	return true;
 }
 
-std::string* FileManager::DownloadFile(std::string& filename) // returneaza contentul fisierului
-{
-	std::ifstream in(filename, std::ios::binary);
-	if (!in.is_open())
-	{
-		std::cerr << "Eroare: nu pot deschide fisierul pentru citire!\n";
-		return nullptr;
-	}
+std::vector<uint8_t> FileManager::DownloadFile(std::string& filename) {
+    std::ifstream in(filename, std::ios::binary);
+    if (!in.is_open()) {
+        std::cerr << "[ERROR] Nu pot deschide fisierul pentru citire!\n";
+        return {};
+    }
 
-	std::string *content = new std::string();
+    in.seekg(0, std::ios::end);
+    std::streamsize len = in.tellg();
+    in.seekg(0, std::ios::beg);
 
-	in.seekg(0, std::ios::end);
-	int len = in.tellg();
-	in.seekg(0, std::ios::beg);
+    std::vector<uint8_t> content(len);
+    if (!in.read(reinterpret_cast<char*>(content.data()), len)) {
+        std::cerr << "Eroare la citirea fisierului!\n";
+        return {};
+    }
 
-	(*content).resize(len);
-
-	in.read(&(*content)[0], len);
-	in.close();
-
-	return content;
+    in.close();
+    return content;
 }

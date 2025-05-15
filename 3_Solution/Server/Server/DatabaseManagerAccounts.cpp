@@ -42,7 +42,7 @@ int DatabaseManagerAccounts::selectUser(std::string& username, std::string& pass
     SQLRETURN retcode = SQLExecDirectA(hStmt, (SQLCHAR *)query.c_str(), SQL_NTS);
 
     if (retcode != SQL_SUCCESS && retcode != SQL_SUCCESS_WITH_INFO) {
-        std::cerr << "[SQL DATABASE] SELECT a esuat!" << std::endl;
+        std::cerr << "[SQL DATABASE] SELECT Log in a esuat!" << std::endl;
         showSQLError(hStmt, SQL_HANDLE_STMT);
         return false;
     }
@@ -65,7 +65,7 @@ bool DatabaseManagerAccounts::insertUser(std::string& username, std::string& pas
     SQLRETURN retcode = SQLExecDirectA(hStmt, (SQLCHAR*)query.c_str(), SQL_NTS);
 
     if (retcode != SQL_SUCCESS && retcode != SQL_SUCCESS_WITH_INFO) {
-        std::cerr << "[SQL DATABASE] INSERT a esuat!" << std::endl;
+        std::cerr << "[SQL DATABASE] INSERT User a esuat!" << std::endl;
         showSQLError(hStmt, SQL_HANDLE_STMT);
         SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
         return false;
@@ -92,7 +92,7 @@ bool DatabaseManagerAccounts::updatePassword(std::string& username, std::string&
     SQLRETURN retcode = SQLExecDirectA(hStmt, (SQLCHAR*)query.c_str(), SQL_NTS);
 
     if (retcode != SQL_SUCCESS && retcode != SQL_SUCCESS_WITH_INFO) {
-        std::cerr << "[SQL DATABASE] UPDATE a esuat!" << std::endl;
+        std::cerr << "[SQL DATABASE] UPDATE Parola a esuat!" << std::endl;
         showSQLError(hStmt, SQL_HANDLE_STMT);
         SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
         return false;
@@ -111,7 +111,7 @@ bool DatabaseManagerAccounts::deleteUser(std::string& username) {
     SQLRETURN retcode = SQLExecDirectA(hStmt, (SQLCHAR*)query.c_str(), SQL_NTS);
 
     if (retcode != SQL_SUCCESS && retcode != SQL_SUCCESS_WITH_INFO) {
-        std::cerr << "[SQL DATABASE] DELETE a esuat!" << std::endl;
+        std::cerr << "[SQL DATABASE] DELETE User a esuat!" << std::endl;
         showSQLError(hStmt, SQL_HANDLE_STMT);
         SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
         return false;
@@ -131,7 +131,7 @@ bool DatabaseManagerAccounts::addFile(int& IDUser, std::string& filename)
     SQLRETURN retcode = SQLExecDirectA(hStmt, (SQLCHAR*)query.c_str(), SQL_NTS);
 
     if (retcode != SQL_SUCCESS && retcode != SQL_SUCCESS_WITH_INFO) {
-        std::cerr << "[SQL DATABASE] INSERT a esuat!" << std::endl;
+        std::cerr << "[SQL DATABASE] INSERT fisier a esuat!" << std::endl;
         showSQLError(hStmt, SQL_HANDLE_STMT);
         SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
         return false;
@@ -143,6 +143,38 @@ bool DatabaseManagerAccounts::addFile(int& IDUser, std::string& filename)
     }
 }
 
+std::string DatabaseManagerAccounts::selectFiles(int& userID) {
+    SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt);
+
+    std::string query = "SELECT FileName FROM UserFiles WHERE UserID = ?";
+    SQLPrepareA(hStmt, (SQLCHAR*)query.c_str(), SQL_NTS);
+    SQLBindParameter(hStmt, 1, SQL_PARAM_INPUT, SQL_C_LONG, SQL_INTEGER, 0, 0, &userID, 0, NULL);
+
+    SQLRETURN ret = SQLExecute(hStmt);
+    if (ret != SQL_SUCCESS && ret != SQL_SUCCESS_WITH_INFO) {
+        std::cerr << "[SQL DATABASE] SELECT fisier a esuat!\n";
+        SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
+        return "";
+    }
+
+    char fileName[256];
+    SQLBindCol(hStmt, 1, SQL_C_CHAR, fileName, sizeof(fileName), NULL);
+
+    std::vector<std::string> files;
+    while (SQLFetch(hStmt) == SQL_SUCCESS) {
+        files.push_back(std::string(fileName));
+    }
+
+    SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
+
+    std::string result = std::to_string(files.size());
+    for (const auto& name : files) {
+        result += ":" + name;
+    }
+
+    return result;
+}
+
 bool DatabaseManagerAccounts::deleteFile(int& IDUser, std::string& filename)
 {
     SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt);
@@ -151,7 +183,7 @@ bool DatabaseManagerAccounts::deleteFile(int& IDUser, std::string& filename)
     SQLRETURN retcode = SQLExecDirectA(hStmt, (SQLCHAR*)query.c_str(), SQL_NTS);
 
     if (retcode != SQL_SUCCESS && retcode != SQL_SUCCESS_WITH_INFO) {
-        std::cerr << "[SQL DATABASE] DELETE a esuat!" << std::endl;
+        std::cerr << "[SQL DATABASE] DELETE Fisier a esuat!" << std::endl;
         showSQLError(hStmt, SQL_HANDLE_STMT);
         SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
         return false;

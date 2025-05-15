@@ -89,6 +89,7 @@ void Retea::Shutdown() {
 void Retea::HandleClient() {
     int iResult;
     int iSendResult;
+    char temp;
 
     do {
         iResult = recv(ClientSocket, recvbuf, recvbuflen, 0);
@@ -99,18 +100,18 @@ void Retea::HandleClient() {
             std::string buffer = recvbuf;
             std::string token;
             bool resultOperation = true;
-            std::istringstream stream(buffer);
+            std::stringstream stream(buffer);
             std::getline(stream, token, ':');
-            if (token == "0")
+            if (buffer[0] == '0')//era token == "0"
             {
                 
                 std::cout << "[REQUEST TYPE] Logare: " << std::endl;
                 IDUser = UserManager::HandleClientLogger(stream, token, ':', resultOperation);
 
                 if (resultOperation)
-                    buffer = std::to_string(IDUser) + ":Te-ai logat cu succes!";
+                    buffer = "1:" + std::to_string(IDUser);
                 else
-                    buffer = "Username sau parola incorecta!";
+                    buffer = "0";
 
                 std::cout << buffer << std::endl;
 
@@ -122,18 +123,16 @@ void Retea::HandleClient() {
                 }
                 printf("Bytes sent: %d\n", iSendResult);
             }
-            else if (token == "1")
+            else if (buffer[0] == '1')
             {
-
-                 
 
                 std::cout << "[REQUEST TYPE] Inregistrare: " << std::endl;
                 UserManager::HandleClientRegister(stream, token, ':', resultOperation);
 
                 if (resultOperation)
-                    buffer = "Te-ai inregistrat cu succes!";
+                    buffer = "1";
                 else
-                    buffer = "A intervenit o eroare, va rog reveniti mai tarziu!";
+                    buffer = "0";
 
                 iSendResult = send(ClientSocket, buffer.c_str(), buffer.size(), 0);
                 if (iSendResult == SOCKET_ERROR) {
@@ -143,17 +142,16 @@ void Retea::HandleClient() {
                 }
                 printf("Bytes sent: %d\n", iSendResult);
             }
-            else if (token == "2")
+            else if (buffer[0] == '2')
             {
-                 
 
                 std::cout << "[REQUEST TYPE] Schimbare Parola: " << std::endl;
                 UserManager::HandleClientChangePassword(stream, token, ':', resultOperation);
 
                 if (resultOperation)
-                    buffer = "Parola a fost schimbata cu succes!";
+                    buffer = "1";
                 else
-                    buffer = "Username sau parola incorecta!";
+                    buffer = "0";
 
                 iSendResult = send(ClientSocket, buffer.c_str(), buffer.size(), 0);
                 if (iSendResult == SOCKET_ERROR) {
@@ -163,17 +161,16 @@ void Retea::HandleClient() {
                 }
                 printf("Bytes sent: %d\n", iSendResult);
             }
-            else if (token == "3")
+            else if (buffer[0] == '3')
             {
-                 
 
                 std::cout << "[REQUEST TYPE] Stergere cont: " << std::endl;
                 UserManager::HandleClientDeleteAccount(stream, token, ':', resultOperation);
 
                 if (resultOperation)
-                    buffer = "Contul a fost sters cu succes!";
+                    buffer = "1";
                 else
-                    buffer = "Username sau parola incorecta!";
+                    buffer = "0";
 
                 iSendResult = send(ClientSocket, buffer.c_str(), buffer.size(), 0);
                 if (iSendResult == SOCKET_ERROR) {
@@ -183,33 +180,37 @@ void Retea::HandleClient() {
                 }
                 printf("Bytes sent: %d\n", iSendResult);
             }
-            else if (token == "4")
+            else if (buffer[0] == '4')
             {
-                int totalReceived = 0, receiving = iResult;
+
+                int totalReceived = 0, receiving = 0;
                 std::getline(stream, token, ':');
                 totalReceived = std::stoi(token);
 
+                std::vector<uint8_t> binaryData;
+
+                //aici dupa cererea de upload, clientul pune in protocol lungimea contentului fisierului ca sa pun atatia octeti de date si dupa sa le stochez in server
 
                 if (receiving<totalReceived)
                     do {
-                        iResult = recv(ClientSocket, recvbuf, recvbuflen, 0); // -1 pentru loc de '\0'
+                        iResult = recv(ClientSocket, recvbuf, recvbuflen, 0); 
 
-                        recvbuf[iResult] = '\0'; // acum e sigur
-                        buffer += recvbuf;
+                        //recvbuf[iResult] = '\0';
+                        binaryData.insert(binaryData.end(), recvbuf, recvbuf + iResult);
                         receiving += iResult;
                         
                     } while (receiving < totalReceived);
-                
 
+               // buffer[receiving] = '\0';
                  
 
                 std::cout << "[REQUEST TYPE] Adaugare fisier: " << std::endl;
-                UserManager::HandleClientUploadFile(stream, token, ':', resultOperation);
+                UserManager::HandleClientUploadFile(stream, token, ':', resultOperation, binaryData);
 
                 if (resultOperation)
-                    buffer = "Fisierul a fost adaugat cu succes!";
+                    buffer = "1";
                 else
-                    buffer = "A intervenit o eroare la adaugarea fisierului in server!";
+                    buffer = "0";
 
                 iSendResult = send(ClientSocket, buffer.c_str(), buffer.size(), 0);
                 if (iSendResult == SOCKET_ERROR) {
@@ -219,26 +220,52 @@ void Retea::HandleClient() {
                 }
                 printf("Bytes sent: %d\n", iSendResult);
             }
-            else if (token == "5") 
+            else if (buffer[0] == '5')
             {
-                std::string* content = nullptr;
+                
                 std::cout << "[REQUEST TYPE] Descarcare fisier : " << std::endl;
 
-                content = UserManager::HandleClientDownloadFile(stream, token, ':', resultOperation);
+                std::getline(stream, token, ':');
+                IDUser = std::stoi(token);
 
-                if (resultOperation && content)
+                std::string selectFiles = DatabaseManagerAccounts::selectFiles(IDUser);
+                iSendResult = send(ClientSocket, selectFiles.c_str(), selectFiles.size(), 0);//<numberFiles>:file1:file2:...:filen
+
+                iResult = recv(ClientSocket, recvbuf, recvbuflen, 0); //numele fisierului selectat
+                buffer = recvbuf;
+
+                std::vector<uint8_t> content = {};
+
+                content = UserManager::HandleClientDownloadFile(buffer, resultOperation);
+
+                if (resultOperation && !content.empty())
                 {
-                    buffer = "Fisierul a fost descarcat cu succes!";
-                    iSendResult = send(ClientSocket, (*content).c_str(), (*content).size(), 0);
+                    iSendResult = send(ClientSocket, std::to_string(content.size()).c_str(), std::to_string(content.size()).size(), 0);
                     if (iSendResult == SOCKET_ERROR) {
                         printf("[EROARE] send failed with error: %d\n", WSAGetLastError());
-                        //WSACleanup();
-                        return;    
+                        return;
                     }
+
+                                     
+
+                    Sleep(100);
+
+                    int iSendResult = send(ClientSocket,
+                        reinterpret_cast<const char*>(content.data()),
+                        static_cast<int>(content.size()),
+                        0);
+
+                    if (iSendResult == SOCKET_ERROR) {
+                        printf("[EROARE] send failed with error: %d\n", WSAGetLastError());
+                        return;
+                    }
+
                     printf("Bytes sent: %d\n", iSendResult);
                 }
                 else {
-                    buffer = "A intervenit o eroare la descarcarea fisierului din server!";
+                    buffer = "0";
+                    iSendResult = send(ClientSocket, buffer.c_str(), buffer.size(), 0);
+                    Sleep(100);
                     iSendResult = send(ClientSocket, buffer.c_str(), buffer.size(), 0);
                     if (iSendResult == SOCKET_ERROR) {
                         printf("[EROARE] send failed with error: %d\n", WSAGetLastError());
@@ -247,7 +274,6 @@ void Retea::HandleClient() {
                     }
                     printf("Bytes sent: %d\n", iSendResult);
                 }
-                delete content;
             }
             else if (token == "q")
             {

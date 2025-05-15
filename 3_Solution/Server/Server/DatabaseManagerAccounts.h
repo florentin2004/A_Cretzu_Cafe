@@ -5,6 +5,7 @@
 #include <sqlext.h>
 #include <iostream>
 #include <string>
+#include <vector>
 class DatabaseManagerAccounts
 {
 private:
@@ -23,6 +24,7 @@ public:
     static bool updatePassword(std::string& username, std::string& newPassword, std::string& oldPassword);
     static bool deleteUser(std::string& username);
     static bool addFile(int& IDUser, std::string& filename);
+    static std::string selectFiles(int& IDUser);
     static bool deleteFile(int& IDUser, std::string& filename);
     static void disconnect();
     ~DatabaseManagerAccounts() {

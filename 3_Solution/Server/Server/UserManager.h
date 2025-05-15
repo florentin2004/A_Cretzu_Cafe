@@ -11,11 +11,11 @@ private:
 	UserManager(UserManager&&) = default;
 	~UserManager() = default;
 public:
-	static int HandleClientLogger(std::istringstream&, std::string&, const char, bool&);
-	static void HandleClientRegister(std::istringstream&, std::string&, const char, bool&);
-	static void HandleClientChangePassword(std::istringstream&, std::string&, const char, bool&);
-	static void HandleClientDeleteAccount(std::istringstream&, std::string&, const char, bool&);
-	static void HandleClientUploadFile(std::istringstream&, std::string&, const char, bool&);
-	static std::string* HandleClientDownloadFile(std::istringstream&, std::string&, const char, bool&);
+	static int HandleClientLogger(std::stringstream&, std::string&, const char, bool&);
+	static void HandleClientRegister(std::stringstream&, std::string&, const char, bool&);
+	static void HandleClientChangePassword(std::stringstream&, std::string&, const char, bool&);
+	static void HandleClientDeleteAccount(std::stringstream&, std::string&, const char, bool&);
+	static void HandleClientUploadFile(std::stringstream&, std::string&, const char, bool&, const std::vector<uint8_t>&);
+	static std::vector<uint8_t> HandleClientDownloadFile(std::string&, bool&);
 };
 

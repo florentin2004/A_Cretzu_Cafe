@@ -11,7 +11,7 @@ private:
 	FileManager(FileManager&&) = default;
 	~FileManager() = default;
 public:
-	static void UploadFile(std::string& filename, std::vector<char>& content);
-	static std::string* DownloadFile(std::string& filename);
+	static bool UploadFile(std::string& filename, const std::vector<uint8_t>& content);
+	static std::vector<uint8_t> DownloadFile(std::string& filename);
 };
 

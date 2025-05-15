@@ -1,4 +1,4 @@
-#include "UserManager.h"
+﻿#include "UserManager.h"
 
 //std::string generateSymmetricKey(size_t length) {
 //    const char minChar = 32;  // ' '
@@ -16,7 +16,7 @@
 //    return key;
 //}
 
-int UserManager::HandleClientLogger(std::istringstream& stream, std::string& token, const char delimiter, bool& resultOperation)
+int UserManager::HandleClientLogger(std::stringstream& stream, std::string& token, const char delimiter, bool& resultOperation)
 {
     DatabaseManagerAccounts::connect();
     int i = 1, IDUser;
@@ -48,7 +48,7 @@ int UserManager::HandleClientLogger(std::istringstream& stream, std::string& tok
     return IDUser;
 }
 
-void UserManager::HandleClientRegister(std::istringstream& stream, std::string& token, const char delimiter, bool& resultOperation)
+void UserManager::HandleClientRegister(std::stringstream& stream, std::string& token, const char delimiter, bool& resultOperation)
 {
     DatabaseManagerAccounts::connect();
     int i = 1;
@@ -76,7 +76,7 @@ void UserManager::HandleClientRegister(std::istringstream& stream, std::string& 
 
 
 
-void UserManager::HandleClientChangePassword(std::istringstream& stream, std::string& token, const char delimiter, bool& resultOperation)
+void UserManager::HandleClientChangePassword(std::stringstream& stream, std::string& token, const char delimiter, bool& resultOperation)
 {
     DatabaseManagerAccounts::connect();
     std::string username, newPassword, oldPassword;
@@ -108,7 +108,7 @@ void UserManager::HandleClientChangePassword(std::istringstream& stream, std::st
     DatabaseManagerAccounts::disconnect();
 }
 
-void UserManager::HandleClientDeleteAccount(std::istringstream& stream, std::string& token, const char delimiter, bool& resultOperation)
+void UserManager::HandleClientDeleteAccount(std::stringstream& stream, std::string& token, const char delimiter, bool& resultOperation)
 {
     DatabaseManagerAccounts::connect();
     std::string username;
@@ -122,12 +122,13 @@ void UserManager::HandleClientDeleteAccount(std::istringstream& stream, std::str
     DatabaseManagerAccounts::disconnect();
 }
 
-void UserManager::HandleClientUploadFile(std::istringstream& stream, std::string& token, const char delimiter, bool& resultOperation)
+void UserManager::HandleClientUploadFile(std::stringstream& stream, std::string& token, const char delimiter, bool& resultOperation, const std::vector<uint8_t>& binaryData)
 {
     DatabaseManagerAccounts::connect();
-    int size, IDUser;
+    int size = 0, IDUser = 0;
     std::string filename;
-    std::vector<char> buffer;
+    char temp = 0;
+
     for (int i = 1; std::getline(stream, token, delimiter); i++)
     {
         switch (i)
@@ -135,50 +136,32 @@ void UserManager::HandleClientUploadFile(std::istringstream& stream, std::string
         case 1:
             IDUser = std::stoi(token);
             break;
+
         case 2:
             size = std::stoi(token);
-            filename.resize(size);
-            stream.read(&filename[0], size);
-            resultOperation = DatabaseManagerAccounts::addFile(IDUser, filename);
-            stream.read(&buffer[0], 1); //aruncam delimitatorul de la finalul numelui fisierului
-            break;
-        case 3:
-            size = std::stoi(token);
-            buffer.resize(size);
-            stream.read(buffer.data(), size);
-            FileManager::UploadFile(filename, buffer);
+            if (size > 0)
+            {
+                filename.resize(size);
+                stream.read(&filename[0], size);
+                bool result1 = DatabaseManagerAccounts::addFile(IDUser, filename);
+                bool result2 = FileManager::UploadFile(filename, binaryData);
+                resultOperation = result1 && result2;
+            }
+            else
+            {
+                std::cerr << "[ERROR] Invalid filename size received!" << std::endl;
+            }
             break;
         default:
             break;
         }
     }
+
     DatabaseManagerAccounts::disconnect();
 }
 
-std::string* UserManager::HandleClientDownloadFile(std::istringstream& stream, std::string& token, const char delimiter, bool& resultOperation)
+std::vector<uint8_t> UserManager::HandleClientDownloadFile(std::string& filename, bool& resultOperation)
 {
-    DatabaseManagerAccounts::connect();
-    int size, IDUser;
-    std::string filename;
-    std::string* content;
-    for (int i = 1; std::getline(stream, token, delimiter); i++)
-    {
-        switch (i)
-        {
-        case 1:
-            IDUser = std::stoi(token);
-            break;
-        case 2:
-            size = std::stoi(token);
-            filename.resize(size);
-            stream.read(&filename[0], size);
-            resultOperation = DatabaseManagerAccounts::deleteFile(IDUser, filename);
-            break;
-        default:
-            break;
-        }
-    }
-    content = FileManager::DownloadFile(filename);
-    DatabaseManagerAccounts::disconnect();
+    std::vector<uint8_t> content = FileManager::DownloadFile(filename);
     return content;
 }

@@ -15,7 +15,7 @@
 
 #pragma comment (lib, "Ws2_32.lib")
 
-#define DEFAULT_BUFLEN 1024
+#define DEFAULT_BUFLEN 512
 #define DEFAULT_PORT "27015"
 class Retea
 {
