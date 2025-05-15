@@ -70,5 +70,13 @@ private:
     Network *client;
     bool is_connection_made = false;
 
+private:
+    QString userId;  // user ID
+
+public:
+    void setUserId(const QString &id) { userId = id; }
+    QString getUserId() const { return userId; }
+    void handleUserIdReceived(const QString &id);
+
 };
 #endif // MAINWINDOW_H

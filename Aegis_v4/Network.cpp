@@ -91,9 +91,18 @@ void Network::onMessageReceived()
 {
     QString data = socket->readAll();
     qDebug() << "Received from server:" << data;
+
+    // Check if it's a login response that contains an ID
+    if (data.startsWith("1:"))  // Assuming format "1:<id>"
+    {
+        QString userIdString = data.split(':').value(1);
+        emit userIdReceived(userIdString); // Emit signal to MainWindow
+    }
 }
 
 void Network::onErrorOccurred(QAbstractSocket::SocketError error)
 {
     qDebug() << "Socket error occurred:" << socket->errorString();
 }
+
+

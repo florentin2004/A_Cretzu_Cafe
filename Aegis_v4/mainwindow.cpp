@@ -62,6 +62,12 @@ void MainWindow::on_RegisterButton_clicked()
 
 #include <QCryptographicHash>
 
+void MainWindow::handleUserIdReceived(const QString &id)
+{
+    setUserId(id);  // Store ID
+    qDebug() << "User ID updated:" << getUserId();
+}
+
 void MainWindow::on_LoginButton_login_clicked()
 {
     QString username = ui->user_lineEdit->text();
@@ -79,6 +85,7 @@ void MainWindow::on_LoginButton_login_clicked()
 
 
     QString loginData = "0:" + hashedUsername+":"+hashedPassword;
+    connect(client, &Network::userIdReceived, this, &MainWindow::handleUserIdReceived);
     client->sendMessage(loginData);
     ui->Window_logic->setCurrentIndex(1); // App
 }
@@ -89,8 +96,7 @@ void MainWindow::on_UploadButton_clicked()
     QString fileName = QFileDialog::getOpenFileName(this, "Select File", QDir::homePath(), "All Files (*.*)");
     if (!fileName.isEmpty())
     {
-        QString idUser = "10";
-        client->sendFile(fileName, idUser);
+        client->sendFile(fileName, getUserId());
     }
 }
 

@@ -25,6 +25,10 @@ private:
     QTcpSocket *socket;
     QString serverIP;
     int serverPort;
+
+signals:
+    void userIdReceived(const QString &userId); //id
+    void fileDownloaded(const QString &fileName); // fisier pe care vreua sa-l descarc
 };
 
 #endif // NETWORK_H
