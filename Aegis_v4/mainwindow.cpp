@@ -77,17 +77,21 @@ void MainWindow::on_LoginButton_login_clicked()
     ui->password_lineEdit->clear();
     ui->PasswordButton->setChecked(false);
 
-    QByteArray key = "Cretzu_Cafe+Aegis";
+    //QByteArray key = "Cretzu_Cafe+Aegis"; // just in case
 
     // Hashing username and password with key
-    QByteArray hashedUsername = QCryptographicHash::hash(key + username.toUtf8(), QCryptographicHash::Sha256).toHex();
-    QByteArray hashedPassword = QCryptographicHash::hash(key + password.toUtf8(), QCryptographicHash::Sha256).toHex();
+    QByteArray hashedUsername = QCryptographicHash::hash(getKey() + username.toUtf8(), QCryptographicHash::Sha256).toHex();
+    QByteArray hashedPassword = QCryptographicHash::hash(getKey() + password.toUtf8(), QCryptographicHash::Sha256).toHex();
 
 
     QString loginData = "0:" + hashedUsername+":"+hashedPassword;
     connect(client, &Network::userIdReceived, this, &MainWindow::handleUserIdReceived);
     client->sendMessage(loginData);
-    ui->Window_logic->setCurrentIndex(1); // App
+    // daca iau 1 fac connect, altfel spun ca parola este gresita
+    if(getUserId() != "-1")
+        ui->Window_logic->setCurrentIndex(1); // App
+    else
+        QMessageBox::warning(this, "Eroare autentificare", "Nume utilizator sau parolă incorecte. Vă rugăm să încercați din nou.");
 }
 
 
@@ -162,11 +166,11 @@ void MainWindow::on_RegisterButton_register_clicked()
     ui->password_again_lineEdit->clear();
     ui->PasswordButton_register->setChecked(false);
 
-    QByteArray key = "Cretzu_Cafe+Aegis";
+    //QByteArray key = "Cretzu_Cafe+Aegis"; //just in case
 
     // Hashing username and password with key
-    QByteArray hashedUsername = QCryptographicHash::hash(key + username.toUtf8(), QCryptographicHash::Sha256).toHex();
-    QByteArray hashedPassword = QCryptographicHash::hash(key + password.toUtf8(), QCryptographicHash::Sha256).toHex();
+    QByteArray hashedUsername = QCryptographicHash::hash(getKey() + username.toUtf8(), QCryptographicHash::Sha256).toHex();
+    QByteArray hashedPassword = QCryptographicHash::hash(getKey() + password.toUtf8(), QCryptographicHash::Sha256).toHex();
 
     // Prepare registration data
     QString registerData = "1:" + hashedUsername + ":" + hashedPassword;
@@ -193,5 +197,61 @@ void MainWindow::on_LogOffButton_clicked()
 void MainWindow::on_DownloadButton_clicked()
 {
 
+}
+
+
+void MainWindow::on_SettingsButton_clicked()
+{
+    ui->kat->setCurrentIndex(2); // Settings
+}
+
+
+void MainWindow::on_ChangePasswordButton_clicked()
+{
+    ui->kat->setCurrentIndex(3); // Change Password
+}
+
+
+void MainWindow::on_showpasswordButton_clicked(bool checked)
+{
+    if (checked) {
+        ui->oldpassword_lineEdit->setEchoMode(QLineEdit::Normal); // Show characters
+        ui->newpassword_lineEdit->setEchoMode(QLineEdit::Normal);
+    } else {
+        ui->oldpassword_lineEdit->setEchoMode(QLineEdit::Password); // Hide characters
+        ui->newpassword_lineEdit->setEchoMode(QLineEdit::Password);
+    }
+}
+
+
+void MainWindow::on_ChangeButton_clicked()
+{
+    QString oldpassword = ui->oldpassword_lineEdit->text();
+    QString newpassword = ui->newpassword_lineEdit->text();
+
+    ui->oldpassword_lineEdit->clear();
+    ui->newpassword_lineEdit->clear();
+
+    //QByteArray key = "Cretzu_Cafe+Aegis"; //just in case
+
+    QByteArray hashedoldpassword = QCryptographicHash::hash(getKey() + oldpassword.toUtf8(), QCryptographicHash::Sha256).toHex();
+    QByteArray hashednewpassword = QCryptographicHash::hash(getKey() + newpassword.toUtf8(), QCryptographicHash::Sha256).toHex();
+
+    // Prepare registration data
+    // trebuie sa verific cu Arian asta
+    QString changeData = "2:"+getUserId()+":"+hashedoldpassword+":"+hashednewpassword;
+
+    // Send data
+    client->sendMessage(changeData);
+
+}
+
+
+void MainWindow::on_DeleteAccountButton_clicked()
+{
+    // trebuie  sa verific cu Arian asta
+    QString deleteData = "3:"+getUserId();
+    // Send data
+     client->sendMessage(deleteData);
 }
 

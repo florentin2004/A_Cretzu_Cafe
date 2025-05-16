@@ -12,5 +12,8 @@
         <file>Images/ivan-removebg-preview.png</file>
         <file>Images/company.png</file>
         <file>Images/logout.png</file>
+        <file>Images/delete.png</file>
+        <file>Images/delete_v2.png</file>
+        <file>Images/security.png</file>
     </qresource>
 </RCC>

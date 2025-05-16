@@ -65,18 +65,30 @@ private slots:
 
     void on_DownloadButton_clicked();
 
+    void on_SettingsButton_clicked();
+
+    void on_ChangePasswordButton_clicked();
+
+    void on_showpasswordButton_clicked(bool checked);
+
+    void on_ChangeButton_clicked();
+
+    void on_DeleteAccountButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     Network *client;
     bool is_connection_made = false;
 
 private:
-    QString userId;  // user ID
+    QString userId = "-1";  // user ID
+    QByteArray key = "Cretzu_Cafe+Aegis"; // key
 
 public:
     void setUserId(const QString &id) { userId = id; }
     QString getUserId() const { return userId; }
     void handleUserIdReceived(const QString &id);
+    QByteArray getKey(){return this->key;};
 
 };
 #endif // MAINWINDOW_H
