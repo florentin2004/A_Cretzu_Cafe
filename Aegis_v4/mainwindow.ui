@@ -1142,33 +1142,21 @@ font: &quot;Vineta BT&quot;;</string>
         </item>
         <item>
          <widget class="QStackedWidget" name="kat">
-          <widget class="QWidget" name="Upload_page">
-           <layout class="QGridLayout" name="gridLayout_3">
-            <item row="0" column="0">
-             <widget class="QLabel" name="image_upload">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>128</width>
-                <height>128</height>
-               </size>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">image: url(:/img/Images/Aegis-removebg-larger.png);</string>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-             </widget>
-            </item>
-           </layout>
+          <widget class="QWidget" name="idle_page_app">
+           <layout class="QGridLayout" name="gridLayout_3"/>
           </widget>
-          <widget class="QWidget" name="Download_page"/>
+          <widget class="QWidget" name="Download_page">
+           <widget class="QTableWidget" name="tableWidget">
+            <property name="geometry">
+             <rect>
+              <x>80</x>
+              <y>150</y>
+              <width>511</width>
+              <height>261</height>
+             </rect>
+            </property>
+           </widget>
+          </widget>
           <widget class="QWidget" name="Settings_page">
            <layout class="QGridLayout" name="gridLayout_5">
             <item row="4" column="0">

@@ -64,9 +64,19 @@ void MainWindow::on_RegisterButton_clicked()
 
 void MainWindow::handleUserIdReceived(const QString &id)
 {
-    setUserId(id);  // Store ID
+    setUserId(id);
     qDebug() << "User ID updated:" << getUserId();
+
+    // Perform login validation **only after** the ID is received
+    if (getUserId() != "-1") {
+        ui->Window_logic->setCurrentIndex(1);  // Move to the main app UI
+        ui->kat->setCurrentIndex(0); // Idle
+    } else {
+        QMessageBox::warning(this, "Eroare autentificare", "Nume utilizator sau parolă incorecte. Vă rugăm să încercați din nou.");
+    }
 }
+
+
 
 void MainWindow::on_LoginButton_login_clicked()
 {
@@ -85,13 +95,9 @@ void MainWindow::on_LoginButton_login_clicked()
 
 
     QString loginData = "0:" + hashedUsername+":"+hashedPassword;
-    connect(client, &Network::userIdReceived, this, &MainWindow::handleUserIdReceived);
+    setUserName(hashedUsername);
     client->sendMessage(loginData);
-    // daca iau 1 fac connect, altfel spun ca parola este gresita
-    if(getUserId() != "-1")
-        ui->Window_logic->setCurrentIndex(1); // App
-    else
-        QMessageBox::warning(this, "Eroare autentificare", "Nume utilizator sau parolă incorecte. Vă rugăm să încercați din nou.");
+    connect(client, &Network::userIdReceived, this, &MainWindow::handleUserIdReceived);
 }
 
 
@@ -189,14 +195,76 @@ void MainWindow::on_LogoButton_clicked()
 
 void MainWindow::on_LogOffButton_clicked()
 {
+    setUserId("-1");
     ui->Window_logic->setCurrentIndex(0); // MainMenu
     ui->right_twix->setCurrentIndex(3); // Idle
 }
 
+void MainWindow::handleFileListReceived(const QString &data)
+{
+    QStringList fileData = data.split(':');
+
+    if (fileData.size() < 2) {
+        qDebug() << "Invalid file list format!";
+        return;
+    }
+
+    int nr_fisiere = fileData[1].toInt();
+    QStringList fileNames = fileData.mid(2, nr_fisiere);
+
+    qDebug() << "Number of files:" << nr_fisiere;
+    qDebug() << "Files received:" << fileNames;
+
+    // Setăm tabelul
+    ui->tableWidget->clearContents();
+    ui->tableWidget->setRowCount(fileNames.size());
+    ui->tableWidget->setColumnCount(4);
+    QStringList headers = {"Download", "Send", "Delete", "Filename"};
+    ui->tableWidget->setHorizontalHeaderLabels(headers);
+
+    // Populăm tabelul cu date
+    for (int row = 0; row < fileNames.size(); ++row) {
+        QString fileName = fileNames[row];
+
+        // Adăugăm numele fișierului
+        QTableWidgetItem *fileItem = new QTableWidgetItem(fileName);
+        ui->tableWidget->setItem(row, 3, fileItem);
+
+        // Creăm butonul "Download"
+        QPushButton *downloadButton = new QPushButton("Download");
+        connect(downloadButton, &QPushButton::clicked, this, [fileName]() {
+            qDebug() << "Downloading: " << fileName;
+            // Implementarea descărcării
+        });
+        ui->tableWidget->setCellWidget(row, 0, downloadButton);
+
+        // Creăm butonul "Send"
+        QPushButton *sendButton = new QPushButton("Send");
+        connect(sendButton, &QPushButton::clicked, this, [fileName]() {
+            qDebug() << "Sending: " << fileName;
+            // Implementarea trimiterii
+        });
+        ui->tableWidget->setCellWidget(row, 1, sendButton);
+
+        // Creăm butonul "Delete"
+        QPushButton *deleteButton = new QPushButton("Delete");
+        connect(deleteButton, &QPushButton::clicked, this, [this, row, fileName]() {
+            qDebug() << "Deleting: " << fileName;
+            ui->tableWidget->removeRow(row);
+            // Implementarea ștergerii
+        });
+        ui->tableWidget->setCellWidget(row, 2, deleteButton);
+    }
+}
+
+
 
 void MainWindow::on_DownloadButton_clicked()
 {
-
+    ui->kat->setCurrentIndex(1); // Download
+    QString filesData = "5:arian.png";
+    client->sendMessage(filesData);
+    //connect(client, &Network::fileListReceived, this, &MainWindow::handleFileListReceived);
 }
 
 
@@ -239,10 +307,13 @@ void MainWindow::on_ChangeButton_clicked()
 
     // Prepare registration data
     // trebuie sa verific cu Arian asta
-    QString changeData = "2:"+getUserId()+":"+hashedoldpassword+":"+hashednewpassword;
+    QString changeData = "2:"+getUserName()+":"+hashednewpassword+":"+hashedoldpassword;
 
     // Send data
     client->sendMessage(changeData);
+
+    ui->Window_logic->setCurrentIndex(0); // MainMenu
+    ui->right_twix->setCurrentIndex(3); // Idle
 
 }
 
@@ -253,5 +324,8 @@ void MainWindow::on_DeleteAccountButton_clicked()
     QString deleteData = "3:"+getUserId();
     // Send data
      client->sendMessage(deleteData);
+    setUserId("-1");
+    ui->Window_logic->setCurrentIndex(0); // MainMenu
+    ui->right_twix->setCurrentIndex(3); // Idle
 }
 

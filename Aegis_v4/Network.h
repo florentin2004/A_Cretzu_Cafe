@@ -27,8 +27,9 @@ private:
     int serverPort;
 
 signals:
-    void userIdReceived(const QString &userId); //id
-    void fileDownloaded(const QString &fileName); // fisier pe care vreua sa-l descarc
+    void userIdReceived(const QString &userId); // ID utilizator
+    void fileDownloaded(const QString &fileName); // Fisier descărcat
+    void fileListReceived(const QString &data); // Lista de fișiere primită
 };
 
 #endif // NETWORK_H

@@ -82,13 +82,18 @@ private:
 
 private:
     QString userId = "-1";  // user ID
+    QString userName;
     QByteArray key = "Cretzu_Cafe+Aegis"; // key
 
 public:
     void setUserId(const QString &id) { userId = id; }
     QString getUserId() const { return userId; }
-    void handleUserIdReceived(const QString &id);
     QByteArray getKey(){return this->key;};
+    void setUserName(const QString &name){userName = name;};
+    QString getUserName() const {return userName;};
+
+    void handleUserIdReceived(const QString &id);
+    void handleFileListReceived(const QString &data);
 
 };
 #endif // MAINWINDOW_H

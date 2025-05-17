@@ -4,7 +4,7 @@
 #include <QFileInfo>
 #include <QThread>
 
-Network::Network(QObject *parent) : QObject(parent), serverIP("10.10.25.122"), serverPort(27015)
+Network::Network(QObject *parent) : QObject(parent), serverIP("25.40.149.96"), serverPort(27015)
 {
     socket = new QTcpSocket(this);
 
@@ -98,6 +98,8 @@ void Network::onMessageReceived()
         QString userIdString = data.split(':').value(1);
         emit userIdReceived(userIdString); // Emit signal to MainWindow
     }
+    if (data.startsWith("5:"))
+        emit fileListReceived(data); // Semnal către MainWindow
 }
 
 void Network::onErrorOccurred(QAbstractSocket::SocketError error)
