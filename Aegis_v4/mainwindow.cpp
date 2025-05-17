@@ -11,6 +11,10 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     this->setWindowIcon(QIcon(":/img/Images/Aegis.ico"));
+
+    client = new Network(this);
+
+    connect(client, &Network::fileDownloaded, this, &MainWindow::handleFileReceived);
 }
 
 MainWindow::~MainWindow()
@@ -257,15 +261,20 @@ void MainWindow::handleFileListReceived(const QString &data)
     }
 }
 
-
+void MainWindow::handleFileReceived(const QString &fileName)
+{
+    qDebug() << "Fișier descărcat: " << fileName;
+    QMessageBox::information(this, "Download complet", "Fișierul a fost descărcat: " + fileName);
+}
 
 void MainWindow::on_DownloadButton_clicked()
 {
     ui->kat->setCurrentIndex(1); // Download
-    QString filesData = "5:arian.png";
+    QString filename = "broasca.txt";
+    QString filesData = "5:" + filename;
     client->sendMessage(filesData);
-    //connect(client, &Network::fileListReceived, this, &MainWindow::handleFileListReceived);
 }
+
 
 
 void MainWindow::on_SettingsButton_clicked()

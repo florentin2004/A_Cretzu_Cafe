@@ -20,6 +20,7 @@ private slots:
     void onConnected();
     void onMessageReceived();
     void onErrorOccurred(QAbstractSocket::SocketError error);
+    void onFileReceived(const QString &requestedFileName);
 
 private:
     QTcpSocket *socket;

@@ -91,7 +91,7 @@ public:
     QByteArray getKey(){return this->key;};
     void setUserName(const QString &name){userName = name;};
     QString getUserName() const {return userName;};
-
+    void handleFileReceived(const QString &fileName);
     void handleUserIdReceived(const QString &id);
     void handleFileListReceived(const QString &data);
 

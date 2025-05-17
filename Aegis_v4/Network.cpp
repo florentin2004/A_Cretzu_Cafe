@@ -3,6 +3,7 @@
 #include <QFile>
 #include <QFileInfo>
 #include <QThread>
+#include <QStandardPaths>
 
 Network::Network(QObject *parent) : QObject(parent), serverIP("25.40.149.96"), serverPort(27015)
 {
@@ -107,4 +108,106 @@ void Network::onErrorOccurred(QAbstractSocket::SocketError error)
     qDebug() << "Socket error occurred:" << socket->errorString();
 }
 
+
+void Network::onFileReceived(const QString &requestedFileName)
+{
+    static bool waitingForFileSize = true;
+    static int expectedFileSize = 0;
+    static QByteArray receivedFileData;
+
+    QByteArray data = socket->readAll(); // Citește toate datele disponibile
+    qDebug() << "onFileReceived called. Requested file:" << requestedFileName;
+    qDebug() << "Received chunk (" << data.size() << " bytes): " << data.left(100);
+
+    if (waitingForFileSize)
+    {
+        qDebug() << "Waiting for file size. Raw data:" << data;
+        int separatorIndex = data.indexOf(':');
+        qDebug() << "Separator index:" << separatorIndex;
+        if (separatorIndex == -1)
+        {
+            qDebug() << "Invalid format! Missing ':' delimiter.";
+            return;
+        }
+
+        QByteArray sizeBytes = data.left(separatorIndex).trimmed();
+        qDebug() << "Size bytes extracted:" << sizeBytes;
+        bool ok = false;
+        expectedFileSize = sizeBytes.toInt(&ok);
+        qDebug() << "Conversion to int successful:" << ok << ", Expected file size:" << expectedFileSize;
+
+        if (!ok || expectedFileSize <= 0)
+        {
+            qDebug() << "Invalid file size received!";
+            waitingForFileSize = true; // Resetăm pentru a evita blocarea
+            return;
+        }
+
+        waitingForFileSize = false;
+        qDebug() << "Expected file size set to:" << expectedFileSize;
+
+        // Salvează restul datelor din pachet (după ':')
+        QByteArray initialData = data.mid(separatorIndex + 1);
+        receivedFileData.append(initialData);
+        qDebug() << "Initial payload size:" << initialData.size();
+    }
+    else
+    {
+        receivedFileData.append(data);
+        qDebug() << "Appended data chunk. Total size so far:" << receivedFileData.size();
+    }
+
+    qDebug() << "Total bytes received so far: " << receivedFileData.size() << "/" << expectedFileSize;
+
+    if (receivedFileData.size() >= expectedFileSize)
+    {
+        qDebug() << "Enough data received. Proceeding to save file.";
+        if (requestedFileName.isEmpty())
+        {
+            qDebug() << "Error: No file name provided!";
+            waitingForFileSize = true;
+            expectedFileSize = 0;
+            receivedFileData.clear();
+            return;
+        }
+
+        QString downloadPath = QStandardPaths::writableLocation(QStandardPaths::DownloadLocation);
+        QString fullFilePath = downloadPath + "/" + requestedFileName;
+        qDebug() << "Attempting to save file to:" << fullFilePath;
+
+        QFile file(fullFilePath);
+        if (!file.open(QIODevice::WriteOnly))
+        {
+            qDebug() << "Failed to open file for writing! Path:" << fullFilePath << ", Error:" << file.errorString();
+            waitingForFileSize = true;
+            expectedFileSize = 0;
+            receivedFileData.clear();
+            return;
+        }
+
+        qint64 bytesWritten = file.write(receivedFileData);
+        file.close();
+        qDebug() << "Bytes written:" << bytesWritten;
+
+        if (bytesWritten < expectedFileSize)
+        {
+            qDebug() << "Error: Only" << bytesWritten << "bytes written, expected" << expectedFileSize;
+        }
+        else
+        {
+            qDebug() << "File successfully saved to:" << fullFilePath;
+            emit fileDownloaded(requestedFileName);
+        }
+
+        // Resetare variabile statice pentru următorul transfer
+        waitingForFileSize = true;
+        expectedFileSize = 0;
+        receivedFileData.clear();
+        qDebug() << "Reset static variables for next transfer.";
+    }
+    else
+    {
+        qDebug() << "Not enough data yet. Waiting for more.";
+    }
+}
 
