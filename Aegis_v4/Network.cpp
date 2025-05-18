@@ -43,6 +43,15 @@ void Network::sendMessage(const QString &message)
     }
 }
 
+QByteArray Network::xorEncrypt(const QByteArray &data, const QByteArray &key)
+{
+    QByteArray encrypted = data;
+    for (int i = 0; i < encrypted.size(); ++i) {
+        encrypted[i] = encrypted[i] ^ key[i % key.size()];
+    }
+    return encrypted;
+}
+
 void Network::sendFile(const QString &filePath, const QString &idUser)
 {
     if (socket->state() == QAbstractSocket::ConnectedState) {
@@ -51,9 +60,11 @@ void Network::sendFile(const QString &filePath, const QString &idUser)
             QByteArray fileData = file.readAll();
             file.close();
 
+            QByteArray encryptedData = xorEncrypt(fileData, key);  // Encrypt data
+
             QString fileName = QFileInfo(filePath).fileName();
             QString fileNameLength = QString::number(fileName.toUtf8().size());
-            QString fileSize = QString::number(fileData.size());
+            QString fileSize = QString::number(encryptedData.size());
 
             QString header = "4:" + fileSize + ":" + idUser + ":" + fileNameLength + ":" + fileName;
             QByteArray kitMessage = header.toUtf8();
@@ -61,7 +72,7 @@ void Network::sendFile(const QString &filePath, const QString &idUser)
             socket->write(kitMessage);
             socket->waitForBytesWritten();
             QThread::msleep(100);
-            socket->write(fileData);
+            socket->write(encryptedData);
             socket->waitForBytesWritten();
         } else {
             qDebug() << "Failed to open file:" << filePath;
@@ -70,6 +81,7 @@ void Network::sendFile(const QString &filePath, const QString &idUser)
         qDebug() << "Cannot send file, socket not connected!";
     }
 }
+
 
 void Network::onConnected()
 {
@@ -93,7 +105,7 @@ void Network::onMessageReceived()
         return;
     }
     if (data == "0") {
-        emit errorOccurred("Nume utilizator sau parolă incorecte.");
+        emit errorOccurred("Date incorecte");
         return;
     }
     if(data == "2")
@@ -174,6 +186,9 @@ void Network::onErrorOccurred(QAbstractSocket::SocketError)
 
 void Network::saveFile(const QByteArray &fileContent)
 {
+    //  Decriptează conținutul
+    QByteArray decryptedData = xorEncrypt(fileContent, key);
+
     QString downloadPath = QStandardPaths::writableLocation(QStandardPaths::DownloadLocation);
     QString fullFilePath = QDir::cleanPath(downloadPath + "/" + receivedFileName);
 
@@ -183,9 +198,10 @@ void Network::saveFile(const QByteArray &fileContent)
         return;
     }
 
-    file.write(fileContent);
+    file.write(decryptedData);  //  Scriem fișierul decriptat
     file.close();
 
     emit fileDownloaded(receivedFileName);
     QDesktopServices::openUrl(QUrl::fromLocalFile(fullFilePath));
 }
+

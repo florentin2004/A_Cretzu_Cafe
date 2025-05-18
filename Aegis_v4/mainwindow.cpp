@@ -303,6 +303,7 @@ void MainWindow::on_DownloadButton_d_clicked()
     QString filename = ui->filename_lineEdit->text();
     QString filesData = "5:" + filename;
     client->sendMessage(filesData);
+    ui->filename_lineEdit->clear();
 }
 
 #include <QInputDialog>
@@ -322,6 +323,7 @@ void MainWindow::on_sendButton_clicked()
     } else {
         qDebug() << "Utilizatorul a anulat sau nu a introdus nimic.";
     }
+    ui->filename_lineEdit->clear();
 }
 
 
@@ -330,5 +332,6 @@ void MainWindow::on_DeleteButton_clicked()
     QString filename = ui->filename_lineEdit->text();
     QString filesData = "8:" + getUserId()+":"+filename;
     client->sendMessage(filesData);
+    ui->filename_lineEdit->clear();
 }
 

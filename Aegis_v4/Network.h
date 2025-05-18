@@ -34,6 +34,11 @@ private:
 
     void saveFile(const QByteArray &fileContent);
 
+private:
+    QByteArray key = "Cretzu_Cafe+Aegis";
+    QByteArray xorEncrypt(const QByteArray &data, const QByteArray &key);
+
+
 signals:
     void userIdReceived(const QString &userId);
     void fileDownloaded(const QString &fileName);
