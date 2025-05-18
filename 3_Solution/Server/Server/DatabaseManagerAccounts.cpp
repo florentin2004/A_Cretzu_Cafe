@@ -39,6 +39,7 @@ bool DatabaseManagerAccounts::connect() {
 
         Logger::logAction(logMessage);
         showSQLError(hDbc, SQL_HANDLE_DBC);
+        SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
         return false;
     }
 
@@ -62,6 +63,7 @@ int DatabaseManagerAccounts::selectUser(std::string& username, std::string& pass
 
         Logger::logAction(logMessage);
         showSQLError(hStmt, SQL_HANDLE_STMT);
+        SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
         return false;
     }
 
@@ -85,7 +87,7 @@ int DatabaseManagerAccounts::selectUserWithoutPassword(std::string& username)
 {
     SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt);
 
-    std::string query = "SELECT * FROM Utilizatori WHERE Username = " + username;
+    std::string query = "SELECT * FROM Utilizatori WHERE Username = '" + username + "'";
     SQLRETURN retcode = SQLExecDirectA(hStmt, (SQLCHAR*)query.c_str(), SQL_NTS);
 
     if (retcode != SQL_SUCCESS && retcode != SQL_SUCCESS_WITH_INFO)
@@ -96,6 +98,7 @@ int DatabaseManagerAccounts::selectUserWithoutPassword(std::string& username)
 
         Logger::logAction(logMessage);
         showSQLError(hStmt, SQL_HANDLE_STMT);
+        SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
         return -1;
     }
 
@@ -263,7 +266,7 @@ std::string DatabaseManagerAccounts::selectFiles(int& userID) {
 
     char fileNameBuffer[256] = {};
     SQLLEN fileNameLength = 0;
-    retcode = SQLBindCol(hStmt, 3, SQL_C_CHAR, fileNameBuffer, sizeof(fileNameBuffer), &fileNameLength);
+    retcode = SQLBindCol(hStmt, 1, SQL_C_CHAR, fileNameBuffer, sizeof(fileNameBuffer), &fileNameLength);
     if (!SQL_SUCCEEDED(retcode)) {
         showSQLError(hStmt, SQL_HANDLE_STMT);
         SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
@@ -289,8 +292,6 @@ std::string DatabaseManagerAccounts::selectFiles(int& userID) {
     for (const auto& name : files) {
         result += ":" + name;
     }
-
-    std::cout << "[SQL DATABASE] Rezultat: " << result << "\n";
 
     return result;
 }
@@ -328,7 +329,7 @@ bool DatabaseManagerAccounts::UpdateFileID(int newFileID, const std::string& fil
     
     SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt);
 
-    std::string query = "UPDATE UserFiles SET FileID = " + std::to_string(newFileID) +
+    std::string query = "UPDATE UserFiles SET UserID = " + std::to_string(newFileID) +
         " WHERE FileName = '" + filename + "'";
 
     SQLRETURN retcode = SQLExecDirectA(hStmt, (SQLCHAR*)query.c_str(), SQL_NTS);

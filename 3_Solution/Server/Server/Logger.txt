@@ -127,3 +127,884 @@
 [REQUEST RESULT] Descarcare fisier reusita!
 [REQUEST RESULT] Logare cu success (ID = 10)
 [REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[ERROR] Nu pot deschide fisierul pentru citire!
+[REQUEST RESULT] Probleme la descarcarea fisierelor!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Numele fisierului adaugat cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Fisier adaugat cu succes!
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Numele fisierului adaugat cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Fisier adaugat cu succes!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Numele fisierului adaugat cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Fisier adaugat cu succes!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Numele fisierului adaugat cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Fisier adaugat cu succes!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[REQUEST RESULT] Descarcare fisier reusita!
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Numele fisierului adaugat cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Fisier adaugat cu succes!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Numele fisierului adaugat cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Fisier adaugat cu succes!
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Numele fisierului adaugat cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Fisier adaugat cu succes!
+[ERROR] Nu pot deschide fisierul pentru citire!
+[REQUEST RESULT] Probleme la descarcarea fisierelor!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Numele fisierului adaugat cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Fisier adaugat cu succes!
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare esuata!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 14)
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[ERROR] Nu pot deschide fisierul pentru citire!
+[REQUEST RESULT] Probleme la descarcarea fisierelor!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Numele fisierului adaugat cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Fisier adaugat cu succes!
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare esuata!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare esuata!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare esuata!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] INSERT User a esuat!
+[SQL ERROR] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]Violation of UNIQUE KEY constraint 'UQ__Utilizat__536C85E4A13F1D59'. Cannot insert duplicate key in object 'dbo.Utilizatori'. The duplicate key value is (cfc17b465428742093f0a2d696cb6fe0cd9f3f574d7130461e49d7eb3e5ff644). (SQLState: 23000)
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Inregistrare esuata!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] INSERT User a esuat!
+[SQL ERROR] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]Violation of UNIQUE KEY constraint 'UQ__Utilizat__536C85E4A13F1D59'. Cannot insert duplicate key in object 'dbo.Utilizatori'. The duplicate key value is (cfc17b465428742093f0a2d696cb6fe0cd9f3f574d7130461e49d7eb3e5ff644). (SQLState: 23000)
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Inregistrare esuata!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare esuata!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] INSERT User a esuat!
+[SQL ERROR] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]Violation of UNIQUE KEY constraint 'UQ__Utilizat__536C85E4A13F1D59'. Cannot insert duplicate key in object 'dbo.Utilizatori'. The duplicate key value is (cfc17b465428742093f0a2d696cb6fe0cd9f3f574d7130461e49d7eb3e5ff644). (SQLState: 23000)
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Inregistrare esuata!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] INSERT User a esuat!
+[SQL ERROR] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]Violation of UNIQUE KEY constraint 'UQ__Utilizat__536C85E4A13F1D59'. Cannot insert duplicate key in object 'dbo.Utilizatori'. The duplicate key value is (cfc17b465428742093f0a2d696cb6fe0cd9f3f574d7130461e49d7eb3e5ff644). (SQLState: 23000)
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Inregistrare esuata!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare esuata!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] INSERT User a esuat!
+[SQL ERROR] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]Violation of UNIQUE KEY constraint 'UQ__Utilizat__536C85E4A13F1D59'. Cannot insert duplicate key in object 'dbo.Utilizatori'. The duplicate key value is (cfc17b465428742093f0a2d696cb6fe0cd9f3f574d7130461e49d7eb3e5ff644). (SQLState: 23000)
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Inregistrare esuata!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare esuata!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] INSERT User a esuat!
+[SQL ERROR] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]Violation of UNIQUE KEY constraint 'UQ__Utilizat__536C85E4A13F1D59'. Cannot insert duplicate key in object 'dbo.Utilizatori'. The duplicate key value is (cfc17b465428742093f0a2d696cb6fe0cd9f3f574d7130461e49d7eb3e5ff644). (SQLState: 23000)
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Inregistrare esuata!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] INSERT User a esuat!
+[SQL ERROR] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]Violation of UNIQUE KEY constraint 'UQ__Utilizat__536C85E4A13F1D59'. Cannot insert duplicate key in object 'dbo.Utilizatori'. The duplicate key value is (7a59b77f01ee6a4440c43d11bf37192294be4981b59b6f469adc55f224e42034). (SQLState: 23000)
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Inregistrare esuata!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] INSERT User a esuat!
+[SQL ERROR] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]Violation of UNIQUE KEY constraint 'UQ__Utilizat__536C85E4A13F1D59'. Cannot insert duplicate key in object 'dbo.Utilizatori'. The duplicate key value is (7a59b77f01ee6a4440c43d11bf37192294be4981b59b6f469adc55f224e42034). (SQLState: 23000)
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Inregistrare esuata!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] INSERT User a esuat!
+[SQL ERROR] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]Violation of UNIQUE KEY constraint 'UQ__Utilizat__536C85E4A13F1D59'. Cannot insert duplicate key in object 'dbo.Utilizatori'. The duplicate key value is (cfc17b465428742093f0a2d696cb6fe0cd9f3f574d7130461e49d7eb3e5ff644). (SQLState: 23000)
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Inregistrare esuata!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare esuata!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Utilizator adaugat cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Inregistrare cu succes!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] INSERT User a esuat!
+[SQL ERROR] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]Violation of UNIQUE KEY constraint 'UQ__Utilizat__536C85E4A13F1D59'. Cannot insert duplicate key in object 'dbo.Utilizatori'. The duplicate key value is (57ab106c11db68e9bfc74348c2940f18dcf16c2976f8f88eaf169438c4795afb). (SQLState: 23000)
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Inregistrare esuata!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] INSERT User a esuat!
+[SQL ERROR] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]Violation of UNIQUE KEY constraint 'UQ__Utilizat__536C85E4A13F1D59'. Cannot insert duplicate key in object 'dbo.Utilizatori'. The duplicate key value is (cfc17b465428742093f0a2d696cb6fe0cd9f3f574d7130461e49d7eb3e5ff644). (SQLState: 23000)
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Inregistrare esuata!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare esuata!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] INSERT User a esuat!
+[SQL ERROR] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]Violation of UNIQUE KEY constraint 'UQ__Utilizat__536C85E4A13F1D59'. Cannot insert duplicate key in object 'dbo.Utilizatori'. The duplicate key value is (cfc17b465428742093f0a2d696cb6fe0cd9f3f574d7130461e49d7eb3e5ff644). (SQLState: 23000)
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Inregistrare esuata!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare esuata!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] INSERT User a esuat!
+[SQL ERROR] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]Violation of UNIQUE KEY constraint 'UQ__Utilizat__536C85E4A13F1D59'. Cannot insert duplicate key in object 'dbo.Utilizatori'. The duplicate key value is (cfc17b465428742093f0a2d696cb6fe0cd9f3f574d7130461e49d7eb3e5ff644). (SQLState: 23000)
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Inregistrare esuata!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare esuata!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[SQL DATABASE] SELECT fisiere de la user a esuat!
+[EROARE] Probleme la selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[SQL DATABASE] SELECT fisiere de la user a esuat!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[SQL DATABASE] SELECT fisiere de la user a esuat!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Numele fisierului adaugat cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Fisier adaugat cu succes!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Numele fisierului adaugat cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Fisier adaugat cu succes!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Numele fisierului adaugat cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Fisier adaugat cu succes!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] INSERT User a esuat!
+[SQL ERROR] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]Violation of UNIQUE KEY constraint 'UQ__Utilizat__536C85E4A13F1D59'. Cannot insert duplicate key in object 'dbo.Utilizatori'. The duplicate key value is (cfc17b465428742093f0a2d696cb6fe0cd9f3f574d7130461e49d7eb3e5ff644). (SQLState: 23000)
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Inregistrare esuata!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare esuata!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare esuata!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Numele fisierului adaugat cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Fisier adaugat cu succes!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[ERROR] Nu pot deschide fisierul pentru citire!
+[REQUEST RESULT] Probleme la descarcarea fisierelor!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Fisier sters din baza de date!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Numele fisierului adaugat cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Fisier adaugat cu succes!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Numele fisierului adaugat cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Fisier adaugat cu succes!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Fisier sters din baza de date!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Fisier sters din baza de date!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Numele fisierului adaugat cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Fisier adaugat cu succes!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Numele fisierului adaugat cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Fisier adaugat cu succes!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Numele fisierului adaugat cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Fisier adaugat cu succes!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Fisier sters din baza de date!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Fisier sters din baza de date!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Utilizator adaugat cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Inregistrare cu succes!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Username a esuat!
+[SQL ERROR] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]Incorrect syntax near 'f727f9d88b5631e9a7adecf7824929656fd0798ae9c035c6651a9f85b674'. (SQLState: 42000)
+[SQL DATABASE] INSERT fisier a esuat!
+[SQL ERROR] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]Cannot update identity column 'FileID'. (SQLState: 42000)
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Probleme la trimiterea fisierelor la alt utilizator!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Username a mers cu succes!
+[SQL DATABASE] S-a schimbat id-ul fisierului cu succes: filename = 'user.png', fileid = 33
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Fisier trimis catre alt utilizator cu succes!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 33)
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 33)
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] DELETE Fisier a esuat!
+[EROARE] E?ec la ?tergerea fi?ierului: sd
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[EROARE] Probleme la selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Numele fisierului adaugat cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Fisier adaugat cu succes!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Fisier sters din baza de date!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Numele fisierului adaugat cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Fisier adaugat cu succes!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Username a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Fisier trimis catre alt utilizator cu succes!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 33)
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[ERROR] Nu pot deschide fisierul pentru citire!
+[REQUEST RESULT] Probleme la descarcarea fisierelor!
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 33)
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 10)
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Username a mers cu succes!
+[SQL DATABASE] S-a schimbat id-ul fisierului cu succes: filename = 'elf.png', fileid = 33
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Fisier trimis catre alt utilizator cu succes!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] SELECT Log in a mers cu succes!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] Logare cu success (ID = 33)
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!
+[REQUEST RESULT] Descarcare fisier reusita!
+[SQL DATABASE] Conectat la SQL Server!
+[SQL DATABASE] Fisier sters din baza de date!
+[SQL DATABASE] Deconectat de la SQL SERVER!
+[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!

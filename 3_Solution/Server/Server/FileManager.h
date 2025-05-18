@@ -13,5 +13,6 @@ private:
 public:
 	static bool UploadFile(std::string& filename, const std::vector<uint8_t>& content);
 	static std::vector<uint8_t> DownloadFile(std::string& filename);
+	static bool removeFile(std::string& filename);
 };
 
