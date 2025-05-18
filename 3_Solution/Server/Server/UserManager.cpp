@@ -1,21 +1,5 @@
 ﻿#include "UserManager.h"
 
-//std::string generateSymmetricKey(size_t length) {
-//    const char minChar = 32;  // ' '
-//    const char maxChar = 126; // '~'
-//    std::string key;
-//    key.reserve(length);
-//
-//    std::mt19937 rng(static_cast<unsigned int>(std::time(nullptr))); // Mersenne Twister RNG
-//    std::uniform_int_distribution<int> dist(minChar, maxChar);
-//
-//    for (size_t i = 0; i < length; ++i) {
-//        key += static_cast<char>(dist(rng));
-//    }
-//
-//    return key;
-//}
-
 int UserManager::HandleClientLogger(std::stringstream& stream, std::string& token, const char delimiter, bool& resultOperation)
 {
     DatabaseManagerAccounts::connect();
@@ -111,14 +95,14 @@ void UserManager::HandleClientChangePassword(std::stringstream& stream, std::str
 void UserManager::HandleClientDeleteAccount(std::stringstream& stream, std::string& token, const char delimiter, bool& resultOperation)
 {
     DatabaseManagerAccounts::connect();
-    std::string username;
+    int IDUser;
 
     std::getline(stream, token, delimiter);
-    std::cout << "Username: ";
-    username = token;
-    std::cout << username << std::endl;
+    std::cout << "ID: ";
+    IDUser = std::stoi(token);
+    std::cout << IDUser << std::endl;
 
-    resultOperation = DatabaseManagerAccounts::deleteUser(username);
+    resultOperation = DatabaseManagerAccounts::deleteUser(IDUser);
     DatabaseManagerAccounts::disconnect();
 }
 
@@ -146,10 +130,6 @@ void UserManager::HandleClientUploadFile(std::stringstream& stream, std::string&
                 bool result1 = DatabaseManagerAccounts::addFile(IDUser, filename);
                 bool result2 = FileManager::UploadFile(filename, binaryData);
                 resultOperation = result1 && result2;
-            }
-            else
-            {
-                std::cerr << "[ERROR] Invalid filename size received!" << std::endl;
             }
             break;
         default:

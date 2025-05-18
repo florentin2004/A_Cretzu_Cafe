@@ -1,10 +1,15 @@
 #include "FileManager.h"
 
+std::string FileManager::logMessage;
+
 bool FileManager::UploadFile(std::string& filename, const std::vector<uint8_t>& content)
 {
 	std::ofstream out(filename, std::ios::binary);
 	if (!out.is_open()) {
-		std::cerr << "[ERROR] Nu pot deschide fisierul pentru scriere!\n";
+        FileManager::logMessage = "[ERROR] Nu pot deschide fisierul pentru scriere!";
+        std::cerr << FileManager::logMessage << std::endl;
+
+        Logger::logAction(FileManager::logMessage);
 		return false;
 	}
 	out.write(reinterpret_cast<const char*>(content.data()), content.size());
@@ -15,7 +20,10 @@ bool FileManager::UploadFile(std::string& filename, const std::vector<uint8_t>& 
 std::vector<uint8_t> FileManager::DownloadFile(std::string& filename) {
     std::ifstream in(filename, std::ios::binary);
     if (!in.is_open()) {
-        std::cerr << "[ERROR] Nu pot deschide fisierul pentru citire!\n";
+        logMessage = "[ERROR] Nu pot deschide fisierul pentru citire!";
+        std::cerr << logMessage << std::endl;
+
+        Logger::logAction(logMessage);
         return {};
     }
 
@@ -25,7 +33,10 @@ std::vector<uint8_t> FileManager::DownloadFile(std::string& filename) {
 
     std::vector<uint8_t> content(len);
     if (!in.read(reinterpret_cast<char*>(content.data()), len)) {
-        std::cerr << "Eroare la citirea fisierului!\n";
+        logMessage = "[ERROR] Probleme la citirea fisierului!";
+        std::cerr << logMessage << std::endl;
+
+        Logger::logAction(logMessage);
         return {};
     }
 

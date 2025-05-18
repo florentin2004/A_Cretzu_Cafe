@@ -10,6 +10,7 @@
 #include <ws2tcpip.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <algorithm>
 #include "UserManager.h"
 #include "MyException.h"
 
@@ -29,6 +30,7 @@ private:
     char recvbuf[DEFAULT_BUFLEN];
     int recvbuflen = DEFAULT_BUFLEN;
     bool on = false;
+    std::string logMessage;
 
 public:
     Retea() = default;
