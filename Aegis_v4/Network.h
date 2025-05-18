@@ -38,6 +38,11 @@ signals:
     void userIdReceived(const QString &userId);
     void fileDownloaded(const QString &fileName);
     void fileListReceived(const QString &data);
+
+    void errorOccurred(const QString &message);
+    void fileListReceived(const QStringList &fileNames);
+
+
 };
 
 #endif // NETWORK_H

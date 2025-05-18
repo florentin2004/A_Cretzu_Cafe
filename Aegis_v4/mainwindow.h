@@ -75,6 +75,11 @@ private slots:
 
     void on_DeleteAccountButton_clicked();
 
+    void on_DownloadButton_d_clicked();
+
+public slots:
+    void updateFileList(const QStringList &fileNames);
+
 private:
     Ui::MainWindow *ui;
     Network *client;
@@ -91,9 +96,8 @@ public:
     QByteArray getKey(){return this->key;};
     void setUserName(const QString &name){userName = name;};
     QString getUserName() const {return userName;};
-    void handleFileReceived(const QString &fileName);
     void handleUserIdReceived(const QString &id);
-    void handleFileListReceived(const QString &data);
+    void displayError(const QString &message);
 
 };
 #endif // MAINWINDOW_H

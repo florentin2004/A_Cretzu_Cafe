@@ -13,8 +13,6 @@ MainWindow::MainWindow(QWidget *parent)
     this->setWindowIcon(QIcon(":/img/Images/Aegis.ico"));
 
     client = new Network(this);
-
-    connect(client, &Network::fileDownloaded, this, &MainWindow::handleFileReceived);
 }
 
 MainWindow::~MainWindow()
@@ -75,15 +73,18 @@ void MainWindow::handleUserIdReceived(const QString &id)
     if (getUserId() != "-1") {
         ui->Window_logic->setCurrentIndex(1);  // Move to the main app UI
         ui->kat->setCurrentIndex(0); // Idle
-    } else {
-        QMessageBox::warning(this, "Eroare autentificare", "Nume utilizator sau parolă incorecte. Vă rugăm să încercați din nou.");
     }
 }
 
+void MainWindow::displayError(const QString &message)
+{
+    QMessageBox::warning(this, "Eroare", message);
+}
 
 
 void MainWindow::on_LoginButton_login_clicked()
 {
+
     QString username = ui->user_lineEdit->text();
     QString password = ui->password_lineEdit->text();
 
@@ -101,7 +102,11 @@ void MainWindow::on_LoginButton_login_clicked()
     QString loginData = "0:" + hashedUsername+":"+hashedPassword;
     setUserName(hashedUsername);
     client->sendMessage(loginData);
+
+    connect(client, &Network::errorOccurred, this, &MainWindow::displayError);
     connect(client, &Network::userIdReceived, this, &MainWindow::handleUserIdReceived);
+
+
 }
 
 
@@ -187,6 +192,9 @@ void MainWindow::on_RegisterButton_register_clicked()
 
     // Send data
     client->sendMessage(registerData);
+
+    connect(client, &Network::errorOccurred, this, &MainWindow::displayError);
+
     ui->right_twix->setCurrentIndex(3); // Idle Page
 }
 
@@ -204,75 +212,24 @@ void MainWindow::on_LogOffButton_clicked()
     ui->right_twix->setCurrentIndex(3); // Idle
 }
 
-void MainWindow::handleFileListReceived(const QString &data)
+void MainWindow::updateFileList(const QStringList &fileNames)
 {
-    QStringList fileData = data.split(':');
+    ui->listWidget->clear(); // Golește lista anterioară
 
-    if (fileData.size() < 2) {
-        qDebug() << "Invalid file list format!";
-        return;
-    }
-
-    int nr_fisiere = fileData[1].toInt();
-    QStringList fileNames = fileData.mid(2, nr_fisiere);
-
-    qDebug() << "Number of files:" << nr_fisiere;
-    qDebug() << "Files received:" << fileNames;
-
-    // Setăm tabelul
-    ui->tableWidget->clearContents();
-    ui->tableWidget->setRowCount(fileNames.size());
-    ui->tableWidget->setColumnCount(4);
-    QStringList headers = {"Download", "Send", "Delete", "Filename"};
-    ui->tableWidget->setHorizontalHeaderLabels(headers);
-
-    // Populăm tabelul cu date
-    for (int row = 0; row < fileNames.size(); ++row) {
-        QString fileName = fileNames[row];
-
-        // Adăugăm numele fișierului
-        QTableWidgetItem *fileItem = new QTableWidgetItem(fileName);
-        ui->tableWidget->setItem(row, 3, fileItem);
-
-        // Creăm butonul "Download"
-        QPushButton *downloadButton = new QPushButton("Download");
-        connect(downloadButton, &QPushButton::clicked, this, [fileName]() {
-            qDebug() << "Downloading: " << fileName;
-            // Implementarea descărcării
-        });
-        ui->tableWidget->setCellWidget(row, 0, downloadButton);
-
-        // Creăm butonul "Send"
-        QPushButton *sendButton = new QPushButton("Send");
-        connect(sendButton, &QPushButton::clicked, this, [fileName]() {
-            qDebug() << "Sending: " << fileName;
-            // Implementarea trimiterii
-        });
-        ui->tableWidget->setCellWidget(row, 1, sendButton);
-
-        // Creăm butonul "Delete"
-        QPushButton *deleteButton = new QPushButton("Delete");
-        connect(deleteButton, &QPushButton::clicked, this, [this, row, fileName]() {
-            qDebug() << "Deleting: " << fileName;
-            ui->tableWidget->removeRow(row);
-            // Implementarea ștergerii
-        });
-        ui->tableWidget->setCellWidget(row, 2, deleteButton);
+    for (const QString &fileName : fileNames)
+    {
+        ui->listWidget->addItem(fileName);
     }
 }
 
-void MainWindow::handleFileReceived(const QString &fileName)
-{
-    qDebug() << "Fișier descărcat: " << fileName;
-    QMessageBox::information(this, "Download complet", "Fișierul a fost descărcat: " + fileName);
-}
 
 void MainWindow::on_DownloadButton_clicked()
 {
     ui->kat->setCurrentIndex(1); // Download
-    QString filename = "elf.png";
-    QString filesData = "5:" + filename;
-    client->sendMessage(filesData);
+    QString seeFile = "7:" + getUserId();
+    client->sendMessage(seeFile);
+    connect(client, QOverload<const QStringList &>::of(&Network::fileListReceived),this, &MainWindow::updateFileList);
+
 }
 
 
@@ -336,5 +293,13 @@ void MainWindow::on_DeleteAccountButton_clicked()
     setUserId("-1");
     ui->Window_logic->setCurrentIndex(0); // MainMenu
     ui->right_twix->setCurrentIndex(3); // Idle
+}
+
+
+void MainWindow::on_DownloadButton_d_clicked()
+{
+    QString filename = ui->filename_lineEdit->text();
+    QString filesData = "5:" + filename;
+    client->sendMessage(filesData);
 }
 

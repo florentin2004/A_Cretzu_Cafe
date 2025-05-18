@@ -92,6 +92,15 @@ void Network::onMessageReceived()
         }
         return;
     }
+    if (data == "0") {
+        emit errorOccurred("Nume utilizator sau parolă incorecte.");
+        return;
+    }
+    if(data == "2")
+    {
+        emit errorOccurred("Nume utilizator deja existent.");
+        return;
+    }
 
     if (data.startsWith("1:")) { // Autentificare
         QList<QByteArray> parts = data.split(':');
@@ -99,15 +108,28 @@ void Network::onMessageReceived()
             emit userIdReceived(QString::fromUtf8(parts[1]));
         }
     }
-    else if (data.startsWith("5:")) { // Început de fișier
+    else if (data.startsWith("5:")) {
         QList<QByteArray> parts = data.split(':');
-        if (parts.size() >= 3) {
-            expectedFileSize = parts[1].toInt();
-            fileBuffer = data.mid(data.indexOf(':', 2) + 1);
-            receivingFile = true;
-            receivedFileName = "elf.png"; // Poate fi adaptat dacă serverul trimite numele
 
-            qDebug() << "Start receiving file. Expected size:" << expectedFileSize;
+        if (parts.size() >= 4) {
+            // Extragere nume fișier și dimensiune
+            receivedFileName = QString::fromUtf8(parts[1]);
+            expectedFileSize = parts[2].toInt();
+
+            // Caută poziția datelor (după al treilea ':')
+            int thirdColonIndex = data.indexOf(':', data.indexOf(':', data.indexOf(':') + 1) + 1);
+            if (thirdColonIndex != -1) {
+                fileBuffer = data.mid(thirdColonIndex + 1);
+            } else {
+                fileBuffer.clear();
+            }
+
+            receivingFile = true;
+
+            qDebug() << "Start receiving file:";
+            qDebug() << " - File name:" << receivedFileName;
+            qDebug() << " - Expected size:" << expectedFileSize;
+            qDebug() << " - Initial payload size:" << fileBuffer.size();
 
             if (fileBuffer.size() >= expectedFileSize) {
                 saveFile(fileBuffer);
@@ -115,8 +137,34 @@ void Network::onMessageReceived()
                 expectedFileSize = 0;
                 fileBuffer.clear();
             }
+        } else {
+            qDebug() << "Invalid file message format.";
         }
     }
+    if (data.startsWith("7:"))
+    {
+        qDebug() << "Received file list:" << data;
+
+        QList<QByteArray> parts = data.split(':');
+
+        if (parts.size() >= 3) {
+            int nrFisiere = parts[1].toInt();
+            QStringList fileNames;
+
+            // Verificăm dacă numărul de fișiere se potrivește cu restul datelor
+            for (int i = 2; i < parts.size(); ++i) {
+                fileNames << QString::fromUtf8(parts[i]);
+            }
+
+            if (fileNames.size() == nrFisiere) {
+                emit fileListReceived(fileNames);
+            } else {
+                qDebug() << "Avertisment: nr_fisiere declarat (" << nrFisiere << ") diferă de numărul real (" << fileNames.size() << ")";
+                emit fileListReceived(fileNames); // Sau ignori dacă preferi
+            }
+        }
+    }
+
 }
 
 void Network::onErrorOccurred(QAbstractSocket::SocketError)
