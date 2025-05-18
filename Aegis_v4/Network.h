@@ -11,29 +11,33 @@ class Network : public QObject
 public:
     explicit Network(QObject *parent = nullptr);
 
-    void connectToServer();    // No need for parameters, uses stored IP/Port
+    void connectToServer();
     void sendMessage(const QString &message);
-    void setServerDetails(const QString &ip, int port);  // Allows setting IP & Port dynamically
+    void setServerDetails(const QString &ip, int port);
     void sendFile(const QString &filePath, const QString &idUser);
-    void saveFile(const QByteArray &fileContent);
 
 private slots:
     void onConnected();
     void onMessageReceived();
     void onErrorOccurred(QAbstractSocket::SocketError error);
-    void onFileReceived(const QByteArray &message);
 
 private:
     QTcpSocket *socket;
     QString serverIP;
     int serverPort;
-    int expectedFileSize; // 🔹 Variabilă membru pentru dimensiunea fișierului
-    QByteArray receivedFileData;
+
+    // Pentru recepție fișier
+    QByteArray fileBuffer;
+    int expectedFileSize = 0;
+    bool receivingFile = false;
+    QString receivedFileName;
+
+    void saveFile(const QByteArray &fileContent);
 
 signals:
-    void userIdReceived(const QString &userId); // ID utilizator
-    void fileDownloaded(const QString &fileName); // Fisier descărcat
-    void fileListReceived(const QString &data); // Lista de fișiere primită
+    void userIdReceived(const QString &userId);
+    void fileDownloaded(const QString &fileName);
+    void fileListReceived(const QString &data);
 };
 
 #endif // NETWORK_H

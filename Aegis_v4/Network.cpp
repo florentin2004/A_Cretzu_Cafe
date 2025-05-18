@@ -5,12 +5,8 @@
 #include <QThread>
 #include <QStandardPaths>
 #include <QDir>
-#include <QProcess>
-
-// deschidere fisier
 #include <QDesktopServices>
 #include <QUrl>
-
 
 Network::Network(QObject *parent) : QObject(parent), serverIP("10.10.25.122"), serverPort(27015)
 {
@@ -32,60 +28,45 @@ void Network::connectToServer()
     qDebug() << "Connecting to server at:" << serverIP << ":" << serverPort;
     socket->connectToHost(serverIP, serverPort);
 
-    if (!socket->waitForConnected(5000))
-    {
+    if (!socket->waitForConnected(5000)) {
         qDebug() << "Connection failed:" << socket->errorString();
     }
 }
 
 void Network::sendMessage(const QString &message)
 {
-    if (socket->state() == QAbstractSocket::ConnectedState)
-    {
+    if (socket->state() == QAbstractSocket::ConnectedState) {
         socket->write(message.toUtf8());
         qDebug() << "Sent message:" << message;
-    }
-    else
-    {
+    } else {
         qDebug() << "Cannot send message, socket not connected!";
     }
 }
 
 void Network::sendFile(const QString &filePath, const QString &idUser)
 {
-    if (socket->state() == QAbstractSocket::ConnectedState)
-    {
+    if (socket->state() == QAbstractSocket::ConnectedState) {
         QFile file(filePath);
-        if (file.open(QIODevice::ReadOnly))
-        {
+        if (file.open(QIODevice::ReadOnly)) {
             QByteArray fileData = file.readAll();
             file.close();
 
-            // Extract file name and calculate individual sizes
             QString fileName = QFileInfo(filePath).fileName();
             QString fileNameLength = QString::number(fileName.toUtf8().size());
             QString fileSize = QString::number(fileData.size());
 
-            // Create initial header (before adding total size)
-            QString header = "4:" + fileSize + ":" + idUser +":"+ fileNameLength+ ":" + fileName;
+            QString header = "4:" + fileSize + ":" + idUser + ":" + fileNameLength + ":" + fileName;
+            QByteArray kitMessage = header.toUtf8();
 
-            // Combine header and file data
-            QByteArray KitMessage = header.toUtf8();
-
-            // Send data over socket
-            socket->write(KitMessage);
+            socket->write(kitMessage);
             socket->waitForBytesWritten();
             QThread::msleep(100);
             socket->write(fileData);
             socket->waitForBytesWritten();
-        }
-        else
-        {
+        } else {
             qDebug() << "Failed to open file:" << filePath;
         }
-    }
-    else
-    {
+    } else {
         qDebug() << "Cannot send file, socket not connected!";
     }
 }
@@ -98,100 +79,65 @@ void Network::onConnected()
 void Network::onMessageReceived()
 {
     QByteArray data = socket->readAll();
-    qDebug() << "Received from server: "<<data;
 
-    if (data.startsWith("1:")) // Autentificare
-    {
+    if (receivingFile) {
+        fileBuffer.append(data);
+
+        if (fileBuffer.size() >= expectedFileSize) {
+            qDebug() << "Received entire file. Size:" << fileBuffer.size();
+            saveFile(fileBuffer);
+            receivingFile = false;
+            expectedFileSize = 0;
+            fileBuffer.clear();
+        }
+        return;
+    }
+
+    if (data.startsWith("1:")) { // Autentificare
         QList<QByteArray> parts = data.split(':');
         if (parts.size() > 1) {
-            QString userIdString = QString::fromUtf8(parts[1]);
-            emit userIdReceived(userIdString);
+            emit userIdReceived(QString::fromUtf8(parts[1]));
         }
     }
-    else if (data.startsWith("5:")) // Mesaj de început pentru transferul fișierului
-    {
-        qDebug() << "Detected file transfer message. Forwarding data to onFileReceived().";
-        onFileReceived(data); // Trimitem mesajul complet ca `QByteArray`
+    else if (data.startsWith("5:")) { // Început de fișier
+        QList<QByteArray> parts = data.split(':');
+        if (parts.size() >= 3) {
+            expectedFileSize = parts[1].toInt();
+            fileBuffer = data.mid(data.indexOf(':', 2) + 1);
+            receivingFile = true;
+            receivedFileName = "elf.png"; // Poate fi adaptat dacă serverul trimite numele
+
+            qDebug() << "Start receiving file. Expected size:" << expectedFileSize;
+
+            if (fileBuffer.size() >= expectedFileSize) {
+                saveFile(fileBuffer);
+                receivingFile = false;
+                expectedFileSize = 0;
+                fileBuffer.clear();
+            }
+        }
     }
 }
 
-void Network::onErrorOccurred(QAbstractSocket::SocketError error)
+void Network::onErrorOccurred(QAbstractSocket::SocketError)
 {
     qDebug() << "Socket error occurred:" << socket->errorString();
 }
 
-
-void Network::onFileReceived(const QByteArray &message)
+void Network::saveFile(const QByteArray &fileContent)
 {
-    qDebug() << "onFileReceived called. Raw received data size: " << message.size();
-
-    // Verificăm delimitatorii ':'
-    int separatorIndex1 = message.indexOf(':');
-    if (separatorIndex1 == -1) {
-        qDebug() << "Invalid format! Missing first ':' delimiter.";
-        return;
-    }
-
-    // Extragem codul protocolului
-    QByteArray protocolCode = message.left(separatorIndex1).trimmed();
-
-    // Extragem restul datelor
-    QByteArray remainingData = message.mid(separatorIndex1 + 1);
-
-    int separatorIndex2 = remainingData.indexOf(':');
-    if (separatorIndex2 == -1) {
-        qDebug() << "Invalid format! Missing second ':' delimiter.";
-        return;
-    }
-
-    // Extragem dimensiunea corectă a fișierului
-    QByteArray fileSizeBytes = remainingData.left(separatorIndex2).trimmed();
-    QByteArray fileContent = remainingData.mid(separatorIndex2 + 1);
-
-    qDebug() << "Extracted - Protocol:" << protocolCode << ", File size:" << fileSizeBytes;
-
-    bool ok = false;
-    int expectedFileSize = fileSizeBytes.toInt(&ok);
-    if (!ok || expectedFileSize <= 0) {
-        qDebug() << "Invalid file size extracted!";
-        return;
-    }
-
-    qDebug() << "Expected file size set to:" << expectedFileSize;
-    qDebug() << "Extracted content size:" << fileContent.size();
-
-    if (fileContent.size() < expectedFileSize) {
-        qDebug() << "Error: File content size is smaller than expected. Received:" << fileContent.size() << ", Expected:" << expectedFileSize;
-        return;
-    }
-
-    // Salvare fișier - folosim `QIODevice::WriteOnly | QIODevice::Unbuffered`
     QString downloadPath = QStandardPaths::writableLocation(QStandardPaths::DownloadLocation);
-    QString fullFilePath = QDir::cleanPath(downloadPath + "/test.txt");
-    qDebug() << "Attempting to save file to:" << fullFilePath;
+    QString fullFilePath = QDir::cleanPath(downloadPath + "/" + receivedFileName);
 
     QFile file(fullFilePath);
-    if (!file.open(QIODevice::WriteOnly | QIODevice::Unbuffered)) {
-        qDebug() << "Failed to open file for writing! Error:" << file.errorString();
+    if (!file.open(QIODevice::WriteOnly)) {
+        qDebug() << "Failed to save file.";
         return;
     }
 
-    qint64 bytesWritten = file.write(fileContent);
+    file.write(fileContent);
     file.close();
 
-    if (bytesWritten != expectedFileSize) {
-        qDebug() << "Error: Mismatch in written file size!";
-        return;
-    }
-
-    qDebug() << "File successfully saved to:" << fullFilePath;
-    emit fileDownloaded(QString::fromUtf8("broasca.txt"));
-
-    // Deschide automat fișierul
-    if (!QDesktopServices::openUrl(QUrl::fromLocalFile(fullFilePath))) {
-        qDebug() << "Failed to open file:" << fullFilePath;
-    } else {
-        qDebug() << "File opened successfully.";
-    }
-
+    emit fileDownloaded(receivedFileName);
+    QDesktopServices::openUrl(QUrl::fromLocalFile(fullFilePath));
 }
