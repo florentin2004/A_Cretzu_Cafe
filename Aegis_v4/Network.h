@@ -15,17 +15,20 @@ public:
     void sendMessage(const QString &message);
     void setServerDetails(const QString &ip, int port);  // Allows setting IP & Port dynamically
     void sendFile(const QString &filePath, const QString &idUser);
+    void saveFile(const QByteArray &fileContent);
 
 private slots:
     void onConnected();
     void onMessageReceived();
     void onErrorOccurred(QAbstractSocket::SocketError error);
-    void onFileReceived(const QString &requestedFileName);
+    void onFileReceived(const QByteArray &message);
 
 private:
     QTcpSocket *socket;
     QString serverIP;
     int serverPort;
+    int expectedFileSize; // 🔹 Variabilă membru pentru dimensiunea fișierului
+    QByteArray receivedFileData;
 
 signals:
     void userIdReceived(const QString &userId); // ID utilizator

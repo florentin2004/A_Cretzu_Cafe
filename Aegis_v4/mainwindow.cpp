@@ -270,7 +270,7 @@ void MainWindow::handleFileReceived(const QString &fileName)
 void MainWindow::on_DownloadButton_clicked()
 {
     ui->kat->setCurrentIndex(1); // Download
-    QString filename = "broasca.txt";
+    QString filename = "elf.png";
     QString filesData = "5:" + filename;
     client->sendMessage(filesData);
 }
