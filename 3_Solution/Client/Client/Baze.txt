@@ -1,0 +1,131 @@
+SECURITATE
+INTEGRITATE
+DISPONIBILITATE
+
+cuvinte cheie pentru bazele de date
+
+Pentru o astfel de bază de date complexă, care include cerințe legate de interogări, tranzacții, proceduri stocate și triggere, îți propun o idee care implică gestionarea unui sistem de rezervări pentru un hotel sau o rețea de hoteluri. Acest sistem ar avea multe entități și operații complexe care se potrivesc cerințelor tale.
+
+Descrierea scopului bazei de date
+Scopul bazei de date este de a gestiona informațiile despre hoteluri, camere, rezervări, clienți, plăți și servicii suplimentare (de exemplu, restaurante, SPA, transport). Acesta va permite gestionarea eficientă a operațiunilor hotelurilor și va oferi un sistem pentru rezervarea și administrarea camerelor, plăților, serviciilor și altor tranzacții legate de cazare.
+
+Tabele principale:
+Hoteluri
+
+ID Hotel (cheie primară)
+Nume hotel
+Locație (Oraș, Țară)
+Număr camere
+Rating
+
+Camere
+
+ID Cameră (cheie primară)
+ID Hotel (cheie externă)
+Tip Cameră (ex. Single, Double, Suite)
+Preț pe noapte
+Status (Disponibilă, Rezervată, Întreținută)
+
+Clienți
+
+ID Client (cheie primară)
+Nume
+Prenume
+Email
+Telefon
+Dată naștere
+
+Rezervări
+
+ID Rezervare (cheie primară)
+ID Client (cheie externă)
+ID Cameră (cheie externă)
+Dată check-in
+Dată check-out
+Status (Confirmată, Anulată, În desfășurare)
+
+Plăți
+
+ID Plată (cheie primară)
+ID Rezervare (cheie externă)
+Suma
+Dată plată
+Tip plată (Card, Numerar, Transfer bancar)
+
+Servicii suplimentare
+
+ID Serviciu (cheie primară)
+Nume serviciu (ex. Mic dejun, SPA, Transport)
+Preț
+ID Hotel (cheie externă)
+
+Feedback-uri
+
+ID Feedback (cheie primară)
+ID Client (cheie externă)
+ID Hotel (cheie externă)
+Evaluare (scor 1-5)
+Comentarii
+Dată feedback
+
+Stocuri
+
+ID Produs (cheie primară)
+Nume produs
+Preț
+Cantitate disponibilă
+
+Rezervări Servicii suplimentare
+
+ID Rezervare (cheie externă)
+ID Serviciu (cheie externă)
+Cantitate
+Preț total
+
+Istoric modificări prețuri
+
+ID Istoric (cheie primară)
+ID Cameră (cheie externă)
+Preț vechi
+Preț nou
+Dată schimbare
+
+Views (minim 5):
+Vizualizare camere disponibile - Vedere a camerelor disponibile pentru o dată dată.
+Rezervări active ale unui client - Vedere cu toate rezervările unui client aflate în desfășurare.
+Feedback hotel - Vedere cu evaluările și feedback-urile lăsate pentru fiecare hotel.
+Servicii suplimentare per hotel - Vedere cu serviciile suplimentare și prețurile acestora pentru fiecare hotel.
+Plăți neachitate - Vedere cu toate plățile care nu au fost finalizate (ex: rezervări anulate fără plată efectivă).
+
+Proceduri stocate (minim 10):
+Adăugare rezervare - Procedură care adaugă o rezervare pentru un client și o cameră, înregistrându-se și statusul.
+Actualizare preț cameră - Procedură pentru modificarea prețului unei camere pentru un anumit hotel.
+Calculare total plată - Procedură care calculează totalul de plată pentru o rezervare (camere + servicii suplimentare).
+Închidere rezervare - Procedură care marchează o rezervare ca fiind încheiată.
+Adăugare feedback - Procedură care permite unui client să lase feedback pentru hotelul la care a stat.
+Anulare rezervare - Procedură care anulează o rezervare, actualizând statusul și returnând plățile deja efectuate.
+Înregistrare plată - Procedură pentru înregistrarea unei plăți asociate unei rezervări.
+Adăugare serviciu suplimentar - Procedură pentru a adăuga un serviciu suplimentar într-o rezervare.
+Actualizare disponibilitate cameră - Procedură care actualizează disponibilitatea unei camere (ex: când este întreținută).
+Generare raport vânzări zilnice - Procedură care generează un raport cu vânzările (rezervări și servicii suplimentare) pe o anumită zi.
+
+Triggere (minim 10):
+Triggere pentru actualizarea prețurilor - Când prețul unei camere este actualizat, triggerează actualizarea istoricului de modificare al prețurilor.
+Triggere pentru plăți neachitate - Dacă o rezervare este marcată ca anulată, triggerează procesul de restituire a plății (dacă este cazul).
+Triggere pentru rezervări - La crearea unei noi rezervări, triggerează actualizarea disponibilității camerei respective.
+Triggere pentru feedback-uri - Când un client adaugă un feedback, triggerează crearea unui raport intern pentru analiză.
+Triggere pentru plăți întârziate - Dacă o plată depășește termenul de plată, trimite o notificare către manager.
+Triggere pentru actualizarea statusului rezervărilor - La fiecare schimbare a statusului rezervării (ex: confirmată, anulată), triggerează un e-mail automat către client.
+Triggere pentru storno - Dacă o rezervare este anulată, triggerează un proces de refacere a stocului de camere.
+Triggere pentru rezervări în aceeași dată - Dacă se face o rezervare pentru aceeași dată în care o cameră este deja rezervată, triggerează o eroare.
+Triggere pentru rezervări de servicii suplimentare - La fiecare adăugare de serviciu suplimentar, triggerează actualizarea prețului total al rezervării.
+Triggere pentru modificarea stocului - Dacă se vinde un serviciu suplimentar, triggerează o reducere în stocul de produse asociat.
+
+Exemple de cerințe:
+Interogare SELECT cu JOIN: Afișează toate rezervările active ale unui client împreună cu detalii despre camerele rezervate și hotelul aferent.
+Interogare cu GROUP BY: Afișează numărul de camere rezervate per hotel, împreună cu valoarea totală generată din aceste rezervări.
+INSERT: Adăugarea unei noi rezervări pentru un client, incluzând camerele și serviciile suplimentare.
+UPDATE cu JOIN: Actualizează prețul unei camere într-un hotel specific, folosind un JOIN între tabelele hoteluri și camere.
+DELETE cu JOIN: Șterge toate rezervările anulate de la un anumit hotel.
+
+Aceasta este doar o structură de bază. Baza de date va fi complexă și va răspunde cerințelor tale, integrând diverse operații și funcționalități pentru un sistem hotelier complet.

@@ -1,0 +1,176 @@
+BITS 32
+section .text
+    global _start
+
+print_number:
+    push ebp
+    
+	mov ebp, esp
+    mov edx, [ebp + 8]
+
+    push esi
+    push edi
+
+    mov edi, buffer
+    add edi, 10
+    mov ebx, 10
+
+_bin_to_ascii:
+    
+    mov eax, edx
+    xor edx, edx
+    div ebx
+    mov ecx, edx
+    add ecx, '0'
+    mov [edi], cl
+    sub edi, 1
+    mov edx, eax
+    cmp edx, 0
+    jg _bin_to_ascii
+
+    mov edi, buffer
+    add edi, 10
+    mov esi, buffer
+_verify:
+    mov al, byte [esi]
+    cmp al, 0
+    je _iszero
+    jne _print
+_iszero:
+    inc esi
+    cmp esi, edi
+    jg _quit
+    jle _verify
+_print:
+    mov eax, 0x04
+    mov ebx, 0x01
+    mov ecx, esi
+    sub edi, esi
+    mov edx, edi
+    inc edx
+    int 0x80
+
+
+    mov ecx, 11
+    mov esi, buffer
+    mov ebx, 0
+_zero_buffer:
+    mov [esi], bl
+    inc esi
+    loop _zero_buffer
+
+    pop edi
+    pop esi
+
+    mov esp, ebp
+    pop     ebp
+    ret
+_start:  
+;deschidere fisier pentru citire
+   mov eax, 5
+   mov ebx, file_in
+   mov ecx, 0            
+   mov edx, 666o         
+   int  0x80
+ ;salvare descriptor
+   mov  byte [fd_in], al
+
+;citirea efectiva 
+
+   mov eax,3
+   movzx ebx, byte [fd_in]
+   mov ecx, buffer
+   mov edx,60
+   int 0x80
+
+   mov esi,buffer
+   mov edi,vector
+   mov ecx,20 
+_conversie:
+    xor eax, eax
+_loopconversie:
+    mov bx,10
+    mul bx
+    mov ebx,0
+    mov bl, byte[esi]
+    sub bl, '0'
+    add ax, bx
+    inc esi
+    cmp byte[esi], 0x00
+    je _after_conversie
+    push eax
+    mov al, byte [space]
+    cmp byte[esi], al
+    pop eax
+    jne _loopconversie
+
+_store:
+    ;store value
+    mov byte [edi], al
+    add edi,1
+    inc esi
+    loop _conversie
+
+_after_conversie:
+    mov byte [edi], al
+
+    mov ecx, 20
+    mov esi, buffer
+    mov ebx, 0
+_zero_buffer1:
+    mov byte[esi], bl
+    inc esi
+    loop _zero_buffer1
+
+    mov esi, vector
+
+    mov edi, vector
+    add edi, 19
+
+_end_buffer:
+    mov al, byte [edi]
+    cmp al, 0
+    je _continue
+    jne _mark
+_continue:
+    cmp edi, esi
+    je _quit
+    dec edi
+    jmp _end_buffer
+_mark:
+    jmp _print_vector
+
+_print_vector:
+    movzx eax, byte [esi]
+    push eax
+    call print_number
+    add esp, 4
+    inc esi
+    cmp esi, edi
+    jle _print_space
+    jg _quit
+
+_print_space:
+    mov eax, 0x04
+    mov ebx, 0x01
+    mov ecx, space
+    mov edx, 1
+    int 0x80
+    jmp _print_vector
+
+_quit:
+    mov eax, 0x01
+    xor ebx, ebx
+    int 0x80
+
+
+
+section .bss
+    buffer resb 80
+    vector resb 20
+    fd_in resb 1
+
+section .data
+    newline db 0x0a
+    space db 0x20
+    file_in db 'in.txt', 0
