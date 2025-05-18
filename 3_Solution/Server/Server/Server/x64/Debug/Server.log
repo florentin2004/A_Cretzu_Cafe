@@ -1,0 +1,15 @@
+﻿  Retea.cpp
+C:\Users\arysu\Documents\GitHub\A_Cretzu_Cafe\3_Solution\Server\Server\Retea.cpp(152,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\arysu\Documents\GitHub\A_Cretzu_Cafe\3_Solution\Server\Server\Retea.cpp(186,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\arysu\Documents\GitHub\A_Cretzu_Cafe\3_Solution\Server\Server\Retea.cpp(221,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\arysu\Documents\GitHub\A_Cretzu_Cafe\3_Solution\Server\Server\Retea.cpp(258,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\arysu\Documents\GitHub\A_Cretzu_Cafe\3_Solution\Server\Server\Retea.cpp(314,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\arysu\Documents\GitHub\A_Cretzu_Cafe\3_Solution\Server\Server\Retea.cpp(385,150): warning C4566: character represented by universal-character-name '\u021B' cannot be represented in the current code page (1252)
+C:\Users\arysu\Documents\GitHub\A_Cretzu_Cafe\3_Solution\Server\Server\Retea.cpp(397,138): warning C4566: character represented by universal-character-name '\u021B' cannot be represented in the current code page (1252)
+C:\Users\arysu\Documents\GitHub\A_Cretzu_Cafe\3_Solution\Server\Server\Retea.cpp(397,138): warning C4566: character represented by universal-character-name '\u0219' cannot be represented in the current code page (1252)
+C:\Users\arysu\Documents\GitHub\A_Cretzu_Cafe\3_Solution\Server\Server\Retea.cpp(419,81): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\arysu\Documents\GitHub\A_Cretzu_Cafe\3_Solution\Server\Server\Retea.cpp(421,81): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\arysu\Documents\GitHub\A_Cretzu_Cafe\3_Solution\Server\Server\Retea.cpp(446,87): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\arysu\Documents\GitHub\A_Cretzu_Cafe\3_Solution\Server\Server\Retea.cpp(480,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\arysu\Documents\GitHub\A_Cretzu_Cafe\3_Solution\Server\Server\Retea.cpp(511,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  Server.vcxproj -> C:\Users\arysu\Documents\GitHub\A_Cretzu_Cafe\3_Solution\Server\x64\Debug\Server.exe
