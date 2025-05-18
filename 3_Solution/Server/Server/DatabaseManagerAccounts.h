@@ -13,7 +13,7 @@ private:
     static SQLHDBC hDbc;
     static SQLHSTMT hStmt;
 
-    //static std::string logMessage;
+    static std::string logMessage;
 
     static void showSQLError(SQLHANDLE handle, SQLSMALLINT type);
 

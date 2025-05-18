@@ -110,8 +110,8 @@ void Retea::Shutdown() {
 
 
 void Retea::HandleClient() {
-    int iResult;
-    int iSendResult;
+    int iResult = 0;
+    int iSendResult = 0;
     //std::string logMessage;
 
     do {

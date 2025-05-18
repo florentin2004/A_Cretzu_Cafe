@@ -9,7 +9,7 @@ private:
 	FileManager(const FileManager&) = default;
 	FileManager(FileManager&&) = default;
 	~FileManager() = default;
-	//static std::string logMessagefile;
+	static std::string logMessage;
 public:
 	static bool UploadFile(std::string& filename, const std::vector<uint8_t>& content);
 	static std::vector<uint8_t> DownloadFile(std::string& filename);

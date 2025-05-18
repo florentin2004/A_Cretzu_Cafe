@@ -1,21 +1,5 @@
 ﻿#include "UserManager.h"
 
-//std::string generateSymmetricKey(size_t length) {
-//    const char minChar = 32;  // ' '
-//    const char maxChar = 126; // '~'
-//    std::string key;
-//    key.reserve(length);
-//
-//    std::mt19937 rng(static_cast<unsigned int>(std::time(nullptr))); // Mersenne Twister RNG
-//    std::uniform_int_distribution<int> dist(minChar, maxChar);
-//
-//    for (size_t i = 0; i < length; ++i) {
-//        key += static_cast<char>(dist(rng));
-//    }
-//
-//    return key;
-//}
-
 int UserManager::HandleClientLogger(std::stringstream& stream, std::string& token, const char delimiter, bool& resultOperation)
 {
     DatabaseManagerAccounts::connect();
