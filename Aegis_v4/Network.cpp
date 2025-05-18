@@ -167,7 +167,7 @@ void Network::onFileReceived(const QByteArray &message)
 
     // Salvare fișier - folosim `QIODevice::WriteOnly | QIODevice::Unbuffered`
     QString downloadPath = QStandardPaths::writableLocation(QStandardPaths::DownloadLocation);
-    QString fullFilePath = QDir::cleanPath(downloadPath + "/elf.png");
+    QString fullFilePath = QDir::cleanPath(downloadPath + "/test.txt");
     qDebug() << "Attempting to save file to:" << fullFilePath;
 
     QFile file(fullFilePath);
