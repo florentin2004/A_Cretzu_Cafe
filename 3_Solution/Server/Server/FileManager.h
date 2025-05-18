@@ -1,8 +1,7 @@
 #pragma once
-#include <iostream>
-#include <fstream>
 #include <sstream>
 #include <vector>
+#include "Logger.h"
 class FileManager
 {
 private:
@@ -10,6 +9,7 @@ private:
 	FileManager(const FileManager&) = default;
 	FileManager(FileManager&&) = default;
 	~FileManager() = default;
+	//static std::string logMessagefile;
 public:
 	static bool UploadFile(std::string& filename, const std::vector<uint8_t>& content);
 	static std::vector<uint8_t> DownloadFile(std::string& filename);

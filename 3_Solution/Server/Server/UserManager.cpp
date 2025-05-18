@@ -111,14 +111,14 @@ void UserManager::HandleClientChangePassword(std::stringstream& stream, std::str
 void UserManager::HandleClientDeleteAccount(std::stringstream& stream, std::string& token, const char delimiter, bool& resultOperation)
 {
     DatabaseManagerAccounts::connect();
-    std::string username;
+    int IDUser;
 
     std::getline(stream, token, delimiter);
-    std::cout << "Username: ";
-    username = token;
-    std::cout << username << std::endl;
+    std::cout << "ID: ";
+    IDUser = std::stoi(token);
+    std::cout << IDUser << std::endl;
 
-    resultOperation = DatabaseManagerAccounts::deleteUser(username);
+    resultOperation = DatabaseManagerAccounts::deleteUser(IDUser);
     DatabaseManagerAccounts::disconnect();
 }
 
@@ -146,10 +146,6 @@ void UserManager::HandleClientUploadFile(std::stringstream& stream, std::string&
                 bool result1 = DatabaseManagerAccounts::addFile(IDUser, filename);
                 bool result2 = FileManager::UploadFile(filename, binaryData);
                 resultOperation = result1 && result2;
-            }
-            else
-            {
-                std::cerr << "[ERROR] Invalid filename size received!" << std::endl;
             }
             break;
         default:

@@ -3,7 +3,10 @@
 int Retea::Initialize() {
     int iResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
     if (iResult != 0) {
-        printf("[EROARE] WSAStartup failed with error: %d\n", iResult);
+        std::string errorMessage = "[EROARE] WSAStartup failed with error: " + std::to_string(iResult);
+        std::cout << errorMessage << std::endl;
+
+        Logger::logAction(errorMessage);
         return 1;
     }
 
@@ -15,8 +18,11 @@ int Retea::Initialize() {
 
     iResult = getaddrinfo(NULL, DEFAULT_PORT, &hints, &result);
     if (iResult != 0) {
-        printf("[EROARE] getaddrinfo failed with error: %d\n", iResult);
-        WSACleanup();
+        std::string errorMessage = "[EROARE] getaddrinfo failed with error: " + std::to_string(iResult);
+        std::cout << errorMessage << std::endl;
+
+        Logger::logAction(errorMessage);
+        //WSACleanup();
         return 1;
     }
     
@@ -26,15 +32,23 @@ int Retea::Initialize() {
 int Retea::CreateSocket() {
     ListenSocket = socket(result->ai_family, result->ai_socktype, result->ai_protocol);
     if (ListenSocket == INVALID_SOCKET) {
-        printf("[EROARE] socket failed with error: %ld\n", WSAGetLastError());
+        std::string errorMessage = "[EROARE] socket failed with error: " + std::to_string(WSAGetLastError());
+        std::cout << errorMessage << std::endl;
+
         freeaddrinfo(result);
+
+        Logger::logAction(errorMessage);
         //WSACleanup();
         return 1;
     }
 
     int iResult = bind(ListenSocket, result->ai_addr, (int)result->ai_addrlen);
     if (iResult == SOCKET_ERROR) {
-        printf("[EROARE] bind failed with error: %d\n", WSAGetLastError());
+        std::string errorMessage = "[EROARE] bind failed with error: " + std::to_string(WSAGetLastError());
+        std::cout << errorMessage << std::endl;
+
+        Logger::logAction(errorMessage);
+
         freeaddrinfo(result);
         closesocket(ListenSocket);
         //WSACleanup();
@@ -45,7 +59,11 @@ int Retea::CreateSocket() {
 
     iResult = listen(ListenSocket, SOMAXCONN);
     if (iResult == SOCKET_ERROR) {
-        printf("[EROARE] listen failed with error: %d\n", WSAGetLastError());
+        std::string errorMessage = "[EROARE] listen failed with error: " + std::to_string(WSAGetLastError());
+        std::cout << errorMessage << std::endl;
+
+        Logger::logAction(errorMessage);
+
         closesocket(ListenSocket);
         //WSACleanup();
         return 1;
@@ -59,13 +77,15 @@ int Retea::CreateSocket() {
 int Retea::AcceptConnection() {
     ClientSocket = accept(ListenSocket, NULL, NULL);
     if (ClientSocket == INVALID_SOCKET) {
-        printf("[EROARE] accept failed with error: %d\n", WSAGetLastError());
+        std::string errorMessage = "[EROARE] accept failed with error: " + std::to_string(WSAGetLastError());
+        std::cerr << errorMessage << std::endl;
+
+        Logger::logAction(errorMessage);
+
         //closesocket(ListenSocket);
         //WSACleanup();
         return 1;
     }
-
-    //closesocket(ListenSocket);  // No longer need the server socket
 
     printf("[SERVER] Client conectat!\n");
     this->on = true;
@@ -76,7 +96,10 @@ int Retea::AcceptConnection() {
 void Retea::Shutdown() {
     int iResult = shutdown(ClientSocket, SD_SEND);
     if (iResult == SOCKET_ERROR) {
-        printf("[EROARE] shutdown failed with error: %d\n", WSAGetLastError());
+        std::string errorMessage = "[EROARE] shutdown failed with error: " + std::to_string(iResult);
+        std::cerr << errorMessage << std::endl;
+
+        Logger::logAction(errorMessage);
     }
 
     closesocket(ClientSocket);
@@ -89,7 +112,7 @@ void Retea::Shutdown() {
 void Retea::HandleClient() {
     int iResult;
     int iSendResult;
-    char temp;
+    //std::string logMessage;
 
     do {
         iResult = recv(ClientSocket, recvbuf, recvbuflen, 0);
@@ -109,15 +132,29 @@ void Retea::HandleClient() {
                 IDUser = UserManager::HandleClientLogger(stream, token, ':', resultOperation);
 
                 if (resultOperation)
+                {
                     buffer = "1:" + std::to_string(IDUser);
+                    logMessage = "[REQUEST RESULT] Logare cu success (ID = " + std::to_string(IDUser) + ")";
+                    std::cout << logMessage << std::endl;
+                    Logger::logAction(logMessage);
+                }
                 else
+                {
                     buffer = "0";
+                    logMessage = "[REQUEST RESULT] Logare esuata!";
+                    std::cout << logMessage << std::endl;
+
+                    Logger::logAction(logMessage);
+                }
 
                 std::cout << buffer << std::endl;
 
                 iSendResult = send(ClientSocket, buffer.c_str(), buffer.size(), 0);
                 if (iSendResult == SOCKET_ERROR) {
-                    printf("[EROARE] send failed with error: %d\n", WSAGetLastError());
+                    logMessage = "[EROARE] send failed with error: " + std::to_string(WSAGetLastError());
+                    std::cerr << logMessage << std::endl;
+
+                    Logger::logAction(logMessage);
                     //WSACleanup();
                     return;
                 }
@@ -126,17 +163,33 @@ void Retea::HandleClient() {
             else if (buffer[0] == '1')
             {
 
-                std::cout << "[REQUEST TYPE] Inregistrare: " << std::endl;
+                //std::cout << "[REQUEST TYPE] Inregistrare: " << std::endl;
                 UserManager::HandleClientRegister(stream, token, ':', resultOperation);
 
                 if (resultOperation)
+                {
                     buffer = "1";
+                    logMessage = "[REQUEST RESULT] Inregistrare cu succes!";
+                    std::cout << logMessage << std::endl;
+
+                    Logger::logAction(logMessage);
+                }
                 else
+                {
                     buffer = "0";
+                    logMessage = "[REQUEST RESULT] Inregistrare esuata!";
+                    std::cout << logMessage << std::endl;
+
+                    Logger::logAction(logMessage);
+                }
 
                 iSendResult = send(ClientSocket, buffer.c_str(), buffer.size(), 0);
                 if (iSendResult == SOCKET_ERROR) {
-                    printf("[EROARE] send failed with error: %d\n", WSAGetLastError());
+                    logMessage = "[EROARE] send failed with error: " + std::to_string(WSAGetLastError());
+                    std::cerr << logMessage << std::endl;
+
+                    Logger::logAction(logMessage);
+
                     //WSACleanup();
                     return;
                 }
@@ -149,13 +202,29 @@ void Retea::HandleClient() {
                 UserManager::HandleClientChangePassword(stream, token, ':', resultOperation);
 
                 if (resultOperation)
+                {
                     buffer = "1";
+                    logMessage = "[REQUEST RESULT] Parola a fost schimbata cu succes!";
+                    std::cout << logMessage << std::endl;
+
+                    Logger::logAction(logMessage);
+                }
                 else
+                {
                     buffer = "0";
+                    logMessage = "[REQUEST RESULT] Probleme la schimbarea parolei!";
+                    std::cout << logMessage << std::endl;
+
+                    Logger::logAction(logMessage);
+                }
 
                 iSendResult = send(ClientSocket, buffer.c_str(), buffer.size(), 0);
                 if (iSendResult == SOCKET_ERROR) {
-                    printf("[EROARE] send failed with error: %d\n", WSAGetLastError());
+                    logMessage = "[EROARE] send failed with error: " + std::to_string(WSAGetLastError());
+                    std::cerr << logMessage << std::endl;
+
+                    Logger::logAction(logMessage);
+
                     //WSACleanup();
                     return;
                 }
@@ -168,13 +237,31 @@ void Retea::HandleClient() {
                 UserManager::HandleClientDeleteAccount(stream, token, ':', resultOperation);
 
                 if (resultOperation)
+                {
                     buffer = "1";
+                    std::cout << buffer;
+                    logMessage = "[REQUEST RESULT] Stergere cont cu succes!";;
+                    std::cout << logMessage << std::endl;
+
+                    Logger::logAction(logMessage);
+                }
                 else
+                {
                     buffer = "0";
+                    std::cout << buffer;
+                    logMessage = "[REQUEST RESULLT] Probleme la stergerea contului!";;
+                    std::cout << logMessage << std::endl;
+
+                    Logger::logAction(logMessage);
+                }
 
                 iSendResult = send(ClientSocket, buffer.c_str(), buffer.size(), 0);
                 if (iSendResult == SOCKET_ERROR) {
-                    printf("[EROARE] send failed with error: %d\n", WSAGetLastError());
+                    logMessage = "[EROARE] send failed with error: " + std::to_string(WSAGetLastError());
+                    std::cerr << logMessage << std::endl;
+
+                    Logger::logAction(logMessage);
+
                     //WSACleanup();
                     return;
                 }
@@ -182,6 +269,7 @@ void Retea::HandleClient() {
             }
             else if (buffer[0] == '4')
             {
+                std::cout << "[REQUEST TYPE] Adaugare fisier: " << std::endl;
 
                 int totalReceived = 0, receiving = 0;
                 std::getline(stream, token, ':');
@@ -204,17 +292,32 @@ void Retea::HandleClient() {
                // buffer[receiving] = '\0';
                  
 
-                std::cout << "[REQUEST TYPE] Adaugare fisier: " << std::endl;
                 UserManager::HandleClientUploadFile(stream, token, ':', resultOperation, binaryData);
 
                 if (resultOperation)
+                {
                     buffer = "1";
+                    logMessage = "[REQUEST RESULT] Fisier adaugat cu succes!";
+                    std::cout << logMessage << std::endl;
+
+                    Logger::logAction(logMessage);
+                }
                 else
+                {
                     buffer = "0";
+                    logMessage = "[REQUEST RESULT] Probleme la adaugarea fisierelor!";
+                    std::cout << logMessage << std::endl;
+
+                    Logger::logAction(logMessage);
+                }
 
                 iSendResult = send(ClientSocket, buffer.c_str(), buffer.size(), 0);
                 if (iSendResult == SOCKET_ERROR) {
-                    printf("[EROARE] send failed with error: %d\n", WSAGetLastError());
+                    logMessage = "[EROARE] send failed with error: " + std::to_string(WSAGetLastError());
+                    std::cerr << logMessage << std::endl;
+
+                    Logger::logAction(logMessage);
+
                     //WSACleanup();
                     return;
                 }
@@ -226,13 +329,17 @@ void Retea::HandleClient() {
                 std::cout << "[REQUEST TYPE] Descarcare fisier : " << std::endl;
 
                 std::getline(stream, token, ':');
-                IDUser = std::stoi(token);
 
-                std::string selectFiles = DatabaseManagerAccounts::selectFiles(IDUser);
-                iSendResult = send(ClientSocket, selectFiles.c_str(), selectFiles.size(), 0);//<numberFiles>:file1:file2:...:filen
+                buffer = token;
+                resultOperation = true;
 
-                iResult = recv(ClientSocket, recvbuf, recvbuflen, 0); //numele fisierului selectat
-                buffer = recvbuf;
+                //IDUser = std::stoi(token);
+
+                //std::string selectFiles = DatabaseManagerAccounts::selectFiles(IDUser);
+                //iSendResult = send(ClientSocket, selectFiles.c_str(), selectFiles.size(), 0);//<numberFiles>:file1:file2:...:filen
+
+                //iResult = recv(ClientSocket, recvbuf, recvbuflen, 0); //numele fisierului selectat
+                //buffer = recvbuf;
 
                 std::vector<uint8_t> content = {};
 
@@ -240,27 +347,64 @@ void Retea::HandleClient() {
 
                 if (resultOperation && !content.empty())
                 {
-                    iSendResult = send(ClientSocket, std::to_string(content.size()).c_str(), std::to_string(content.size()).size(), 0);
+
+                    std::vector<uint8_t> sendBuffer;
+
+                    // Adaugă lungimea ca șir de caractere
+                    std::string sizeStr = std::to_string(content.size());
+                    sendBuffer.insert(sendBuffer.end(), sizeStr.begin(), sizeStr.end());
+
+                    // Adaugă delimitatorul ":"
+                    sendBuffer.insert(sendBuffer.end(), ':');
+
+                    // Adaugă conținutul
+                    sendBuffer.insert(sendBuffer.end(), content.begin(), content.end());
+                    
+                    content.clear();
+
+                    const size_t chunkSize = 512;
+                    size_t bytesSent = 0;
+                    while (bytesSent < sendBuffer.size()) {
+                        size_t bytesToSend = std::min<size_t>(chunkSize, sendBuffer.size() - bytesSent);
+                        iSendResult = send(ClientSocket,
+                            reinterpret_cast<const char*>(sendBuffer.data() + bytesSent),
+                            static_cast<int>(bytesToSend),
+                            0);
+                        if (iSendResult == SOCKET_ERROR) {
+                            logMessage = "[EROARE] send continut failed with error: " + std::to_string(WSAGetLastError());
+                            std::cerr << logMessage << std::endl;
+                            Logger::logAction(logMessage);
+                            return;
+                        }
+                        if (iSendResult != static_cast<int>(bytesToSend)) {
+                            logMessage = "[AVERTISMENT] send incomplet: trimis " + std::to_string(iSendResult) + "/" + std::to_string(bytesToSend) + " octeți";
+                            std::cerr << logMessage << std::endl;
+                            Logger::logAction(logMessage);
+                            // Continuă să trimiți restul datelor
+                        }
+                        bytesSent += iSendResult;
+                    }
+
+                    if (bytesSent != sendBuffer.size()) {
+                        logMessage = "[EROARE] send incomplet: " + std::to_string(bytesSent) + "/" + std::to_string(sendBuffer.size()) + " octeți trimiși";
+                        std::cerr << logMessage << std::endl;
+                        Logger::logAction(logMessage);
+                    }
+
                     if (iSendResult == SOCKET_ERROR) {
-                        printf("[EROARE] send failed with error: %d\n", WSAGetLastError());
+                        logMessage = "[EROARE] send failed with error: " + std::to_string(WSAGetLastError());
+                        std::cerr << logMessage << std::endl;
+
+                        Logger::logAction(logMessage);
                         return;
                     }
 
-                                     
+                    logMessage = "[REQUEST RESULT] Descarcare fisier reusita!";
+                    std::cout << logMessage << std::endl;
 
-                    Sleep(100);
+                    Logger::logAction(logMessage);
 
-                    int iSendResult = send(ClientSocket,
-                        reinterpret_cast<const char*>(content.data()),
-                        static_cast<int>(content.size()),
-                        0);
-
-                    if (iSendResult == SOCKET_ERROR) {
-                        printf("[EROARE] send failed with error: %d\n", WSAGetLastError());
-                        return;
-                    }
-
-                    printf("Bytes sent: %d\n", iSendResult);
+                    //printf("Bytes sent: %d\n", iSendResult);
                 }
                 else {
                     buffer = "0";
@@ -268,12 +412,77 @@ void Retea::HandleClient() {
                     Sleep(100);
                     iSendResult = send(ClientSocket, buffer.c_str(), buffer.size(), 0);
                     if (iSendResult == SOCKET_ERROR) {
-                        printf("[EROARE] send failed with error: %d\n", WSAGetLastError());
+                        logMessage = "[EROARE] send failed with error: " + std::to_string(WSAGetLastError());
+                        std::cerr << logMessage << std::endl;
+
+                        Logger::logAction(logMessage);
                         //WSACleanup();
                         return;
                     }
                     printf("Bytes sent: %d\n", iSendResult);
+
+                    logMessage = "[REQUEST RESULT] Probleme la descarcarea fisierelor!";
+                    std::cout << logMessage << std::endl;
+
+                    Logger::logAction(logMessage);
                 }
+            }
+            else if (buffer[0] == '6')//vad in ce ordine trimite si clientul username-ul clientului la care vrea sa il trimita
+            {
+                std::cout << "[REQUEST TYPE] Trimitere fisier catre alt client";
+
+                std::getline(stream, token, ':');
+                IDUser = std::stoi(token); // cu tot cu ID-ul userului
+
+                std::string selectFiles = DatabaseManagerAccounts::selectFiles(IDUser);
+                iSendResult = send(ClientSocket, selectFiles.c_str(), selectFiles.size(), 0);
+                printf("Bytes sent: %d\n", iSendResult);
+
+                iResult = recv(ClientSocket, recvbuf, recvbuflen, 0);// username:filename
+                buffer = recvbuf;
+                
+                stream.clear();
+                stream.str(buffer);
+
+                getline(stream, token, ':');
+
+                IDUser = DatabaseManagerAccounts::selectUserWithoutPassword(token);
+
+                getline(stream, token, ':');
+
+                resultOperation = DatabaseManagerAccounts::UpdateFileID(IDUser, token);
+
+                if (resultOperation)
+                {
+                    buffer = "1";
+                    logMessage = "[REQUEST RESULT] Fisier trimis catre alt utilizator cu succes!";
+                    std::cout << logMessage << std::endl;
+
+                    Logger::logAction(logMessage);
+                }
+                else
+                {
+                    buffer = "0";
+                    logMessage = "[REQUEST RESULT] Probleme la trimiterea fisierelor la alt utilizator!";
+                    std::cout << logMessage << std::endl;
+
+                    Logger::logAction(logMessage);
+                }
+
+                iSendResult = send(ClientSocket, buffer.c_str(), buffer.size(), 0);
+                if (iSendResult == SOCKET_ERROR) {
+                    logMessage = "[EROARE] send failed with error: " + std::to_string(WSAGetLastError());
+                    std::cerr << logMessage << std::endl;
+
+                    Logger::logAction(logMessage);
+
+                    //WSACleanup();
+                    return;
+                }
+                printf("Bytes sent: %d\n", iSendResult);
+
+                //asta este ID-ul userului la care ii se va trimite fisierul
+
             }
             else if (token == "q")
             {
@@ -282,11 +491,21 @@ void Retea::HandleClient() {
             }
             else
             {
+
                 std::cout << "[PROTOCOL] Protocol neidentificat, informatie aruncata!" << std::endl;
                 buffer = "Protocol neidentificat";
+
+                logMessage = "[PROTOCOL] Protocol neidentificat, informatie aruncata!";
+                std::cout << logMessage << std::endl;
+
+                Logger::logAction(logMessage);
+
                 iSendResult = send(ClientSocket, buffer.c_str(), buffer.size(), 0);
                 if (iSendResult == SOCKET_ERROR) {
-                    printf("[EROARE] send failed with error: %d\n", WSAGetLastError());
+                    logMessage = "[EROARE] send failed with error: " + std::to_string(WSAGetLastError());
+                    std::cerr << logMessage << std::endl;
+
+                    Logger::logAction(logMessage);
                     //WSACleanup();
                     return;
                 }
@@ -306,7 +525,11 @@ void Retea::HandleClient() {
                 closesocket(ClientSocket);
             }
             else {
-                std::cerr << "[EROARE] recv failed with error: " << errorCode << std::endl;
+                logMessage = "[EROARE] recv failed with error: " + std::to_string(errorCode);
+                std::cerr << logMessage << std::endl;
+
+                Logger::logAction(logMessage);
+
                 closesocket(ClientSocket);
             }
         }
