@@ -998,6 +998,12 @@ font: &quot;Vineta BT&quot;;</string>
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
+             <property name="minimumSize">
+              <size>
+               <width>161</width>
+               <height>78</height>
+              </size>
+             </property>
              <property name="font">
               <font>
                <family>Vineta BT</family>
@@ -1037,6 +1043,12 @@ font: &quot;Vineta BT&quot;;</string>
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>161</width>
+               <height>78</height>
+              </size>
              </property>
              <property name="font">
               <font>
@@ -1078,6 +1090,12 @@ font: &quot;Vineta BT&quot;;</string>
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
+             <property name="minimumSize">
+              <size>
+               <width>161</width>
+               <height>78</height>
+              </size>
+             </property>
              <property name="font">
               <font>
                <family>Vineta BT</family>
@@ -1117,6 +1135,12 @@ font: &quot;Vineta BT&quot;;</string>
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>161</width>
+               <height>78</height>
+              </size>
              </property>
              <property name="font">
               <font>
@@ -1259,6 +1283,12 @@ font: &quot;Vineta BT&quot;;</string>
                    <verstretch>0</verstretch>
                   </sizepolicy>
                  </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>235</width>
+                   <height>76</height>
+                  </size>
+                 </property>
                  <property name="font">
                   <font>
                    <family>Vineta BT</family>
@@ -1279,12 +1309,37 @@ font: &quot;Vineta BT&quot;;</string>
                 </widget>
                </item>
                <item>
+                <widget class="QPushButton" name="sendButton">
+                 <property name="minimumSize">
+                  <size>
+                   <width>235</width>
+                   <height>76</height>
+                  </size>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">image: url(:/img/Images/send.png);</string>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                 <property name="flat">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
                 <widget class="QPushButton" name="DeleteButton">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>235</width>
+                   <height>76</height>
+                  </size>
                  </property>
                  <property name="font">
                   <font>
@@ -1325,8 +1380,8 @@ font: &quot;Vineta BT&quot;;</string>
           </widget>
           <widget class="QWidget" name="Settings_page">
            <layout class="QGridLayout" name="gridLayout_5">
-            <item row="4" column="0">
-             <spacer name="verticalSpacer_24">
+            <item row="6" column="1">
+             <spacer name="verticalSpacer_26">
               <property name="orientation">
                <enum>Qt::Orientation::Vertical</enum>
               </property>
@@ -1338,90 +1393,7 @@ font: &quot;Vineta BT&quot;;</string>
               </property>
              </spacer>
             </item>
-            <item row="0" column="1">
-             <spacer name="verticalSpacer_10">
-              <property name="orientation">
-               <enum>Qt::Orientation::Vertical</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>20</width>
-                <height>40</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="3" column="0">
-             <widget class="QPushButton" name="ChangePasswordButton">
-              <property name="minimumSize">
-               <size>
-                <width>131</width>
-                <height>101</height>
-               </size>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">image: url(:/img/Images/security.png);</string>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-              <property name="flat">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="1">
-             <spacer name="verticalSpacer_23">
-              <property name="orientation">
-               <enum>Qt::Orientation::Vertical</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>20</width>
-                <height>40</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="1" column="0">
-             <widget class="QPushButton" name="DeleteAccountButton">
-              <property name="minimumSize">
-               <size>
-                <width>121</width>
-                <height>91</height>
-               </size>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">image: url(:/img/Images/delete_v2.png);</string>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-              <property name="flat">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="1">
-             <widget class="QLabel" name="changePasswordlabel">
-              <property name="minimumSize">
-               <size>
-                <width>456</width>
-                <height>45</height>
-               </size>
-              </property>
-              <property name="font">
-               <font>
-                <family>Vineta BT</family>
-                <pointsize>20</pointsize>
-               </font>
-              </property>
-              <property name="text">
-               <string>Change Password</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
+            <item row="5" column="1">
              <widget class="QLabel" name="deleteAccountlabel">
               <property name="minimumSize">
                <size>
@@ -1440,7 +1412,202 @@ font: &quot;Vineta BT&quot;;</string>
               </property>
              </widget>
             </item>
-            <item row="0" column="0">
+            <item row="2" column="1">
+             <spacer name="verticalSpacer_10">
+              <property name="orientation">
+               <enum>Qt::Orientation::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="3" column="0">
+             <widget class="QLabel" name="Id_label">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>121</width>
+                <height>91</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">image: url(:/img/Images/fingerprint.png);</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="0">
+             <spacer name="verticalSpacer_27">
+              <property name="orientation">
+               <enum>Qt::Orientation::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="8" column="0">
+             <spacer name="verticalSpacer_24">
+              <property name="orientation">
+               <enum>Qt::Orientation::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="4" column="1">
+             <spacer name="verticalSpacer_37">
+              <property name="orientation">
+               <enum>Qt::Orientation::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLabel" name="Username_label">
+              <property name="font">
+               <font>
+                <family>Vineta BT</family>
+                <pointsize>18</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item row="7" column="1">
+             <widget class="QLabel" name="changePasswordlabel">
+              <property name="minimumSize">
+               <size>
+                <width>456</width>
+                <height>45</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <family>Vineta BT</family>
+                <pointsize>20</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Change Password</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QLabel" name="UserId_label">
+              <property name="font">
+               <font>
+                <family>Vineta BT</family>
+                <pointsize>18</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0">
+             <spacer name="verticalSpacer_36">
+              <property name="orientation">
+               <enum>Qt::Orientation::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="Userlabel">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>121</width>
+                <height>91</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">image: url(:/img/Images/user.png);</string>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::Shape::NoFrame</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Shadow::Plain</enum>
+              </property>
+              <property name="lineWidth">
+               <number>0</number>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item row="8" column="1">
+             <spacer name="verticalSpacer_23">
+              <property name="orientation">
+               <enum>Qt::Orientation::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="5" column="0">
+             <widget class="QPushButton" name="DeleteAccountButton">
+              <property name="minimumSize">
+               <size>
+                <width>121</width>
+                <height>91</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">image: url(:/img/Images/delete_v2.png);</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="flat">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
              <spacer name="verticalSpacer_25">
               <property name="orientation">
                <enum>Qt::Orientation::Vertical</enum>
@@ -1453,8 +1620,27 @@ font: &quot;Vineta BT&quot;;</string>
               </property>
              </spacer>
             </item>
-            <item row="2" column="1">
-             <spacer name="verticalSpacer_26">
+            <item row="7" column="0">
+             <widget class="QPushButton" name="ChangePasswordButton">
+              <property name="minimumSize">
+               <size>
+                <width>131</width>
+                <height>101</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">image: url(:/img/Images/security.png);</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="flat">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <spacer name="verticalSpacer_38">
               <property name="orientation">
                <enum>Qt::Orientation::Vertical</enum>
               </property>
@@ -1466,8 +1652,8 @@ font: &quot;Vineta BT&quot;;</string>
               </property>
              </spacer>
             </item>
-            <item row="2" column="0">
-             <spacer name="verticalSpacer_27">
+            <item row="0" column="1">
+             <spacer name="verticalSpacer_39">
               <property name="orientation">
                <enum>Qt::Orientation::Vertical</enum>
               </property>

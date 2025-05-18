@@ -77,6 +77,10 @@ private slots:
 
     void on_DownloadButton_d_clicked();
 
+    void on_sendButton_clicked();
+
+    void on_DeleteButton_clicked();
+
 public slots:
     void updateFileList(const QStringList &fileNames);
 
@@ -88,6 +92,7 @@ private:
 private:
     QString userId = "-1";  // user ID
     QString userName;
+    QString userName_notHash;
     QByteArray key = "Cretzu_Cafe+Aegis"; // key
 
 public:
@@ -95,7 +100,9 @@ public:
     QString getUserId() const { return userId; }
     QByteArray getKey(){return this->key;};
     void setUserName(const QString &name){userName = name;};
+    void setUserNameNH(const QString &name){userName_notHash = name;};
     QString getUserName() const {return userName;};
+    QString getUserNameNH() const{return userName_notHash;};
     void handleUserIdReceived(const QString &id);
     void displayError(const QString &message);
 

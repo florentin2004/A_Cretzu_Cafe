@@ -69,7 +69,6 @@ void MainWindow::handleUserIdReceived(const QString &id)
     setUserId(id);
     qDebug() << "User ID updated:" << getUserId();
 
-    // Perform login validation **only after** the ID is received
     if (getUserId() != "-1") {
         ui->Window_logic->setCurrentIndex(1);  // Move to the main app UI
         ui->kat->setCurrentIndex(0); // Idle
@@ -101,6 +100,7 @@ void MainWindow::on_LoginButton_login_clicked()
 
     QString loginData = "0:" + hashedUsername+":"+hashedPassword;
     setUserName(hashedUsername);
+    setUserNameNH(username);
     client->sendMessage(loginData);
 
     connect(client, &Network::errorOccurred, this, &MainWindow::displayError);
@@ -237,6 +237,8 @@ void MainWindow::on_DownloadButton_clicked()
 void MainWindow::on_SettingsButton_clicked()
 {
     ui->kat->setCurrentIndex(2); // Settings
+    ui->UserId_label->setText("User Id: "+getUserId());
+    ui->Username_label->setText("Username: "+getUserNameNH());
 }
 
 
@@ -300,6 +302,33 @@ void MainWindow::on_DownloadButton_d_clicked()
 {
     QString filename = ui->filename_lineEdit->text();
     QString filesData = "5:" + filename;
+    client->sendMessage(filesData);
+}
+
+#include <QInputDialog>
+
+void MainWindow::on_sendButton_clicked()
+{
+    // Deschide un dialog pentru introducerea numelui de utilizator
+    bool ok;
+    QString enteredUsername = QInputDialog::getText(this, "Introduceți numele","Nume utilizator:", QLineEdit::Normal,"", &ok);
+
+    if (ok && !enteredUsername.isEmpty()) {
+        userName = enteredUsername;
+        QString filename = ui->filename_lineEdit->text();
+        QByteArray hashedUsername = QCryptographicHash::hash(getKey() + userName.toUtf8(), QCryptographicHash::Sha256).toHex();
+        QString filesData = "6:"+hashedUsername+ ":" + filename;
+        client->sendMessage(filesData);
+    } else {
+        qDebug() << "Utilizatorul a anulat sau nu a introdus nimic.";
+    }
+}
+
+
+void MainWindow::on_DeleteButton_clicked()
+{
+    QString filename = ui->filename_lineEdit->text();
+    QString filesData = "8:" + getUserId()+":"+filename;
     client->sendMessage(filesData);
 }
 

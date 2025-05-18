@@ -15,5 +15,8 @@
         <file>Images/delete.png</file>
         <file>Images/delete_v2.png</file>
         <file>Images/security.png</file>
+        <file>Images/fingerprint.png</file>
+        <file>Images/user.png</file>
+        <file>Images/send.png</file>
     </qresource>
 </RCC>
