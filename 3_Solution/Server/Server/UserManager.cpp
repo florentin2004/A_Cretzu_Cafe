@@ -127,9 +127,8 @@ void UserManager::HandleClientUploadFile(std::stringstream& stream, std::string&
             {
                 filename.resize(size);
                 stream.read(&filename[0], size);
-                bool result1 = DatabaseManagerAccounts::addFile(IDUser, filename);
-                bool result2 = FileManager::UploadFile(filename, binaryData);
-                resultOperation = result1 && result2;
+                resultOperation = DatabaseManagerAccounts::addFile(IDUser, filename);
+                if(resultOperation)resultOperation = FileManager::UploadFile(filename, binaryData, IDUser);
             }
             break;
         default:
@@ -140,18 +139,11 @@ void UserManager::HandleClientUploadFile(std::stringstream& stream, std::string&
     DatabaseManagerAccounts::disconnect();
 }
 
-std::vector<uint8_t> UserManager::HandleClientDownloadFile(std::string& filename, bool& resultOperation)
+std::vector<uint8_t> UserManager::HandleClientDownloadFile(std::stringstream& stream, std::string& token, const char delimiter, bool& resultOperation, std::string& buffer)
 {
-    std::vector<uint8_t> content = FileManager::DownloadFile(filename);
-    return content;
-}
-
-void UserManager::HandleClientDeleteFile(std::stringstream& stream, std::string& token, const char delimiter, bool& resultOperation)
-{
-    DatabaseManagerAccounts::connect();
-    int IDUser = 0;
+    int size = 0, IDUser = 0;
+    std::vector<uint8_t> content;
     std::string filename;
-    bool result1 = false, result2 = false;
 
     for (int i = 1; std::getline(stream, token, delimiter); i++)
     {
@@ -163,9 +155,36 @@ void UserManager::HandleClientDeleteFile(std::stringstream& stream, std::string&
 
         case 2:
             filename = token;
-            result1 = DatabaseManagerAccounts::deleteFile(IDUser, filename);
-            result2 = FileManager::removeFile(filename);
-            resultOperation = result1 && result2;
+            content = FileManager::DownloadFile(filename, IDUser);
+            break;
+        default:
+            break;
+        }
+    }
+
+    buffer.clear();
+    buffer = filename;
+    return content;
+}
+
+void UserManager::HandleClientDeleteFile(std::stringstream& stream, std::string& token, const char delimiter, bool& resultOperation)
+{
+    DatabaseManagerAccounts::connect();
+    int IDUser = 0;
+    std::string filename;
+
+    for (int i = 1; std::getline(stream, token, delimiter); i++)
+    {
+        switch (i)
+        {
+        case 1:
+            IDUser = std::stoi(token);
+            break;
+
+        case 2:
+            filename = token;
+            resultOperation = DatabaseManagerAccounts::deleteFile(IDUser, filename);
+            if (resultOperation == true) resultOperation = FileManager::removeFile(filename);
             break;
 
         default:
@@ -178,18 +197,21 @@ void UserManager::HandleClientDeleteFile(std::stringstream& stream, std::string&
 void UserManager::HandleClientSendFileToAnotherUser(std::stringstream& stream, std::string& token, const char delimiter, bool& resultOperation)
 {
     DatabaseManagerAccounts::connect();
-    int IDUser = 0;
+    int IDUserSource = 0, IDUserDestination = 0;
 
     for (int i = 1; std::getline(stream, token, delimiter); i++)
     {
         switch (i)
         {
         case 1:
-            IDUser = DatabaseManagerAccounts::selectUserWithoutPassword(token);//username dorit
+            IDUserDestination = DatabaseManagerAccounts::selectUserWithoutPassword(token);//username dorit
             break;
-
         case 2:
-            resultOperation = DatabaseManagerAccounts::UpdateFileID(IDUser, token);//filename-ul 
+            IDUserSource = std::stoi(token);//ID-ul sursa
+            break;
+        case 3:
+            resultOperation = DatabaseManagerAccounts::UpdateFileID(IDUserDestination, token);//filename-ul 
+            if (resultOperation) FileManager::changeDirectoryFile(IDUserSource, IDUserDestination, token); //schimbam flderul in care se afla fisierul
             break;
 
         default:

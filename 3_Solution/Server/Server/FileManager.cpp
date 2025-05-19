@@ -2,9 +2,16 @@
 
 std::string FileManager::logMessage;
 
-bool FileManager::UploadFile(std::string& filename, const std::vector<uint8_t>& content)
+bool FileManager::UploadFile(std::string& filename, const std::vector<uint8_t>& content, int& IDUser)
 {
-	std::ofstream out(filename, std::ios::binary);
+    if (CreateDirectoryA(std::to_string(IDUser).c_str(), NULL) || GetLastError() == ERROR_ALREADY_EXISTS) {
+        std::cout << "Folderul a fost creat sau deja exista.\n";
+    }
+    else {
+        std::cerr << "Eroare la crearea folderului. Cod eroare: " << GetLastError() << "\n";
+    }
+
+	std::ofstream out(std::to_string(IDUser) + "\\" + filename, std::ios::binary);
 	if (!out.is_open()) {
         FileManager::logMessage = "[ERROR] Nu pot deschide fisierul pentru scriere!";
         std::cerr << FileManager::logMessage << std::endl;
@@ -17,8 +24,10 @@ bool FileManager::UploadFile(std::string& filename, const std::vector<uint8_t>& 
 	return true;
 }
 
-std::vector<uint8_t> FileManager::DownloadFile(std::string& filename) {
-    std::ifstream in(filename, std::ios::binary);
+std::vector<uint8_t> FileManager::DownloadFile(std::string& filename, int& IDUser) {
+
+
+    std::ifstream in(std::to_string(IDUser) + "\\" + filename, std::ios::binary);
     if (!in.is_open()) {
         logMessage = "[ERROR] Nu pot deschide fisierul pentru citire!";
         std::cerr << logMessage << std::endl;
@@ -60,4 +69,21 @@ bool FileManager::removeFile(std::string& filename)
         return false;
     }
     return true;
+}
+
+bool FileManager::changeDirectoryFile(int& IDUserSource, int& IDUserDestination, std::string& filename)
+{
+    std::string source = std::to_string(IDUserSource) + "\\" + filename;
+    std::string destination = std::to_string(IDUserDestination) + "\\" + filename;
+
+    if (MoveFileA(source.c_str(), destination.c_str())) {
+        std::cout << "Fisierul a fost mutat cu succes!\n";
+        return true;
+    }
+    else {
+        logMessage = "[EROARE] Probleme la mutarea fisierului. Cod eroare: " + GetLastError();
+        std::cerr << logMessage << std::endl;
+        Logger::logAction(logMessage); 
+        return false;
+    }
 }

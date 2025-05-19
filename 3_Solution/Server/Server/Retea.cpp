@@ -315,13 +315,10 @@ void Retea::HandleClient() {
                 
                 std::cout << "[REQUEST TYPE] Descarcare fisier : " << std::endl;
 
-                std::getline(stream, token, ':');
-
-                buffer = token;
 
                 std::vector<uint8_t> content = {};
+                content = UserManager::HandleClientDownloadFile(stream, token, ':', resultOperation, buffer);
 
-                content = UserManager::HandleClientDownloadFile(buffer, resultOperation);
 
                 if (resultOperation && !content.empty())
                 {
@@ -417,10 +414,10 @@ void Retea::HandleClient() {
                 std::cout << "[REQUEST TYPE] Trimitere fisier catre alt client";
 
                 UserManager::HandleClientSendFileToAnotherUser(stream, token, ':', resultOperation);
-
+                
                 if (resultOperation)
                 {
-                    buffer = "1";
+                    buffer = "6";
                     logMessage = "[REQUEST RESULT] Fisier trimis catre alt utilizator cu succes!";
                     std::cout << logMessage << std::endl;
 
@@ -511,14 +508,14 @@ void Retea::HandleClient() {
                 }
                 else
                 {
-                    buffer = "1";
-                    logMessage = "[REQUEST RESULT] A trimis serverul catre client selectia de fisiere!";
+                    buffer = "8"; //clientul stie cum sa faca handle la situatie
+                    logMessage = "[REQUEST RESULT] Fisierul a fost sters!";
                     std::cerr << logMessage << std::endl;
 
                     Logger::logAction(logMessage);
                 }
                 
-                iSendResult = send(ClientSocket, buffer.c_str(), buffer.size(), 0);//<numberFiles>:file1:file2:...:filen
+                iSendResult = send(ClientSocket, buffer.c_str(), buffer.size(), 0);
 
                 std::cout << buffer << std::endl;
 

@@ -1,17 +1,15 @@
-﻿  DatabaseManagerAccounts.cpp
-  FileManager.cpp
+﻿  FileManager.cpp
   Retea.cpp
 C:\Users\arysu\Documents\GitHub\A_Cretzu_Cafe\3_Solution\Server\Server\Retea.cpp(144,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
 C:\Users\arysu\Documents\GitHub\A_Cretzu_Cafe\3_Solution\Server\Server\Retea.cpp(180,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
 C:\Users\arysu\Documents\GitHub\A_Cretzu_Cafe\3_Solution\Server\Server\Retea.cpp(215,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
 C:\Users\arysu\Documents\GitHub\A_Cretzu_Cafe\3_Solution\Server\Server\Retea.cpp(250,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
 C:\Users\arysu\Documents\GitHub\A_Cretzu_Cafe\3_Solution\Server\Server\Retea.cpp(303,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\arysu\Documents\GitHub\A_Cretzu_Cafe\3_Solution\Server\Server\Retea.cpp(396,81): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\arysu\Documents\GitHub\A_Cretzu_Cafe\3_Solution\Server\Server\Retea.cpp(398,81): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\arysu\Documents\GitHub\A_Cretzu_Cafe\3_Solution\Server\Server\Retea.cpp(438,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\arysu\Documents\GitHub\A_Cretzu_Cafe\3_Solution\Server\Server\Retea.cpp(468,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\arysu\Documents\GitHub\A_Cretzu_Cafe\3_Solution\Server\Server\Retea.cpp(521,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\arysu\Documents\GitHub\A_Cretzu_Cafe\3_Solution\Server\Server\Retea.cpp(549,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-  source.cpp
+C:\Users\arysu\Documents\GitHub\A_Cretzu_Cafe\3_Solution\Server\Server\Retea.cpp(393,81): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\arysu\Documents\GitHub\A_Cretzu_Cafe\3_Solution\Server\Server\Retea.cpp(395,81): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\arysu\Documents\GitHub\A_Cretzu_Cafe\3_Solution\Server\Server\Retea.cpp(435,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\arysu\Documents\GitHub\A_Cretzu_Cafe\3_Solution\Server\Server\Retea.cpp(465,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\arysu\Documents\GitHub\A_Cretzu_Cafe\3_Solution\Server\Server\Retea.cpp(518,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\arysu\Documents\GitHub\A_Cretzu_Cafe\3_Solution\Server\Server\Retea.cpp(546,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
   Generating Code...
   Server.vcxproj -> C:\Users\arysu\Documents\GitHub\A_Cretzu_Cafe\3_Solution\Server\x64\Debug\Server.exe
