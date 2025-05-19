@@ -13,7 +13,6 @@ public:
 
     void connectToServer();
     void sendMessage(const QString &message);
-    void setServerDetails(const QString &ip, int port);
     void sendFile(const QString &filePath, const QString &idUser);
 
 private slots:
@@ -46,6 +45,9 @@ signals:
 
     void errorOccurred(const QString &message);
     void fileListReceived(const QStringList &fileNames);
+
+    void fileDeleted();
+    void fileSended();
 
 
 };

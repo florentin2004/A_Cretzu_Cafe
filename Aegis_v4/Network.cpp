@@ -17,12 +17,6 @@ Network::Network(QObject *parent) : QObject(parent), serverIP("172.16.46.25"), s
     connect(socket, &QTcpSocket::errorOccurred, this, &Network::onErrorOccurred);
 }
 
-void Network::setServerDetails(const QString &ip, int port)
-{
-    serverIP = ip;
-    serverPort = port;
-}
-
 void Network::connectToServer()
 {
     qDebug() << "Connecting to server at:" << serverIP << ":" << serverPort;
@@ -114,6 +108,17 @@ void Network::onMessageReceived()
         return;
     }
 
+    if (data.startsWith("8")) { // Server confirmă ștergerea
+        qDebug()<<data;
+        emit fileDeleted();
+    }
+
+    if (data.startsWith("6")) { // Server confirmă ștergerea
+        qDebug()<<data;
+        emit fileSended();
+    }
+
+
     if (data.startsWith("1:")) { // Autentificare
         QList<QByteArray> parts = data.split(':');
         if (parts.size() > 1) {
@@ -159,20 +164,27 @@ void Network::onMessageReceived()
 
         QList<QByteArray> parts = data.split(':');
 
-        if (parts.size() >= 3) {
+        if (parts.size() >= 2) {  // Asigură că avem cel puțin `7:` și un număr
             int nrFisiere = parts[1].toInt();
             QStringList fileNames;
 
-            // Verificăm dacă numărul de fișiere se potrivește cu restul datelor
-            for (int i = 2; i < parts.size(); ++i) {
-                fileNames << QString::fromUtf8(parts[i]);
-            }
+            // Dacă există fișiere, le procesăm
+            if (nrFisiere > 0 && parts.size() >= (2 + nrFisiere)) {
+                for (int i = 2; i < parts.size(); ++i) {
+                    fileNames << QString::fromUtf8(parts[i]);
+                }
 
-            if (fileNames.size() == nrFisiere) {
-                emit fileListReceived(fileNames);
-            } else {
-                qDebug() << "Avertisment: nr_fisiere declarat (" << nrFisiere << ") diferă de numărul real (" << fileNames.size() << ")";
-                emit fileListReceived(fileNames); // Sau ignori dacă preferi
+                if (fileNames.size() == nrFisiere) {
+                    emit fileListReceived(fileNames);
+                } else {
+                    qDebug() << "Avertisment: nr_fisiere declarat (" << nrFisiere<< ") difera de numarul real (" << fileNames.size() << ")";
+                    emit fileListReceived(fileNames); // Sau poți ignora lista dacă preferi
+                }
+            }
+            else {
+                // Cazul în care nu sunt fișiere
+                QStringList noFile;
+                emit fileListReceived(noFile);
             }
         }
     }

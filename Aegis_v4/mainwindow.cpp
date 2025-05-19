@@ -78,6 +78,7 @@ void MainWindow::handleUserIdReceived(const QString &id)
 void MainWindow::displayError(const QString &message)
 {
     QMessageBox::warning(this, "Eroare", message);
+    return;
 }
 
 
@@ -105,7 +106,6 @@ void MainWindow::on_LoginButton_login_clicked()
 
     connect(client, &Network::errorOccurred, this, &MainWindow::displayError);
     connect(client, &Network::userIdReceived, this, &MainWindow::handleUserIdReceived);
-
 
 }
 
@@ -217,6 +217,10 @@ void MainWindow::updateFileList(const QStringList &fileNames)
 {
     ui->listWidget->clear(); // Golește lista anterioară
 
+    if (fileNames.isEmpty()) {
+        return; // Nu am fisiere
+    }
+
     for (const QString &fileName : fileNames)
     {
         ui->listWidget->addItem(fileName);
@@ -302,7 +306,7 @@ void MainWindow::on_DeleteAccountButton_clicked()
 void MainWindow::on_DownloadButton_d_clicked()
 {
     QString filename = ui->filename_lineEdit->text();
-    QString filesData = "5:" + filename;
+    QString filesData = "5:"+ getUserId()+":"+ filename;
     client->sendMessage(filesData);
     ui->filename_lineEdit->clear();
 }
@@ -319,20 +323,23 @@ void MainWindow::on_sendButton_clicked()
         userName = enteredUsername;
         QString filename = ui->filename_lineEdit->text();
         QByteArray hashedUsername = QCryptographicHash::hash(getKey() + userName.toUtf8(), QCryptographicHash::Sha256).toHex();
-        QString filesData = "6:"+hashedUsername+ ":" + filename;
+        QString filesData = "6:"+hashedUsername+ ":"+getUserId()+":" + filename;
         client->sendMessage(filesData);
     } else {
         qDebug() << "Utilizatorul a anulat sau nu a introdus nimic.";
     }
     ui->filename_lineEdit->clear();
+    connect(client, &Network::fileSended, this, &MainWindow::on_DownloadButton_clicked);
 }
 
 
 void MainWindow::on_DeleteButton_clicked()
 {
     QString filename = ui->filename_lineEdit->text();
-    QString filesData = "8:" + getUserId()+":"+filename;
+    QString filesData = "8:" + getUserId() + ":" + filename;
     client->sendMessage(filesData);
     ui->filename_lineEdit->clear();
+
+    connect(client, &Network::fileDeleted, this, &MainWindow::on_DownloadButton_clicked);
 }
 
