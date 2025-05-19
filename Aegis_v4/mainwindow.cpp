@@ -112,6 +112,7 @@ void MainWindow::on_LoginButton_login_clicked()
 
 void MainWindow::on_UploadButton_clicked()
 {
+    ui->kat->setCurrentIndex(0); //Idle
     QString fileName = QFileDialog::getOpenFileName(this, "Select File", QDir::homePath(), "All Files (*.*)");
     if (!fileName.isEmpty())
     {

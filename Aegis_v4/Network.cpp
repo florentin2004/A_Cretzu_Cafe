@@ -8,7 +8,7 @@
 #include <QDesktopServices>
 #include <QUrl>
 
-Network::Network(QObject *parent) : QObject(parent), serverIP("10.10.25.122"), serverPort(27015)
+Network::Network(QObject *parent) : QObject(parent), serverIP("172.16.46.25"), serverPort(27015)
 {
     socket = new QTcpSocket(this);
 

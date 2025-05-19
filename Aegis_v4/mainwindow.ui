@@ -1167,7 +1167,18 @@ font: &quot;Vineta BT&quot;;</string>
         <item>
          <widget class="QStackedWidget" name="kat">
           <widget class="QWidget" name="idle_page_app">
-           <layout class="QGridLayout" name="gridLayout_3"/>
+           <layout class="QGridLayout" name="gridLayout_3">
+            <item row="0" column="0">
+             <widget class="QLabel" name="imagelabel">
+              <property name="styleSheet">
+               <string notr="true">image: url(:/img/Images/Aegis-removebg.png);</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </widget>
           <widget class="QWidget" name="Download_page">
            <layout class="QGridLayout" name="gridLayout_6">
@@ -1205,7 +1216,7 @@ font: &quot;Vineta BT&quot;;</string>
                </font>
               </property>
               <property name="styleSheet">
-               <string notr="true">background-color: rgb(77, 60, 215);</string>
+               <string notr="true">background-color: rgb(11, 178, 255);</string>
               </property>
              </widget>
             </item>
