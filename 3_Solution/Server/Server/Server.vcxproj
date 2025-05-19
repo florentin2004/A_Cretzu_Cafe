@@ -130,7 +130,6 @@
     <ClCompile Include="DatabaseManagerAccounts.cpp" />
     <ClCompile Include="FileManager.cpp" />
     <ClCompile Include="Logger.cpp" />
-    <ClCompile Include="MyException.cpp" />
     <ClCompile Include="Retea.cpp" />
     <ClCompile Include="source.cpp" />
     <ClCompile Include="UserManager.cpp" />
@@ -139,7 +138,6 @@
     <ClInclude Include="DatabaseManagerAccounts.h" />
     <ClInclude Include="FileManager.h" />
     <ClInclude Include="Logger.h" />
-    <ClInclude Include="MyException.h" />
     <ClInclude Include="Retea.h" />
     <ClInclude Include="UserManager.h" />
   </ItemGroup>

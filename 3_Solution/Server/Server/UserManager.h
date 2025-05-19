@@ -17,5 +17,7 @@ public:
 	static void HandleClientDeleteAccount(std::stringstream&, std::string&, const char, bool&);
 	static void HandleClientUploadFile(std::stringstream&, std::string&, const char, bool&, const std::vector<uint8_t>&);
 	static std::vector<uint8_t> HandleClientDownloadFile(std::string&, bool&);
+	static void HandleClientDeleteFile(std::stringstream&, std::string&, const char, bool&);
+	static void HandleClientSendFileToAnotherUser(std::stringstream&, std::string&, const char, bool&);
 };
 

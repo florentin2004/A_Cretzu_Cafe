@@ -1,4 +1,4 @@
-#include "FileManager.h"
+﻿#include "FileManager.h"
 
 std::string FileManager::logMessage;
 
@@ -41,5 +41,23 @@ std::vector<uint8_t> FileManager::DownloadFile(std::string& filename) {
     }
 
     in.close();
+
+    /*if (std::remove(filename.c_str()) != 0) {
+        logMessage = "[EROARE] Eșec la ștergerea fișierului: " + filename;
+        std::cerr << logMessage << std::endl;
+        Logger::logAction(logMessage);
+        return {};
+    }*/
     return content;
+}
+
+bool FileManager::removeFile(std::string& filename)
+{
+    if (std::remove(filename.c_str()) != 0) {
+        logMessage = "[EROARE] Eroare la stergerea fisierului: " + filename;
+        std::cerr << logMessage << std::endl;
+        Logger::logAction(logMessage);
+        return false;
+    }
+    return true;
 }

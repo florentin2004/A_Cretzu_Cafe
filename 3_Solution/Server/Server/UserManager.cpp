@@ -3,7 +3,7 @@
 int UserManager::HandleClientLogger(std::stringstream& stream, std::string& token, const char delimiter, bool& resultOperation)
 {
     DatabaseManagerAccounts::connect();
-    int i = 1, IDUser;
+    int i = 1, IDUser = 0;
     std::string username, password;
     while(std::getline(stream, token, delimiter))
     {
@@ -144,4 +144,57 @@ std::vector<uint8_t> UserManager::HandleClientDownloadFile(std::string& filename
 {
     std::vector<uint8_t> content = FileManager::DownloadFile(filename);
     return content;
+}
+
+void UserManager::HandleClientDeleteFile(std::stringstream& stream, std::string& token, const char delimiter, bool& resultOperation)
+{
+    DatabaseManagerAccounts::connect();
+    int IDUser = 0;
+    std::string filename;
+    bool result1 = false, result2 = false;
+
+    for (int i = 1; std::getline(stream, token, delimiter); i++)
+    {
+        switch (i)
+        {
+        case 1:
+            IDUser = std::stoi(token);
+            break;
+
+        case 2:
+            filename = token;
+            result1 = DatabaseManagerAccounts::deleteFile(IDUser, filename);
+            result2 = FileManager::removeFile(filename);
+            resultOperation = result1 && result2;
+            break;
+
+        default:
+            break;
+        }
+    }
+    DatabaseManagerAccounts::disconnect();
+}
+
+void UserManager::HandleClientSendFileToAnotherUser(std::stringstream& stream, std::string& token, const char delimiter, bool& resultOperation)
+{
+    DatabaseManagerAccounts::connect();
+    int IDUser = 0;
+
+    for (int i = 1; std::getline(stream, token, delimiter); i++)
+    {
+        switch (i)
+        {
+        case 1:
+            IDUser = DatabaseManagerAccounts::selectUserWithoutPassword(token);//username dorit
+            break;
+
+        case 2:
+            resultOperation = DatabaseManagerAccounts::UpdateFileID(IDUser, token);//filename-ul 
+            break;
+
+        default:
+            break;
+        }
+    }
+    DatabaseManagerAccounts::disconnect();
 }
